@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/Z0lFGf9.png" width="400" alt="store it"></p>
+<p align="center"><img src="https://i.imgur.com/G8wRV7i.png" width="300" alt="store it"></p>
 
 ## About Store it
 ### Development stack being used <br/>
