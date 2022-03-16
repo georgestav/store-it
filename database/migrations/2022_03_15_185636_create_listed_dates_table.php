@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Create offers table is the table holding the offers created by hosts
+ * Create listed_dates table is the table holding the offers created by hosts
  * specifing the overall available timeframe of a specific storage location 
  */
 
@@ -18,11 +18,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('listed_dates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('listing_id'); //foreignId pointing to listings table
-            $table->dateTimeTz('offered_from'); //The dateTimeTz method creates a DATETIME (with timezone)
-            $table->dateTimeTz('offered_until'); //The dateTimeTz method creates a DATETIME (with timezone)
+            $table->dateTimeTz('listed_from'); //The dateTimeTz method creates a DATETIME (with timezone)
+            $table->dateTimeTz('listed_until'); //The dateTimeTz method creates a DATETIME (with timezone)
             $table->timestamps(); //keeping the timestamps if we need to reference in the future the time an offer was made
         });
     }
