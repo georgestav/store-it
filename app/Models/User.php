@@ -7,11 +7,49 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+//relationships
+use App\Models\Language;
+use App\Models\Role;
+use App\Models\Person;
+use App\Models\Listing;
+use App\Models\Review;
+use App\Models\Booking;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function person()
+    {
+        return $this->hasOne(Person::class);
+    }
+
+    public function listings()
+    {
+        return $this->hasMany(Listing::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    
     /**
      * The attributes that are mass assignable.
      *
