@@ -19,7 +19,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    
+
     public function language()
     {
         return $this->belongsTo(Language::class);
@@ -49,7 +49,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
-    
+
     /**
      * The attributes that are mass assignable.
      *
