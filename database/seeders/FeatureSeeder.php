@@ -16,7 +16,6 @@ class FeatureSeeder extends Seeder
      */
     public function run()
     {
-        //todo #1 see why it fails to write to db
         DB::table('features')->truncate();
 
         $features = [
