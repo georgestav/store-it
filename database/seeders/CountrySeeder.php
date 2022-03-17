@@ -5,10 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Models\Language;
+use App\Models\Country;
 use Illuminate\Support\Facades\DB;
 
-class LanguageSeeder extends Seeder
+class CountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,26 +17,26 @@ class LanguageSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('languages')->truncate();
+        DB::table('countries')->truncate();
 
-        $languages = [
+        $countries = [
             [
                 'id' => 1,
-                'name' => 'English'
+                'name' => 'United Kingdom'
             ],
             [
                 'id' => 2,
-                'name' => 'Czech'
+                'name' => 'Czech Republic'
             ],
             [
                 'id' => 3,
-                'name' => 'French'
+                'name' => 'France'
             ],
         ];
 
-        foreach ($languages as $language) {
-            Language::create([
-                'name' => $language['name'],
+        foreach ($countries as $country) {
+            Country::create([
+                'name' => $country['name'],
             ]);
         }
     }

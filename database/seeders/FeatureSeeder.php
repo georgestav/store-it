@@ -17,30 +17,30 @@ class FeatureSeeder extends Seeder
     public function run()
     {
         //todo #1 see why it fails to write to db
-        // DB::table('features')->truncate();
+        DB::table('features')->truncate();
 
-        // $features = [
-        //     [
-        //         'name' => 'dehumidifier'
-        //     ],
-        //     [
-        //         'name' => 'basement'
-        //     ],
-        //     [
-        //         'name' => 'light'
-        //     ],
-        //     [
-        //         'name' => 'cooled'
-        //     ],
-        //     [
-        //         'name' => 'high ceiling'
-        //     ],
-        // ];
+        $features = [
+            [
+                'name' => 'dehumidifier'
+            ],
+            [
+                'name' => 'basement'
+            ],
+            [
+                'name' => 'light'
+            ],
+            [
+                'name' => 'cooled'
+            ],
+            [
+                'name' => 'high ceiling'
+            ],
+        ];
 
-        // foreach ($features as $feature) {
-        //     Feature::create([
-        //         'name' => $feature['name'],
-        //     ]);
-        // }
+        foreach ($features as $feature) {
+            Feature::create([
+                'name' => $feature['name'],
+            ]);
+        }
     }
 }

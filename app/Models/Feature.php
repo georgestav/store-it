@@ -11,6 +11,8 @@ class Feature extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function listings()
     {
         return $this->belongsToMany(Listing::class);
