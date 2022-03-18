@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Listings controller group
 Route::get("/listings", "Api\ListingController@index");
 Route::post("/listings", "Api\LIstingController@store");
+
 //Cities controller group
 Route::get('/cities', 'Api\CityController@index');
 Route::post('/cities', 'Api\CityController@store');

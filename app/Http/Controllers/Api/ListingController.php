@@ -14,5 +14,21 @@ class ListingController extends Controller
         return $listings;
     }
 
-    public function 
+    public function store(Request $request) {
+        
+        $listing = new Listing;
+
+        $listing->user_id = 2;
+        $listing->country_id = 7;
+        $listing->city_id = 12;
+        $listing->storage_type_id = 3;
+        $listing->coordinates = "E°15.345 W°44.890";
+        $listing->description = $request->input("description");
+        $listing->size = $request->input("size");
+        $listing->daily_rate = $request->input("daily_rate");
+        $listing->rating = "4";
+
+        $listing->save();
+
+    }
 }
