@@ -15,4 +15,20 @@ class AvailabilityController extends Controller
 
         return $availabilities;
     }
+
+    /**
+     * add new availability to the listing table
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function store(Request $request)
+    {
+        $availability = new Availability;
+
+        $availability->listing_id = 3;
+        $availability->available_from = $request->input("available_from");
+        $availability->available_until = $request->input("available_until");
+
+        $availability->save();
+    }
 }
