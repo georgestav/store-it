@@ -14,6 +14,7 @@ use App\Models\Picture;
 use App\Models\Review;
 use App\Models\Feature;
 use App\Models\Booking;
+use App\Models\StorageType;
 
 class Listing extends Model
 {
@@ -62,5 +63,10 @@ class Listing extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function storage_type()
+    {
+        return $this->belongsTo(StorageType::class);
     }
 }
