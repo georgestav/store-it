@@ -38,14 +38,14 @@ Route::get("/countries", "Api\CountryController@index");
 
 //Reviews controller group
 Route::get('/reviews/{listing_id}', 'Api\ReviewController@index'); // get the reviews of a specific listing
-Route::post('/reviews/{listing_id}/create', 'Api\ReviewController@store'); // create new review for a specific listing
-Route::post('/reviews/{listing_id}/update/{id}', 'Api\ReviewController@update'); //! withought the front-end no access to put or patch
+Route::post('/reviews/{listing_id}', 'Api\ReviewController@store'); // create new review for a specific listing
+Route::post('/reviews/{listing_id}/{id}', 'Api\ReviewController@update'); //! withought the front-end no access to put or patch
 Route::delete('/reviews/{id}', 'Api\ReviewController@destroy');
 
 //Availabilities controller group
-Route::get("/availabilities", "Api\AvailabilityController@index");
-Route::post("/availabilities", "Api\AvailabilityController@store");
-Route::post("/availabilities/{id}", "Api\AvailabilityController@update"); //! need for corredtion to put/patch
+Route::get("/availabilities/{listing_id}", "Api\AvailabilityController@index");
+Route::post("/availabilities/{listing_id}", "Api\AvailabilityController@store");
+Route::post("/availabilities/{listing_id}/{id}", "Api\AvailabilityController@update"); //! need for corredtion to put/patch
 Route::delete("/availabilities/{id}", "Api\AvailabilityController@destroy");
 
 //Bookings controller group

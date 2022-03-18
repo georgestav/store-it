@@ -8,10 +8,14 @@ use App\Models\Availability;
 
 class AvailabilityController extends Controller
 {
-    //get all availabilities from the availabilities table
-    public function index()
+    /**
+     * get all availabilities from the availabilities table
+     * 
+     * @param $listing_id
+     */
+    public function index($listing_id)
     {
-        $availabilities = Availability::query()->orderBy("available_from", "asc")->get();
+        $availabilities = Availability::query()->orderBy("available_from", "asc")->where("listing_id", $listing_id)->get();
 
         return $availabilities;
     }
