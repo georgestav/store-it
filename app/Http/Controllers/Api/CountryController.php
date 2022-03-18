@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Country;
+use DB;
 
 class CountryController extends Controller
 {
@@ -14,6 +15,4 @@ class CountryController extends Controller
 
         return $countries;
     }
-
-    
 }
