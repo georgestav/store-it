@@ -16,7 +16,7 @@ class ReviewController extends Controller
      */
     public function index($listing_id)
     {
-        $reviews = Review::all();
+        $reviews = Review::where('listing_id', $listing_id)->get();
         return $reviews;
     }
 
