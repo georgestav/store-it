@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId("user_id");
             $table->foreignId("country_id");
             $table->foreignId("city_id");
+            $table->foreignId("storage_type_id");
             $table->string("coordinates");
             $table->text("description");
             $table->integer("size");
