@@ -14,7 +14,7 @@
 <!-- ignore warnings and display ERRORS only -->
 <arg  value="np"/>
 
-<!-- Our base rule: set to PSR12-->
-<rule  ref="PSR12"/>
+<!-- Our base rule: set to PSR0-->
+<rule  ref="PSR0"/>
 
 </ruleset>
