@@ -34,3 +34,6 @@ Route::delete('/cities/{id}', 'Api\CityController@destroy');
 
 //Countries controller group
 Route::get("/countries", "Api\CountryController@index");
+
+//Availabilities controller group
+Route::get("/availabilities", "Api\AvailabilityController@index");
