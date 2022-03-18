@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get("/listings", "Api\ListingController@index");
 Route::post("/listings", "Api\ListingController@store");
 Route::post("/listings/{id}", "Api\ListingController@update"); //! need for correction to put/patch
+Route::delete("/listings/{id}", "Api\ListingController@destroy");
 
 //Cities controller group
 Route::get('/cities', 'Api\CityController@index');

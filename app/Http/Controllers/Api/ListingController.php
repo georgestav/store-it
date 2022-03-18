@@ -35,7 +35,7 @@ class ListingController extends Controller
 
     }
 
-    //updating a specific listing in the listing table
+    //updating a specific listing in the listings table
     public function update(Request $request, $id) {
 
         $listing = Listing::findOrFail($id);
@@ -47,5 +47,13 @@ class ListingController extends Controller
 
         $listing->save();
 
+    }
+
+    //deleting a specific listing from the listings table
+    public function destroy(Request $request, $id) {
+
+        $listing = Listing::findOrFail($id);
+
+        $listing->delete();
     }
 }
