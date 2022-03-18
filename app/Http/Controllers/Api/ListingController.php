@@ -8,12 +8,15 @@ use App\Models\Listing;
 
 class ListingController extends Controller
 {
+
+    //get all listings from the listings table
     public function index() {
         $listings = Listing::query()->get();
 
         return $listings;
     }
 
+    //add new listing to listing table
     public function store(Request $request) {
         
         $listing = new Listing;
@@ -27,6 +30,20 @@ class ListingController extends Controller
         $listing->size = $request->input("size");
         $listing->daily_rate = $request->input("daily_rate");
         $listing->rating = "4";
+
+        $listing->save();
+
+    }
+
+    //updating a specific listing in the listing table
+    public function update(Request $request, $id) {
+
+        $listing = Listing::findOrFail($id);
+
+        $listing->storage_type_id = 2;
+        $listing->description = $request->input("description");
+        $listing->size = $request->input("size");
+        $listing->daily_rate = $request->input("daily_rate");
 
         $listing->save();
 
