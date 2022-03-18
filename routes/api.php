@@ -40,3 +40,9 @@ Route::get("/availabilities", "Api\AvailabilityController@index");
 Route::post("/availabilities", "Api\AvailabilityController@store");
 Route::post("/availabilities/{id}", "Api\AvailabilityController@update"); //! need for corredtion to put/patch
 Route::delete("/availabilities/{id}", "Api\AvailabilityController@destroy");
+
+//Bookings controller group
+Route::get("/bookings", "Api\BookingController@index");
+Route::post("/bookings", "Api\BookingController@store");
+Route::post("/bookings/{id}", "Api\BookingController@update"); //! need for corredtion to put/patch
+Route::delete("/bookings/{id}", "Api\BookingController@destroy");
