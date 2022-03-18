@@ -16,7 +16,11 @@ class ListingController extends Controller
         return $listings;
     }
 
-    //add new listing to listing table
+    /**
+     * add new listing to listing table
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
     public function store(Request $request) {
         
         $listing = new Listing;
@@ -35,7 +39,12 @@ class ListingController extends Controller
 
     }
 
-    //updating a specific listing in the listings table
+    /**
+     * updating a specific listing from the listings table
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param $id
+     */
     public function update(Request $request, $id) {
 
         $listing = Listing::findOrFail($id);
@@ -49,8 +58,12 @@ class ListingController extends Controller
 
     }
 
-    //deleting a specific listing from the listings table
-    public function destroy(Request $request, $id) {
+    /**
+     * deleting a specific listing from the listings table
+     *
+     * @param $id
+     */
+    public function destroy($id) {
 
         $listing = Listing::findOrFail($id);
 
