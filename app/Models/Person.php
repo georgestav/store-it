@@ -13,15 +13,6 @@ class Person extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'surname',
-        'phone',
-        'address',
-        // 'city_id',
-        // 'country_id',
-        // 'user_id', $user = new \App\Models\User
-    ];
 
     public function city()
     {
