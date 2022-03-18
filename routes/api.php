@@ -39,3 +39,4 @@ Route::get("/countries", "Api\CountryController@index");
 Route::get("/availabilities", "Api\AvailabilityController@index");
 Route::post("/availabilities", "Api\AvailabilityController@store");
 Route::post("/availabilities/{id}", "Api\AvailabilityController@update"); //! need for corredtion to put/patch
+Route::delete("/availabilities/{id}", "Api\AvailabilityController@destroy");

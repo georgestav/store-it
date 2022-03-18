@@ -47,4 +47,16 @@ class AvailabilityController extends Controller
 
         $availability->save();
     }
+
+    /**
+     * deleting a specific availability from the availabilities table
+     *
+     * @param $id
+     */
+    public function destroy($id)
+    {
+        $availability = Availability::findOrFail($id);
+
+        $availability->delete();
+    }
 }
