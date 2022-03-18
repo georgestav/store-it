@@ -16,7 +16,6 @@ class ReviewController extends Controller
      */
     public function index($listing_id)
     {
-        // dd($listing_id);
         $reviews = Review::all();
         return $reviews;
     }
