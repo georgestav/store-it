@@ -28,12 +28,19 @@ Route::delete("/listings/{id}", "Api\ListingController@destroy");
 
 //Cities controller group
 Route::get('/cities', 'Api\CityController@index');
-Route::post('/cities', 'Api\CityController@store');
+Route::post('/cities', 'Api\CityController@store'); // create new city
 Route::post('/cities/{id}', 'Api\CityController@update'); //! withought the front-end no access to put or patch
 Route::delete('/cities/{id}', 'Api\CityController@destroy');
 
 //Countries controller group
 Route::get("/countries", "Api\CountryController@index");
+
+
+//Reviews controller group
+Route::get('/reviews/{listing_id}', 'Api\ReviewController@index'); // get the reviews of a specific listing
+Route::post('/reviews/{listing_id}/create', 'Api\ReviewController@store'); // create new review for a specific listing
+Route::post('/reviews/{listing_id}/update/{id}', 'Api\ReviewController@update'); //! withought the front-end no access to put or patch
+Route::delete('/reviews/{id}', 'Api\ReviewController@destroy');
 
 //Availabilities controller group
 Route::get("/availabilities", "Api\AvailabilityController@index");
