@@ -18,6 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//countries
 Route::get("/countries", "Api\CountryController@index");
 
+//listings
 Route::get("/listings", "Api\ListingController@index");
+Route::post("/listings", "Api\LIstingController@store");

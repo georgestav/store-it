@@ -13,4 +13,6 @@ class ListingController extends Controller
 
         return $listings;
     }
+
+    public function 
 }
