@@ -38,3 +38,4 @@ Route::get("/countries", "Api\CountryController@index");
 //Availabilities controller group
 Route::get("/availabilities", "Api\AvailabilityController@index");
 Route::post("/availabilities", "Api\AvailabilityController@store");
+Route::post("/availabilities/{id}", "Api\AvailabilityController@update"); //! need for corredtion to put/patch
