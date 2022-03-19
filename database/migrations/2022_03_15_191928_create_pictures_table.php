@@ -20,7 +20,8 @@ return new class extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->id();
             $table->foreignId('listing_id');
-            $table->binary('photo'); //binary - blob of the picture/s of a storage
+            $table->string("name");
+            $table->longText('photo'); //binary - blob of the picture/s of a storage
             $table->timestamps();
         });
     }

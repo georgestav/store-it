@@ -73,3 +73,9 @@ Route::get('/person/{id}', 'Api\PersonController@indexSingle'); //todo protect f
 Route::post('/person', 'Api\PersonController@store'); //todo put or patch / protect only for same user
 Route::post('/person/{id}', 'Api\PersonController@update'); //todo put or patch / protect only for same user
 Route::delete('/person/{id}', 'Api\PersonController@destroy'); //todo protect for admins, or same user
+
+//Picture Controller group
+
+Route::get('/picture/{listing_id}', 'Api\PictureController@indexListing'); //todo protect for logged in users
+Route::post('/picture', 'Api\PictureController@store'); //todo protect for manager of listing
+Route::delete('/picture/{id}', 'Api\PictureController@destroy'); //todo protect for manager of listing
