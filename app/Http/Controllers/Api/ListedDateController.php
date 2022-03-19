@@ -13,9 +13,9 @@ class ListedDateController extends Controller
      * 
      * @param $listing_id
      */
-    public function index($listing_id)
+    public function index()
     {
-        $listed_dates = ListedDate::query()->where("listing_id", $listing_id)->limit(1)->get();
+        $listed_dates = ListedDate::query()->orderBy("listed_from", "asc")->get();
 
         return $listed_dates;
     }
@@ -30,7 +30,7 @@ class ListedDateController extends Controller
     {
         $listed_dates = new ListedDate;
 
-        $listed_dates->listing_id =$listing_id;
+        $listed_dates->listing_id = $listing_id;
         $listed_dates->listed_from = $request->input("listed_from");
         $listed_dates->listed_until = $request->input("listed_until");
 
@@ -44,10 +44,10 @@ class ListedDateController extends Controller
      * @param $id
      * @param $listing_id
      */
-    public function update(Request $request, $id, $listing_id)
+    public function update(Request $request, $listing_id, $id)
     {
         $listed_dates = ListedDate::findOrFail($id);
-        $listed_dates->lisitng_id = $listing_id;
+        $listed_dates->listing_id = $listing_id;
         $listed_dates->listed_from = $request->input("listed_from");
         $listed_dates->listed_until = $request->input("listed_until");
 
