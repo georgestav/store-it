@@ -75,4 +75,7 @@ Route::post('/person/{id}', 'Api\PersonController@update'); //todo put or patch 
 Route::delete('/person/{id}', 'Api\PersonController@destroy'); //todo protect for admins, or same user
 
 //ListedDates Controller group
-Route::get("/listed-dates/{listing_id}", "Api\ListedDatesController@index");
+Route::get("/listed-dates/{listing_id}", "Api\ListedDateController@index");
+Route::post("/listed-dates/{listing_id}", "Api\ListedDateController@store");
+Route::post("/listed-dates/{listing_id}/{id}", "Api\ListedDateController@update"); //todo put/patch
+Route::delete("/listed-dates/{id}", "Api\ListedDateController@destroy");
