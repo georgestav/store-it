@@ -22,7 +22,7 @@ class UserController extends Controller
     /**
      * Retrieve single user by id
      *
-     * @param  mixed $id
+     * @param  int $id
      * @return object
      */
     public function indexSingle($id)
@@ -34,7 +34,7 @@ class UserController extends Controller
     /**
      * Store new user
      *
-     * @param  mixed $request
+     * @param mixed Illuminate\Http\Request $request
      * @return object
      */
     public function store(Request $request)
@@ -52,6 +52,13 @@ class UserController extends Controller
         return $user;
     }
 
+    /**
+     * Update existing user by id
+     *
+     * @param  mixed Illuminate\Http\Request $request
+     * @param  int $id
+     * @return object
+     */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -70,7 +77,7 @@ class UserController extends Controller
     /**
      * Delete user by id
      *
-     * @param  mixed $id
+     * @param  int $id
      * @return void
      */
     public function destroy($id)

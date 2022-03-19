@@ -28,4 +28,19 @@ class Person extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'surname',
+        'phone',
+        'address',
+        'city_id',
+        'country_id',
+        'user_id',
+    ];
 }

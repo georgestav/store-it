@@ -63,8 +63,13 @@ Route::delete('/features/{id}', 'Api\FeatureController@destroy');
 //Users controller group
 Route::get('/users', 'Api\UserController@indexAll'); //todo protect for admins only
 Route::get('/user/{id}', 'Api\UserController@indexSingle'); //todo protect for admins, or same user
-
-Route::post('/user', 'Api\UserController@store');
-Route::post('/user/{id}', 'Api\UserController@update');
-
+Route::post('/user', 'Api\UserController@store'); //todo put or patch / protect only for same user
+Route::post('/user/{id}', 'Api\UserController@update'); //todo put or patch / protect only for same user
 Route::delete('/user/{id}', 'Api\UserController@destroy'); //todo protect for admins, or same user
+
+//Person Controller group
+Route::get('/people', 'Api\PersonController@indexAll'); //todo protect for admins only
+Route::get('/person/{id}', 'Api\PersonController@indexSingle'); //todo protect for admins, or same user
+Route::post('/person', 'Api\PersonController@store'); //todo put or patch / protect only for same user
+Route::post('/person/{id}', 'Api\PersonController@update'); //todo put or patch / protect only for same user
+Route::delete('/person/{id}', 'Api\PersonController@destroy'); //todo protect for admins, or same user
