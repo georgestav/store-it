@@ -49,9 +49,9 @@ Route::post("/availabilities/{listing_id}/{id}", "Api\AvailabilityController@upd
 Route::delete("/availabilities/{id}", "Api\AvailabilityController@destroy");
 
 //Bookings controller group
-Route::get("/bookings", "Api\BookingController@index");
-Route::post("/bookings", "Api\BookingController@store");
-Route::post("/bookings/{id}", "Api\BookingController@update"); //todo put/patch
+Route::get("/bookings/{listing_id}", "Api\BookingController@index");
+Route::post("/bookings/{listing_id}", "Api\BookingController@store");
+Route::post("/bookings/{listing_id}/{id}", "Api\BookingController@update"); //todo put/patch
 Route::delete("/bookings/{id}", "Api\BookingController@destroy");
 
 //Features controller group

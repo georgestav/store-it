@@ -24,12 +24,13 @@ class AvailabilityController extends Controller
      * add new availability to the availabilities table
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  $lisitng_id
      */
-    public function store(Request $request)
+    public function store(Request $request, $listing_id)
     {
         $availability = new Availability;
 
-        $availability->listing_id = 3;
+        $availability->listing_id =$listing_id;
         $availability->available_from = $request->input("available_from");
         $availability->available_until = $request->input("available_until");
 
@@ -41,11 +42,12 @@ class AvailabilityController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param $id
+     * @param $listing_id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $listing_id)
     {
         $availability = Availability::findOrFail($id);
-
+        $availability->lisitng_id = $listing_id;
         $availability->available_from = $request->input("available_from");
         $availability->available_until = $request->input("available_until");
 
