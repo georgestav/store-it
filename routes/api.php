@@ -73,3 +73,6 @@ Route::get('/person/{id}', 'Api\PersonController@indexSingle'); //todo protect f
 Route::post('/person', 'Api\PersonController@store'); //todo put or patch / protect only for same user
 Route::post('/person/{id}', 'Api\PersonController@update'); //todo put or patch / protect only for same user
 Route::delete('/person/{id}', 'Api\PersonController@destroy'); //todo protect for admins, or same user
+
+//ListedDates Controller group
+Route::get("/listed-dates/{listing_id}", "Api\ListedDatesController@index");
