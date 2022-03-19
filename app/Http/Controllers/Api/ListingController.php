@@ -10,7 +10,8 @@ class ListingController extends Controller
 {
 
     //get all listings from the listings table
-    public function index() {
+    public function index()
+    {
         $listings = Listing::query()->get();
 
         return $listings;
@@ -21,8 +22,9 @@ class ListingController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request) {
-        
+    public function store(Request $request)
+    {
+
         $listing = new Listing;
 
         $listing->user_id = 2;
@@ -36,7 +38,6 @@ class ListingController extends Controller
         $listing->rating = "4";
 
         $listing->save();
-
     }
 
     /**
@@ -45,7 +46,8 @@ class ListingController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param $id
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
 
         $listing = Listing::findOrFail($id);
 
@@ -55,7 +57,6 @@ class ListingController extends Controller
         $listing->daily_rate = $request->input("daily_rate");
 
         $listing->save();
-
     }
 
     /**
@@ -63,7 +64,8 @@ class ListingController extends Controller
      *
      * @param $id
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         $listing = Listing::findOrFail($id);
 
