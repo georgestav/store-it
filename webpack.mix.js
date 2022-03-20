@@ -39,7 +39,8 @@ mix
     .version();
 
 // ADD ASSETS TO COMPILE HERE:
-
+mix.sass("resources/css/app.scss", "public/css");
+mix.js("resources/js/storeit.js", "public/js").react();
 // Examples:
 // mix.sass('resources/css/app.scss', 'public/css');
 // mix.js('resources/js/library.js', 'public/js');
