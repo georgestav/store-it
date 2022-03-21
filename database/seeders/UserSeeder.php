@@ -18,19 +18,68 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->truncate();
-        // $faker = Faker::create();
+        DB::table('users')->truncate();
+        
+        $users = [
+            [
+                'id' => 1,
+                'name' => 'matej',
+                "email" => "matej.basta@email.cz",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                "language_id" => 1,
+                "role_id" => 1
 
-        // for ($i = 1; $i <= 10; $i++) {
-        //     User::create([
-        //         'name' => $faker->name(),
-        //         'email' => $faker->unique()->safeEmail(),
-        //         'email_verified_at' => now(),
-        //         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        //         'remember_token' => Str::random(10),
-        //         'language_id' => '01',
-        //         'role_id' => '01',
-        //     ]);
-        // }
+            ],
+            [
+                'id' => 2,
+                'name' => 'george',
+                "email" => "g.stavroulakis@gmail.com",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                "language_id" => 1,
+                "role_id" => 1
+            ],
+            [
+                'id' => 3,
+                'name' => 'sean',
+                "email" => "beeredbeard@gmail.com",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                "language_id" => 1,
+                "role_id" => 1
+            ],
+            [
+                'id' => 4,
+                'name' => 'editor',
+                "email" => "editor@storeit.com",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                "language_id" => 1,
+                "role_id" => 2
+            ],
+            [
+                'id' => 5,
+                'name' => 'host',
+                "email" => "host@storeit.com",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                "language_id" => 1,
+                "role_id" => 3
+            ],
+            [
+                'id' => 6,
+                'name' => 'user',
+                "email" => "user@storeit.com",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                "language_id" => 1,
+                "role_id" => 4
+            ],
+        ];
+
+        foreach ($users as $user) {
+            User::create([
+                'name' => $user['name'],
+                "email" => $user["email"],
+                "password" => $user["password"],
+                "language_id" => $user["language_id"],
+                "role_id" => $user["role_id"]
+            ]);
+        }
     }
 }
