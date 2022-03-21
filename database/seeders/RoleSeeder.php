@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
+        DB::table('roles')->truncate();
 
         $roles = [
             [
