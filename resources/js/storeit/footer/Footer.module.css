@@ -3,6 +3,10 @@
     justify-content: space-between;
     margin-top: 1rem;
     padding: 1rem 5px;
+    border: 1px solid black;
+    min-width: 100vw;
+    position: fixed;
+    bottom: 0px;
 }
 
 .left__container {
@@ -22,11 +26,18 @@
     gap: 5rem;
     border-left: 2px dimgray solid;
     border-right: 2px dimgray solid;
-    padding: 0 10rem;
+    padding: 0 10%;
 }
 
 .right__container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .center__container {
+    padding: 3%;
+    gap: 3%;
+    }
 }
