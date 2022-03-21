@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'id' => 1,
                 'name' => 'matej',
                 "email" => "matej.basta@email.cz",
-                "password" => "matejbasta",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 "language_id" => 1,
                 "role_id" => 1
 
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'id' => 2,
                 'name' => 'george',
                 "email" => "g.stavroulakis@gmail.com",
-                "password" => "12345678",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 "language_id" => 1,
                 "role_id" => 1
             ],
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
                 'id' => 3,
                 'name' => 'sean',
                 "email" => "beeredbeard@gmail.com",
-                "password" => "matlocks",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 "language_id" => 1,
                 "role_id" => 1
             ],
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
                 'id' => 4,
                 'name' => 'editor',
                 "email" => "editor@storeit.com",
-                "password" => "12345678",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 "language_id" => 1,
                 "role_id" => 2
             ],
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
                 'id' => 5,
                 'name' => 'host',
                 "email" => "host@storeit.com",
-                "password" => "12345678",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 "language_id" => 1,
                 "role_id" => 3
             ],
@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
                 'id' => 6,
                 'name' => 'user',
                 "email" => "user@storeit.com",
-                "password" => "12345678",
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 "language_id" => 1,
                 "role_id" => 4
             ],
