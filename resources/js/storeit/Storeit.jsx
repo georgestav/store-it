@@ -1,7 +1,7 @@
 import React from "react";
-import NavigationBar from "./navigation/NavigationBar";
+import NavigationBar from "../components/navigation/NavigationBar";
 import Content from "./content/Content";
-import Footer from "./footer/Footer";
+import Footer from "../components/footer/Footer";
 
 export default function App() {
     return (
