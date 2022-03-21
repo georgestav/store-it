@@ -1,0 +1,25 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.left__container {
+    display: flex;
+    gap: 3rem;
+}
+
+.bg__icon {
+    padding-top: 0.5rem;
+}
+
+.right__container {
+    display: flex;
+    gap: 3rem;
+}
+
+.logo {
+    background-color: aquamarine;
+    width: 80px;
+    height: 40px;
+}
