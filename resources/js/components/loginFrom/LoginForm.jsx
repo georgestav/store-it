@@ -2,33 +2,40 @@ import React, { useRef, useState } from "react";
 import axios from "axios";
 
 function LoginForm() {
-    const email = useRef();
-    const password = useRef();
-    const [rememberMe, setRememberMe] = useState(false);
+    const [errors, setErrors] = useState({}); //define errors
+    const email = useRef(); //assign to useRef
+    const password = useRef(); //assign to useRef
+    const [rememberMe, setRememberMe] = useState(false); //remember me logic
 
+    //handle login submit
     const loginSubmitHandler = async (e) => {
         e.preventDefault();
-        const loginDetails = {
-            email: email.current.value,
-            password: password.current.value,
-            // rememberMe: rememberMe,
-        };
-        console.log(loginDetails);
+        try {
+            const loginDetails = {
+                email: email.current.value,
+                password: password.current.value,
+                // rememberMe: rememberMe,
+            };
 
-        // with axios
-        const response = await axios.post("/login", loginDetails);
-        const response_data = await response.data;
+            // with axios
+            const response = await axios.post("/login", loginDetails);
+            const response_data = await response.data;
 
-        console.log(response);
+            setErrors({});
+        } catch (error) {
+            setErrors(error.response.data.errors); //accessing the error messages
+            console.error(error.response.data.message);
+        }
     };
 
     return (
         <div>
             <form action="/login" onSubmit={loginSubmitHandler}>
+                {errors ? <p>{errors.email}</p> : null}
                 <div>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="loginEmail">Email</label>
                     <input
-                        id="email"
+                        id="loginEmail"
                         type="email"
                         autoComplete="current-email"
                         ref={email}
@@ -36,9 +43,9 @@ function LoginForm() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="loginPassword">Password</label>
                     <input
-                        id="password"
+                        id="loginPassword"
                         type="password"
                         autoComplete="current-email"
                         ref={password}

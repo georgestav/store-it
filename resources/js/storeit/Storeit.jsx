@@ -11,10 +11,10 @@ export default function App() {
         <>
             <NavigationBar />
             <LoginForm />
-            <Content />
-            <Footer />
             <RegisterForm />
             <Logout />
+            <Content />
+            <Footer />
         </>
     );
 }
