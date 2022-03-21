@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
+import Button from "@mui/material/Button";
 
 function LoginForm() {
     const [errors, setErrors] = useState({}); //define errors
@@ -61,7 +62,7 @@ function LoginForm() {
                     />
                 </div>
                 <div>
-                    <input type="submit" />
+                    <Button variant="contained" type="submit">Submit</Button>
                 </div>
             </form>
         </div>
