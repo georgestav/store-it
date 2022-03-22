@@ -1,23 +1,18 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faUserAstronaut } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NavigationBar.module.css";
+import AccountMenu from "./AccountMenu";
+import BurgerMenu from "./BurgerMenu";
+import logo from "./logo/storeit.svg";
 
-function NavigationBar() {
+function NavigationBar({ setDisplay }) {
     return (
         <>
             <nav className={styles.navigation}>
                 <div className={styles.left__container}>
-                    <FontAwesomeIcon
-                        icon={faBars}
-                        className={styles.bg__icon}
-                    />
-                    <div className={styles.logo}></div>
+                    <BurgerMenu />
+                    <img src={logo} className={styles.logo} alt="logo" />
                 </div>
-                <div className={styles.right__container}>
-                    <div>Become a host</div>
-                    <FontAwesomeIcon icon={faUserAstronaut} size="lg" />
-                </div>
+                <AccountMenu setDisplay={setDisplay} />
             </nav>
         </>
     );

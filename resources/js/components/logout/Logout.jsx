@@ -13,9 +13,5 @@ export default function Logout() {
         }
     };
 
-    return (
-        <form action="" method="post" onSubmit={handleLogout}>
-            <button>Logout</button>
-        </form>
-    );
+    return <div onClick={handleLogout}>Logout</div>;
 }

@@ -1,8 +1,22 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
+// import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+// import Modal from "@mui/material/Modal";
 
-function LoginForm() {
+// const style = {
+//     position: "absolute",
+//     top: "50%",
+//     left: "50%",
+//     transform: "translate(-50%, -50%)",
+//     width: 400,
+//     bgcolor: "background.paper",
+//     border: "2px solid #000",
+//     boxShadow: 24,
+//     p: 4,
+// };
+
+export default function LoginForm({ setDisplay }) {
     const [errors, setErrors] = useState({}); //define errors
     const email = useRef(); //assign to useRef
     const password = useRef(); //assign to useRef
@@ -23,14 +37,16 @@ function LoginForm() {
             const response_data = await response.data;
 
             setErrors({});
+            setDisplay("");
+            console.log("loged in", response_data);
         } catch (error) {
             setErrors(error.response.data.errors); //accessing the error messages
             console.error(error.response.data.message);
         }
     };
-
     return (
         <div>
+            <Button onClick={() => setDisplay("")}>Back</Button>
             <form action="/login" onSubmit={loginSubmitHandler}>
                 {errors ? <p>{errors.email}</p> : null}
                 <div>
@@ -62,11 +78,11 @@ function LoginForm() {
                     />
                 </div>
                 <div>
-                    <Button variant="contained" type="submit">Submit</Button>
+                    <Button variant="contained" type="submit">
+                        Submit
+                    </Button>
                 </div>
             </form>
         </div>
     );
 }
-
-export default LoginForm;
