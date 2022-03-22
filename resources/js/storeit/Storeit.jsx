@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import NavigationBar from "../components/navigation/NavigationBar";
+import axios from "axios";
+
 import Content from "./content/Content";
 import Footer from "../components/footer/Footer";
 import { UserContext } from "../components/context/UserContext";
@@ -12,7 +14,21 @@ export default function App() {
     const values = useMemo(() => ({ user, setUser }), [user]);
 
     //Use efftect triggered when display changes, ex register, login
-    useEffect(() => {}, [display]);
+    useEffect(() => {
+        checkUserLogged();
+    }, [display]);
+
+    //check for already logged in user
+    const checkUserLogged = async () => {
+        try {
+            // get request to get logged in user data and assign it to userContext
+            const getdetails = await axios.get("api/user/logged-in");
+            const userData = await getdetails.data;
+            setUser(userData);
+        } catch (error) {
+            console.error("User not Logged in", error.response.data.message);
+        }
+    };
 
     return (
         <UserContext.Provider value={values}>

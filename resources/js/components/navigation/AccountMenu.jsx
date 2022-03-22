@@ -18,7 +18,6 @@ export default function AccountMenu({ setDisplay }) {
     //use userContext
     const { user, setUser } = useContext(UserContext);
 
-    console.log(user);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
