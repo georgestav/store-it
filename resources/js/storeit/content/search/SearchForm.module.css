@@ -1,7 +1,9 @@
-.search__box {
-    top: 100px;
-    height: 200px;
-    width: 200px;
-    background-color: red;
-    z-index: 1;
+.search__form__container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 1rem;
 }
