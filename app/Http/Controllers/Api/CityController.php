@@ -11,9 +11,16 @@ class CityController extends Controller
     /**
      * Get all cities from cities table
      */
-    public function index()
+    public function index($name = null)
     {
-        $cities = City::all();
+        $builder = City::query()->orderBy("name", "asc");
+
+        if ($name) {
+            $builder->where("name", $name)->limit(1);
+        }
+
+        $cities = $builder->get();
+
         return $cities;
     }
 

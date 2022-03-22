@@ -21,13 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Listings controller group
-Route::get("/listings", "Api\ListingController@index");
+Route::get("/listings/{city?}", "Api\ListingController@index");
 Route::post("/listings", "Api\ListingController@store");
 Route::post("/listings/{id}", "Api\ListingController@update"); //todo put/patch
 Route::delete("/listings/{id}", "Api\ListingController@destroy");
 
 //Cities controller group
-Route::get('/cities', 'Api\CityController@index');
+Route::get('/cities/{name?}', 'Api\CityController@index');
 Route::post('/cities', 'Api\CityController@store'); // create new city
 Route::post('/cities/{id}', 'Api\CityController@update'); //todo put or patch
 Route::delete('/cities/{id}', 'Api\CityController@destroy');
