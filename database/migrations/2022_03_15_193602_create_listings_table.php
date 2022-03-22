@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("coordinates");
             $table->text("description");
             $table->integer("size");
-            $table->integer("daily_rate");
+            $table->float("daily_rate", 8, 2);
             $table->integer("rating");
             $table->timestamps();
         });
