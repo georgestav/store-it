@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 //custom components
 import Listing from "../listing/Listing";
+import Map from "../map/Map";
 
 export default function ResultsList() {
 
@@ -42,10 +43,15 @@ export default function ResultsList() {
 
     return (
         <>
-            <p>Results</p>
-            {results.map(listing => (
-                <Listing key={listing.id} listing={listing} />
-            ))}
+            <div>
+                <p>Results</p>
+                {results.map(listing => (
+                    <Listing key={listing.id} listing={listing} />
+                ))}
+            </div>
+            <div>
+                <Map />
+            </div>
         </>
         
     );
