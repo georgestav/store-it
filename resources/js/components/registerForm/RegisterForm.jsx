@@ -25,7 +25,7 @@ export default function RegisterForm({ setDisplay }) {
         });
     };
 
-    console.log('Seeing that')
+    console.log("Seeing that");
 
     //function handling submission
     const handleSubmit = async (event) => {
@@ -45,9 +45,7 @@ export default function RegisterForm({ setDisplay }) {
     };
 
     return (
-        
         <div className={styles.body}>
-            <Button onClick={() => setDisplay("")}>Back</Button>
             <form action="" method="post" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>
                 <br />
@@ -95,6 +93,7 @@ export default function RegisterForm({ setDisplay }) {
                 />
                 {errors && errors.password ? <p>{errors.password}</p> : null}
                 <br />
+                <Button onClick={() => setDisplay("")}>Back</Button>
                 <Button variant="contained" type="submit">
                     Submit
                 </Button>

@@ -3,19 +3,21 @@ import React from "react";
 import styles from "./Search.module.css";
 
 function Search() {
-    return ( 
-    <>
-    <div className={styles.body}>
+    return (
+        <>
+            <div className={styles.body}>
+                <h1 className={styles.header}>Store your valuables</h1>
 
-    <h1 className={styles.header}>Store your valuables</h1>
+                <input
+                    type="Search"
+                    placeholder="Search"
+                    className={styles.searchbar}
+                />
 
-    <input type="Search" placeholder="Search" className={styles.searchbar} Search component />
-
-    <button className={styles.learnMore}>Learn more</button>
-
-    </div>
-    </>
-    )
+                <button className={styles.learnMore}>Learn more</button>
+            </div>
+        </>
+    );
 }
 
 export default Search;

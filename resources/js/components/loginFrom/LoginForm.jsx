@@ -1,26 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import axios from "axios";
-// import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-// import Modal from "@mui/material/Modal";
-
-// const style = {
-//     position: "absolute",
-//     top: "50%",
-//     left: "50%",
-//     transform: "translate(-50%, -50%)",
-//     width: 400,
-//     bgcolor: "background.paper",
-//     border: "2px solid #000",
-//     boxShadow: 24,
-//     p: 4,
-// };
 
 export default function LoginForm({ setDisplay }) {
-    const [errors, setErrors] = useState({}); //define errors
-    const email = useRef(); //assign to useRef
     const password = useRef(); //assign to useRef
+    const email = useRef(); //assign to useRef
+    const [errors, setErrors] = useState({}); //define errors
     const [rememberMe, setRememberMe] = useState(false); //remember me logic
+
+    //use userContext
+    const { user, setUser } = useContext(UserContext);
 
     //handle login submit
     const loginSubmitHandler = async (e) => {
@@ -32,21 +22,25 @@ export default function LoginForm({ setDisplay }) {
                 // rememberMe: rememberMe,
             };
 
-            // with axios
+            // with axios login the user
             const response = await axios.post("/login", loginDetails);
-            const response_data = await response.data;
+            const response_data = await response;
 
-            setErrors({});
-            setDisplay("");
-            console.log("loged in", response_data);
+            // get request to get logged in user data and assign it to userContext
+            const getdetails = await axios.get("api/user/logged-in");
+            const userData = await getdetails.data;
+
+            setUser(userData); // set user data to User Context
+            setErrors({}); // set errors if any
+            setDisplay(""); //set display to empty to switch back to main content
         } catch (error) {
             setErrors(error.response.data.errors); //accessing the error messages
             console.error(error.response.data.message);
         }
     };
+
     return (
         <div>
-            <Button onClick={() => setDisplay("")}>Back</Button>
             <form action="/login" onSubmit={loginSubmitHandler}>
                 {errors ? <p>{errors.email}</p> : null}
                 <div>
@@ -78,6 +72,7 @@ export default function LoginForm({ setDisplay }) {
                     />
                 </div>
                 <div>
+                    <Button onClick={() => setDisplay("")}>Back</Button>
                     <Button variant="contained" type="submit">
                         Submit
                     </Button>

@@ -5,9 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    /**
+     * Get logged in user with role
+     *
+     * @return object
+     */
+    public function logedIn()
+    {
+        $user = Auth::user();
+        $user->role = $user->role;
+        return $user;
+    }
+
     /**
      * Retrieve all Users
      *

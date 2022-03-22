@@ -6,7 +6,7 @@ export default function Logout() {
         event.preventDefault();
         try {
             const response = await axios.post("/logout");
-            console.log(response.data);
+            const response_data = await response.data;
             console.log("logout");
         } catch (error) {
             console.log(error.response);
