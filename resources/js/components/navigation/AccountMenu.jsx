@@ -7,11 +7,9 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import LoginForm from "../loginFrom/LoginForm";
-import RegisterForm from "../registerForm/RegisterForm";
 import Logout from "../logout/Logout";
 
-export default function AccountMenu() {
+export default function AccountMenu({ setDisplay }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -48,6 +46,7 @@ export default function AccountMenu() {
                 id="account-menu"
                 open={open}
                 onClose={handleClose}
+                onClick={handleClose}
                 PaperProps={{
                     elevation: 0,
                     sx: {
@@ -80,12 +79,10 @@ export default function AccountMenu() {
                 <MenuItem>Profile</MenuItem>
                 <MenuItem>My account</MenuItem>
                 <Divider />
-                <MenuItem>
-                    <RegisterForm />
+                <MenuItem onClick={() => setDisplay("register")}>
+                    Register
                 </MenuItem>
-                <MenuItem>
-                    <LoginForm />
-                </MenuItem>
+                <MenuItem onClick={() => setDisplay("login")}>Login</MenuItem>
                 <MenuItem>
                     <Logout />
                 </MenuItem>

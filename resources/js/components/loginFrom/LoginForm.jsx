@@ -1,26 +1,22 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
-import Box from "@mui/material/Box";
+// import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
+// import Modal from "@mui/material/Modal";
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-};
+// const style = {
+//     position: "absolute",
+//     top: "50%",
+//     left: "50%",
+//     transform: "translate(-50%, -50%)",
+//     width: 400,
+//     bgcolor: "background.paper",
+//     border: "2px solid #000",
+//     boxShadow: 24,
+//     p: 4,
+// };
 
-export default function LoginForm() {
-    const [open, setOpen] = useState(false);
-    const handleOpenModal = () => setOpen(true);
-    const handleCloseModal = () => setOpen(false);
-
+export default function LoginForm({ setDisplay }) {
     const [errors, setErrors] = useState({}); //define errors
     const email = useRef(); //assign to useRef
     const password = useRef(); //assign to useRef
@@ -41,7 +37,8 @@ export default function LoginForm() {
             const response_data = await response.data;
 
             setErrors({});
-            handleCloseModal();
+            setDisplay("");
+            console.log("loged in", response_data);
         } catch (error) {
             setErrors(error.response.data.errors); //accessing the error messages
             console.error(error.response.data.message);
@@ -49,52 +46,43 @@ export default function LoginForm() {
     };
     return (
         <div>
-            <Button onClick={handleOpenModal}>Login</Button>
-            <Modal
-                open={open}
-                onClose={handleCloseModal}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <form action="/login" onSubmit={loginSubmitHandler}>
-                        {errors ? <p>{errors.email}</p> : null}
-                        <div>
-                            <label htmlFor="loginEmail">Email</label>
-                            <input
-                                id="loginEmail"
-                                type="email"
-                                autoComplete="current-email"
-                                ref={email}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="loginPassword">Password</label>
-                            <input
-                                id="loginPassword"
-                                type="password"
-                                autoComplete="current-email"
-                                ref={password}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="rememberme">Remember me</label>
-                            <input
-                                type="checkbox"
-                                id="rememberme"
-                                onClick={() => setRememberMe(!rememberMe)}
-                            />
-                        </div>
-                        <div>
-                            <Button variant="contained" type="submit">
-                                Submit
-                            </Button>
-                        </div>
-                    </form>
-                </Box>
-            </Modal>
+            <Button onClick={() => setDisplay("")}>Back</Button>
+            <form action="/login" onSubmit={loginSubmitHandler}>
+                {errors ? <p>{errors.email}</p> : null}
+                <div>
+                    <label htmlFor="loginEmail">Email</label>
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        autoComplete="current-email"
+                        ref={email}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="loginPassword">Password</label>
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        autoComplete="current-email"
+                        ref={password}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="rememberme">Remember me</label>
+                    <input
+                        type="checkbox"
+                        id="rememberme"
+                        onClick={() => setRememberMe(!rememberMe)}
+                    />
+                </div>
+                <div>
+                    <Button variant="contained" type="submit">
+                        Submit
+                    </Button>
+                </div>
+            </form>
         </div>
     );
 }

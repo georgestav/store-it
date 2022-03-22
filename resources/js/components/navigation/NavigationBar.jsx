@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./NavigationBar.module.css";
-// import Logout from "../logout/Logout";
 import AccountMenu from "./AccountMenu";
 import BurgerMenu from "./BurgerMenu";
+import logo from "./logo/storeit.svg";
 
-function NavigationBar() {
+function NavigationBar({ setDisplay }) {
     return (
         <>
             <nav className={styles.navigation}>
                 <div className={styles.left__container}>
                     <BurgerMenu />
-                    <div className={styles.logo}></div>
+                    <img src={logo} className={styles.logo} alt="logo" />
                 </div>
-                <AccountMenu />
+                <AccountMenu setDisplay={setDisplay} />
             </nav>
-            {/* <Logout /> */}
         </>
     );
 }

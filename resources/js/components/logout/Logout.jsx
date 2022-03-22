@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import Button from "@mui/material/Button";
 
 export default function Logout() {
     const handleLogout = async (event) => {
@@ -14,9 +13,5 @@ export default function Logout() {
         }
     };
 
-    return (
-        <form action="" method="post" onSubmit={handleLogout}>
-            <Button>Logout</Button>
-        </form>
-    );
+    return <div onClick={handleLogout}>Logout</div>;
 }
