@@ -1,4 +1,6 @@
-import * as React from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -10,8 +12,13 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "../logout/Logout";
 
 export default function AccountMenu({ setDisplay }) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
+    //use userContext
+    const { user, setUser } = useContext(UserContext);
+
+    console.log(user);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -76,16 +83,29 @@ export default function AccountMenu({ setDisplay }) {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>My account</MenuItem>
-                <Divider />
-                <MenuItem onClick={() => setDisplay("register")}>
-                    Register
-                </MenuItem>
-                <MenuItem onClick={() => setDisplay("login")}>Login</MenuItem>
-                <MenuItem>
-                    <Logout />
-                </MenuItem>
+                {
+                    //if user is guest and therefore NOT logged in, display Register and Login
+                    user === "guest" ? (
+                        <span>
+                            <MenuItem onClick={() => setDisplay("register")}>
+                                Register
+                            </MenuItem>
+                            <MenuItem onClick={() => setDisplay("login")}>
+                                Login
+                            </MenuItem>
+                        </span>
+                    ) : (
+                        //if user is logged in, display Register and Login
+                        <span>
+                            <MenuItem>Profile</MenuItem>
+                            <MenuItem>My account</MenuItem>
+                            <Divider />
+                            <MenuItem>
+                                <Logout />
+                            </MenuItem>
+                        </span>
+                    )
+                }
             </Menu>
         </React.Fragment>
     );

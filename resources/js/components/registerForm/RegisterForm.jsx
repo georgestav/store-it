@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 import axios from "axios";
 import Button from "@mui/material/Button";
 import styles from "./RegisterForm.module.css";
 
 export default function RegisterForm({ setDisplay }) {
+    //use userContext
+    const { user, setUser } = useContext(UserContext);
     //values in the form
     const [values, setValues] = useState({
         name: "",
@@ -25,19 +29,21 @@ export default function RegisterForm({ setDisplay }) {
         });
     };
 
-    console.log("Seeing that");
-
     //function handling submission
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
+            // with axios register the user
             const response = await axios.post("/register", values);
             const response_data = await response.data;
-
             setErrors({});
+
+            // get request to get logged in user data and assign it to userContext
+            const getdetails = await axios.get("api/user/logged-in");
+            const userData = await getdetails.data;
             setDisplay("");
-            console.log("registed", response_data);
+            setUser(userData); //pass values to user Contex
         } catch (error) {
             console.error(error.response.data.errors);
             setErrors(error.response.data.errors); //accessing the error messages

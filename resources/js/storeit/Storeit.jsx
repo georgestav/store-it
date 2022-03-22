@@ -8,7 +8,7 @@ export default function App() {
     const [display, setDisplay] = useState(""); //set empty display
     const [user, setUser] = useState("guest"); //set default user to guest
 
-    //passed values with UserContext
+    //passed values with UserContext custom effect hook
     const values = useMemo(() => ({ user, setUser }), [user]);
 
     //Use efftect triggered when display changes, ex register, login
