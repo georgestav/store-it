@@ -52,7 +52,7 @@ export default function ResultsList() {
                 ))}
             </div>
             <div className={styles.container__map}>
-                <Map />
+                <Map listings={results}/>
             </div>
         </div>
         
