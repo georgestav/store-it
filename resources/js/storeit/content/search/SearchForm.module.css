@@ -1,0 +1,7 @@
+.search__box {
+    top: 100px;
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    z-index: 1;
+}
