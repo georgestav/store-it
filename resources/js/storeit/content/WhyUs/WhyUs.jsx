@@ -10,9 +10,11 @@ function WhyUs() {
                 <h1 className={styles.WhyUs}>Why us?</h1>
 
                 <div className={styles.container}>
-                    <h3 className={styles.efficient}>Efficient</h3>
+
+                    <h2 className={styles.efficient}>Efficient</h2>
 
                     <p className={styles.paragraph}>Save hours by booking with our trusted clients</p>
+                    
                 </div>
 
             </div>
