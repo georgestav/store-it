@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+}
+
+.container__results {
+    width: 45%;
+}
+
+.container__map {
+    width: 55%;
+}

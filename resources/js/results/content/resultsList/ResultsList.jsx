@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+//css
+import styles from "./resultsList.module.css";
 //custom components
 import Listing from "../listing/Listing";
 import Map from "../map/Map";
@@ -42,17 +44,17 @@ export default function ResultsList() {
     }, [cityID]);
 
     return (
-        <>
-            <div>
+        <div className={styles.container}>
+            <div className={styles.container__results} >
                 <p>Results</p>
                 {results.map(listing => (
                     <Listing key={listing.id} listing={listing} />
                 ))}
             </div>
-            <div>
+            <div className={styles.container__map}>
                 <Map />
             </div>
-        </>
+        </div>
         
     );
 }
