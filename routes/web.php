@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index.index');
 });
+
+Route::get("/results/{search?}", "ListingController@showResults")->where(["search" => '[a-zA-Z]+']); //method, that takes a search input and finds all relevant listings
