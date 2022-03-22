@@ -1,40 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import NavigationBar from "../components/navigation/NavigationBar";
 import Content from "./content/Content";
 import Footer from "../components/footer/Footer";
-import LoginForm from "../components/loginFrom/LoginForm";
-import RegisterForm from "../components/registerForm/RegisterForm";
+import { UserContext } from "../components/context/UserContext";
 
 export default function App() {
-    const [display, setDisplay] = useState("");
+    const [display, setDisplay] = useState(""); //set empty display
+    const [user, setUser] = useState("guest"); //set default user to guest
 
-    useEffect(() => {
-        console.log("use effect triggered");
-    }, [display]);
+    //passed values with UserContext custom effect hook
+    const values = useMemo(() => ({ user, setUser }), [user]);
 
-    if (display === "login") {
-        return (
-            <>
-                <NavigationBar setDisplay={setDisplay} />
-                <LoginForm setDisplay={setDisplay} />
-                <Footer />
-            </>
-        );
-    } else if (display === "register") {
-        return (
-            <>
-                <NavigationBar setDisplay={setDisplay} />
-                <RegisterForm setDisplay={setDisplay} />
-                <Footer />
-            </>
-        );
-    } else {
-        return (
-            <>
-                <NavigationBar setDisplay={setDisplay} />
-                <Content />
-                <Footer />
-            </>
-        );
-    }
+    //Use efftect triggered when display changes, ex register, login
+    useEffect(() => {}, [display]);
+
+    return (
+        <UserContext.Provider value={values}>
+            <NavigationBar setDisplay={setDisplay} />
+            <Content display={display} setDisplay={setDisplay} />
+            <Footer />
+        </UserContext.Provider>
+    );
 }
