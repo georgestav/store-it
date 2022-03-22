@@ -1,14 +1,18 @@
+import React from "react";
 import styles from "./map.module.css";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-export default function Map({listings}) {
+export default function Map({listings, cityCoordinates}) {
 
-    const position = [50.073658, 14.418540];
+    console.log('map.jsx',cityCoordinates);
+    console.log('test message from map.jsx')
 
     return (
         <div>
             <h2>Map</h2>
-            <MapContainer className={styles.container} center={position} zoom={10}>
+            {cityCoordinates == false ?
+            null :
+            (<MapContainer className={styles.container} center={cityCoordinates} zoom={10}>
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -22,7 +26,7 @@ export default function Map({listings}) {
                     </Marker>
                 ))}
                 
-            </MapContainer>
+            </MapContainer>)}
         </div>
     );
 }

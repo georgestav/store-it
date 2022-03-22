@@ -10,6 +10,7 @@ export default function ResultsList() {
 
     const [results, setResults] = useState([]);
     const [cityID, setCityID] = useState(null);
+    const [cityCoordinates, setCityCoordinates] = useState([]);
 
     //accessing the search from the url
     const path = location.pathname;
@@ -18,7 +19,7 @@ export default function ResultsList() {
     const search = lastPartOfPath[0].toUpperCase() + lastPartOfPath.substring(1);
 
     //function that fetches the id of the city, that has been searched for
-    const fetchCity = async (userInput) => {
+    const fetchCityId = async (userInput) => {
         const response = await axios.get(`api/cities/${userInput}`);
         const data = response.data;
 
@@ -28,10 +29,22 @@ export default function ResultsList() {
             setCityID("");
         }
     }
+
+    const fetchCityCoordinates = async (userInput) => {
+        const response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${userInput}&format=geojson`);
+        const data = response.data;
+        // console.log('fetchCityCoordinates',data.features[0].geometry.coordinates.reverse());
+
+        if (userInput !== "Results") {
+            setCityCoordinates(data.features[0].geometry.coordinates.reverse());
+        } else {
+            setCityCoordinates([51.509865, -0.118092]);
+        }
+    }
     
     //function that fetches the listings based on the city, that has been searched
     const fetchListings = async () => {
-        fetchCity(search);
+        fetchCityId(search);
         // console.log(cityID);
         const response = await axios.get(`api/listings/${cityID}`);
         const data = response.data;
@@ -41,6 +54,7 @@ export default function ResultsList() {
 
     useEffect(() => {
         fetchListings();
+        fetchCityCoordinates(search);
     }, [cityID]);
 
     return (
@@ -52,7 +66,7 @@ export default function ResultsList() {
                 ))}
             </div>
             <div className={styles.container__map}>
-                <Map listings={results}/>
+                <Map listings={results} cityCoordinates={cityCoordinates}/>
             </div>
         </div>
         
