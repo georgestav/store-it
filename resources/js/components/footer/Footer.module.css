@@ -5,8 +5,9 @@
     padding: 1rem 5px;
     border: 1px solid black;
     min-width: 100vw;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0px;
+    background-color: rgb(238, 238, 238);
 }
 
 .left__container {

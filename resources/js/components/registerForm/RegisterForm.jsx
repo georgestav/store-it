@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import styles from "./RegisterForm.module.css";
 
 export default function RegisterForm({ setDisplay }) {
     //values in the form
@@ -24,6 +25,8 @@ export default function RegisterForm({ setDisplay }) {
         });
     };
 
+    console.log('Seeing that')
+
     //function handling submission
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -42,7 +45,8 @@ export default function RegisterForm({ setDisplay }) {
     };
 
     return (
-        <div>
+        
+        <div className={styles.body}>
             <Button onClick={() => setDisplay("")}>Back</Button>
             <form action="" method="post" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>

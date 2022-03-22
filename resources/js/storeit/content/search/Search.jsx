@@ -9,7 +9,7 @@ function Search() {
 
     <h1 className={styles.header}>Store your valuables</h1>
 
-    <div className={styles.searchbar}>Search component</div>
+    <input type="Search" placeholder="Search" className={styles.searchbar} Search component />
 
     <button className={styles.learnMore}>Learn more</button>
 
