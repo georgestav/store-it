@@ -2,6 +2,7 @@ import React, { useRef, useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import styles from "./LoginForm.module.css";
 
 export default function LoginForm({ setDisplay }) {
     const password = useRef(); //assign to useRef
@@ -40,7 +41,7 @@ export default function LoginForm({ setDisplay }) {
     };
 
     return (
-        <div>
+        <div className={styles.body}>
             <form action="/login" onSubmit={loginSubmitHandler}>
                 {errors ? <p>{errors.email}</p> : null}
                 <div>
