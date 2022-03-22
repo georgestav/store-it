@@ -4,17 +4,17 @@ import styles from "./Search.module.css";
 
 function Search() {
     return ( 
-    <>
-    <div className={styles.body}>
+        <>
+            <div className={styles.body}>
 
-    <h1 className={styles.header}>Store your valuables</h1>
+            <h1 className={styles.header}>Store your valuables</h1>
 
-    <input type="Search" placeholder="Search" className={styles.searchbar} />
+            <input type="Search" placeholder="Search" className={styles.searchbar} />
 
-    <button className={styles.learnMore}>Learn more</button>
+            <button className={styles.learnMore}>Learn more</button>
 
-    </div>
-    </>
+            </div>
+        </>
     )
 }
 
