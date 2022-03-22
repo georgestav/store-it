@@ -17,4 +17,6 @@ class ListingController extends Controller
 
         return view("results.results", compact("location"));
     }
+
+    
 }

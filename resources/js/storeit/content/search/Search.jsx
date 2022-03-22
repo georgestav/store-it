@@ -9,7 +9,7 @@ function Search() {
 
             <h1 className={styles.header}>Store your valuables</h1>
 
-            <input type="Search" placeholder="Search" className={styles.searchbar} />
+    <input type="search" placeholder="Search" className={styles.searchbar} />
 
             <button className={styles.learnMore}>Learn more</button>
 
