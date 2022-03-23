@@ -12,6 +12,12 @@ function OurProcess() {
 
                 <div className={styles.body}>
 
+                    <div className={styles.ourProcessBackground}>
+                    {/* Uhh, dedicated div for background blur. 
+                    This is probably a bad practice but I don't 
+                    know what else to do.  */}
+                    </div>
+
                     <h1 className={styles.ourProcess}>Our Process</h1>
 
                     <div className={styles.containers}>
@@ -20,7 +26,7 @@ function OurProcess() {
                             
                             <h2>1</h2>
                             <p>Book an available listing through our website</p>
-                            <img className={styles.image1} src={customers1} />
+                            <img src={customers1} />
 
                         </div>
 

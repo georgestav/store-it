@@ -8,6 +8,16 @@
     background: black;
 }
 
+.ourProcessBackground {
+    min-height: 100vh;
+    min-width: 100%;
+    background-image: url('../images/background-images/attic.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    filter: blur(5px); 
+}
+
 .ourProcess {
     font-size: 400%;
     color: white;
@@ -16,7 +26,7 @@
 .containers {
     display: flex;
     flex-direction: column;
-    row-gap: 30em;
+    row-gap: 15em;
     font-size: 150%;
 }
 
