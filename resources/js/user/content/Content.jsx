@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import LoginForm from "../../components/loginFrom/LoginForm";
 import RegisterForm from "../../components/registerForm/RegisterForm";
 import { UserContext } from "../../components/context/UserContext";
+import UserProfile from "./UserProfile";
 
 function Content({ display, setDisplay }) {
     //use userContext
@@ -26,7 +27,7 @@ function Content({ display, setDisplay }) {
     } else {
         return (
             <>
-                <div>User!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+                <UserProfile />
             </>
         );
     }

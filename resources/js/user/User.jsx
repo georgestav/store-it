@@ -28,11 +28,13 @@ function User() {
         }
     };
     return (
-        <UserContext.Provider value={values}>
-            <NavigationBar setDisplay={setDisplay} />
-            <Content display={display} setDisplay={setDisplay} />
+        <>
+            <UserContext.Provider value={values}>
+                <NavigationBar setDisplay={setDisplay} />
+                <Content display={display} setDisplay={setDisplay} />
+            </UserContext.Provider>
             <Footer />
-        </UserContext.Provider>
+        </>
     );
 }
 
