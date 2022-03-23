@@ -1,21 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 //styling
 import styles from "./Search.module.css";
+import SearchForm from "./SearchForm";
 
 function Search() {
-    return ( 
-        <>
-            <div className={styles.body}>
+    const [displaySearch, setDisplaySearch] = useState(false); //set display status
 
-            <h1 className={styles.header}>Store your valuables</h1>
+    //handler to bring search form up if search box is clicked
+    const displaySearchHandler = () => {
+        setDisplaySearch(true);
+    };
 
-    <input type="search" placeholder="Search" className={styles.searchbar} />
+    if (!displaySearch) {
+        return (
+            <>
+                <div className={styles.body}>
+                    <h1 className={styles.header}>Store your valuables</h1>
 
-            <button className={styles.learnMore}>Learn more</button>
+                    <input
+                        type="Search"
+                        placeholder="Search"
+                        className={styles.searchbar}
+                        onClick={displaySearchHandler}
+                    />
 
-            </div>
-        </>
-    )
+                    <button className={styles.learnMore}>Learn more</button>
+                </div>
+            </>
+        );
+    } else {
+        return <SearchForm className={styles.search__container} />;
+        //
+    }
 }
 
 export default Search;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react";
-import NavigationBar from "../components/navigation/NavigationBar";
 import axios from "axios";
 
+import { UserContext } from "../components/context/UserContext";
+import NavigationBar from "../components/navigation/NavigationBar";
 import Content from "./content/Content";
 import Footer from "../components/footer/Footer";
-import { UserContext } from "../components/context/UserContext";
 
 export default function App() {
     const [display, setDisplay] = useState(""); //set empty display
@@ -31,10 +31,12 @@ export default function App() {
     };
 
     return (
-        <UserContext.Provider value={values}>
-            <NavigationBar setDisplay={setDisplay} />
-            <Content display={display} setDisplay={setDisplay} />
+        <>
+            <UserContext.Provider value={values}>
+                <NavigationBar setDisplay={setDisplay} />
+                <Content display={display} setDisplay={setDisplay} />
+            </UserContext.Provider>
             <Footer />
-        </UserContext.Provider>
+        </>
     );
 }
