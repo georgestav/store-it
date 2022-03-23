@@ -14,27 +14,31 @@ function OurProcess() {
 
                     <h1 className={styles.ourProcess}>Our Process</h1>
 
-                    <div className={styles.container1}>
-                        
-                        <h2>1</h2>
-                        <p>Book an available listing through our website</p>
-                        <img className={styles.image1} src={customers1} />
+                    <div className={styles.containers}>
 
-                    </div>
+                        <div className={styles.container1}>
+                            
+                            <h2>1</h2>
+                            <p>Book an available listing through our website</p>
+                            <img className={styles.image1} src={customers1} />
 
-                    <div className={styles.container2}>
+                        </div>
 
-                        <h2>2</h2>
-                        <p>Store your belongings</p>
-                        <img src={customers2} />
+                        <div className={styles.container2}>
 
-                    </div>
+                            <h2>2</h2>
+                            <p>Store your belongings</p>
+                            <img src={customers2} />
 
-                    <div className={styles.container3}>
+                        </div>
 
-                        <h2>3</h2>
-                        <p>Retrieve at the end of booking!</p>
-                        <img src={customers3} />
+                        <div className={styles.container3}>
+
+                            <h2>3</h2>
+                            <p>Retrieve at the end of booking!</p>
+                            <img src={customers3} />
+
+                        </div>
 
                     </div>
 

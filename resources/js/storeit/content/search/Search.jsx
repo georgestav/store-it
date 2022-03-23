@@ -29,8 +29,7 @@ function Search() {
             </>
         );
     } else {
-        return <SearchForm className={styles.search__container} />;
-        //
+        return <SearchForm setDisplaySearch={setDisplaySearch} />;
     }
 }
 

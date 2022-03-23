@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    min-width: 100%;
     background: radial-gradient(#464646, #000000);
     row-gap: 3em;
 }
