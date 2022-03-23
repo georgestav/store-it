@@ -11,6 +11,7 @@ export default function ResultsList() {
     const [results, setResults] = useState([]);
     const [cityID, setCityID] = useState(null);
     const [cityCoordinates, setCityCoordinates] = useState([]);
+    const [address, setAddress] = useState("");
 
     //accessing the search from the url
     const path = location.pathname;
@@ -30,6 +31,7 @@ export default function ResultsList() {
         }
     }
 
+    //function that fetches the coordinates of a city based on the user input
     const fetchCityCoordinates = async (userInput) => {
         const response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${userInput}&format=geojson`);
         const data = response.data;
@@ -40,6 +42,14 @@ export default function ResultsList() {
         } else {
             setCityCoordinates([51.509865, -0.118092]);
         }
+    }
+
+    //function that fetches the address name based on the coordinates
+    const fetchAddress = async (coordinates) => {
+        const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=${coordinates[0]}&lon=${coordinates[1]}`);
+        const data = response.data;
+        console.log("this", data.features[0].properties.geocoding.label);
+        setAddress(data.features[0].properties.geocoding.label);
     }
     
     //function that fetches the listings based on the city, that has been searched
@@ -61,9 +71,14 @@ export default function ResultsList() {
         <div className={styles.container}>
             <div className={styles.container__results} >
                 <p>Results</p>
-                {results.map(listing => (
-                    <Listing key={listing.id} listing={listing} />
-                ))}
+                {results.map(listing => {
+                    
+                    // fetchAddress(listing.coordinates.split(", "));
+                    
+                    return (
+                    <Listing key={listing.id} listing={listing} address={address}/>
+                    )
+                    })}
             </div>
             <div className={styles.container__map}>
                 <Map listings={results} cityCoordinates={cityCoordinates}/>
