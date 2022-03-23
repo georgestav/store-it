@@ -49,15 +49,15 @@ function PersonalDetails({ userid }) {
     //form handling to save to the database
     const personalInfoHandler = async (e) => {
         e.preventDefault();
-        console.log({
-            name: name.current.value,
-            surname: surname.current.value,
-            phone: phone.current.value,
-            address: address.current.value,
-            city_id: city_id.current.value,
-            country_id: country_id.current.value,
-            user_id: userid,
-        });
+        // console.log({
+        //     name: name.current.value,
+        //     surname: surname.current.value,
+        //     phone: phone.current.value,
+        //     address: address.current.value,
+        //     city_id: city_id.current.value,
+        //     country_id: country_id.current.value,
+        //     user_id: userid,
+        // });
         await axios
             .post("/api/person", {
                 name: name.current.value,

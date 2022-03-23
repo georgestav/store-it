@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { UserContext } from "../../components/context/UserContext";
+import { Button } from "@mui/material";
+import EditRole from "./forms/EditRole";
 import PersonalDetails from "./forms/PersonalDetails";
 
 //styling
@@ -9,10 +11,11 @@ function UserProfile() {
     //use userContext
     const { user, setUser } = useContext(UserContext);
     const [userData, setUserData] = useState({});
+    const [editRole, setEditRole] = useState(false);
 
     useEffect(() => {
         fetchUserData();
-    }, []);
+    }, [editRole]);
 
     const fetchUserData = async () => {
         try {
@@ -20,7 +23,7 @@ function UserProfile() {
             const getdetails = await axios.get("api/user/logged-in");
             const userData = await getdetails.data;
             setUserData(userData);
-            console.log("fetched data", userData);
+            setUser(userData);
         } catch (error) {
             console.error("User not Logged in", error.response.data.message);
         }
@@ -38,9 +41,13 @@ function UserProfile() {
                 <div>{user.created_at}</div>
             </div>
             <div>
-                <div>Registed as:</div>
-                <div>{user.role?.name}</div>
+                <EditRole
+                    user={user}
+                    editRole={editRole}
+                    setEditRole={setEditRole}
+                />
             </div>
+            {/* todo display current data in the form and patch on save */}
             <PersonalDetails userid={user.id} />
         </div>
     );
