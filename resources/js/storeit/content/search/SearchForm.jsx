@@ -1,14 +1,55 @@
 import React, { useState, useRef } from "react";
 import styles from "./SearchForm.module.css";
+import Switch from "@mui/material/Switch";
+import Button from "@mui/material/Button";
+
+const label = { inputProps: { "aria-label": "Switch demo" } };
 
 function SearchForm({ setDisplaySearch }) {
+    const [geolocationStatus, setGeolocationStatus] = useState(false);
+    const [userCoordinates, setUserCoordinates] = useState({});
     const locationInput = useRef();
 
-    const sumbitSearchHandler = (e) => {
-        e.preventDefault();
-        window.location.href = "/results/" + locationInput.current.value;
+    //toggle geolocation status
+    const geoTogglerHandler = () => {
+        setGeolocationStatus(!geolocationStatus);
     };
 
+    //get users location data
+    const getLocation = (pos) => {
+        let crd = pos.coords;
+        setUserCoordinates(crd);
+    };
+    const errorLocation = (err) => {
+        console.warn(err);
+    };
+    if (geolocationStatus && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getLocation, errorLocation, {
+            maximumAge: 60,
+            timeout: 5000,
+            enableHighAccuracy: true,
+        });
+    }
+
+    //form submit sets url
+    const sumbitSearchHandler = (e) => {
+        e.preventDefault();
+        try {
+            if (!geolocationStatus) {
+                // if geolocation is off, redirect with form input
+                window.location.href =
+                    "/results/" + locationInput.current.value;
+            } else if (geolocationStatus) {
+                window.location.href = `/results/coords,${userCoordinates.latitude},${userCoordinates.longitude}`;
+            } else {
+                throw new Error(
+                    "Could not use search, please report it to our team!"
+                );
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
         <form
             className={styles.search__form__container}
@@ -16,15 +57,23 @@ function SearchForm({ setDisplaySearch }) {
         >
             <h3>Search your next Storage</h3>
             <div>
-                <label htmlFor="location">Location</label>
-                <input
-                    id="location"
-                    type="text"
-                    placeholder="Location"
-                    ref={locationInput}
-                    autoFocus
-                />
+                <label htmlFor="location">Store it can use geolocation</label>
+                <Switch {...label} onChange={geoTogglerHandler} />
             </div>
+            {!geolocationStatus ? (
+                <div>
+                    <label htmlFor="location">Location</label>
+                    <input
+                        id="location"
+                        type="text"
+                        placeholder="Location"
+                        ref={locationInput}
+                        autoFocus
+                    />
+                </div>
+            ) : (
+                <></>
+            )}
             <div>
                 <label htmlFor="fromDate">From date</label>
                 <input id="fromDate" type="date" disabled />
@@ -33,15 +82,6 @@ function SearchForm({ setDisplaySearch }) {
                 <label htmlFor="untilDate">Until Date</label>
                 <input id="untilDate" type="date" disabled />
             </div>
-            <div>
-                <label htmlFor="location">Location</label>
-                <input
-                    id="location"
-                    type="text"
-                    placeholder="Location"
-                    disabled
-                />
-            </div>
             <select name="" id="" disabled>
                 <option value="">Attic</option>
                 <option value="">Shed</option>
@@ -49,8 +89,10 @@ function SearchForm({ setDisplaySearch }) {
                 <option value="">Room</option>
                 <option value="">Locker</option>
             </select>
-            <button onClick={() => setDisplaySearch(false)}>Back</button>
-            <button>Search</button>
+            <Button onClick={() => setDisplaySearch(false)}>Back</Button>
+            <Button variant="contained" type="submit">
+                Submit
+            </Button>
         </form>
     );
 }
