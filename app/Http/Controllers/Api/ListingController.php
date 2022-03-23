@@ -10,11 +10,13 @@ class ListingController extends Controller
 {
 
     //get all listings from the listings table
-    public function index($city = null)
+    public function index($city = null, $cityCoordinates0 = null, $cityCoordinates1 = null)
     {
         $builder = Listing::query();
 
-        if ($city) {
+        // dump($cityCoordinates0);
+
+        if ($city !== -1) {
             $builder->where("city_id", $city);
         }
 
