@@ -3,6 +3,8 @@ import { UserContext } from "../../components/context/UserContext";
 import Search from "./search/Search";
 import LoginForm from "../../components/loginFrom/LoginForm";
 import RegisterForm from "../../components/registerForm/RegisterForm";
+import WhyUs from "./whyus/WhyUs";
+import OurProcess from "./ourprocess/OurProcess";
 
 function Content({ display, setDisplay }) {
     //use userContext
@@ -28,6 +30,8 @@ function Content({ display, setDisplay }) {
         return (
             <>
                 <Search />
+                <WhyUs />
+                <OurProcess />
             </>
         );
     }

@@ -6,14 +6,17 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    min-width: 100%;
+    background: radial-gradient(#9e6d39, #663500);
 }
 
 .header {
     font-family: "Rokkitt", serif;
     color: rgb(255, 221, 227);
-    width: 25%;
-    text-shadow: 2px 2px black;
+    width: 50%;
+    text-shadow: 2px 2px 2px #000000;
     text-align: center;
+    font-size: 300%;
 }
 
 .searchbar {

@@ -1,0 +1,40 @@
+.body {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100%;
+    background: black;
+}
+
+.ourProcess {
+    font-size: 400%;
+    color: white;
+}
+
+.containers {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30em;
+    font-size: 150%;
+}
+
+.container1 {
+    color: white;
+    text-align: center;
+}
+
+.container2 {
+    color: white;
+    text-align: center;
+}
+
+.container3 {
+    color: white;
+    text-align: center;
+}
+
+img {
+    max-width: 80vw;
+}
