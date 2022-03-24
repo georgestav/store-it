@@ -62,20 +62,18 @@ export default function ResultsList() {
     
     
     //function that fetches the listings based on the city, that has been searched
-    const fetchListings = async (coords) => {
+    const fetchListings = async () => {
         fetchCityId(search);
-        fetchCityCoordinates(search);
-        
-        const response = await axios.get(`api/listings/${cityID}/${coords[0]}/${coords[1]}`);
+        await fetchCityCoordinates(search);
+
+        const response = await axios.get(`api/listings/${cityID}/${cityCoordinates[0]}/${cityCoordinates[1]}`);
         const data = response.data;
         console.log('function',response);
         setResults(data);
     }
 
     useEffect(() => {
-        if(cityID || cityCoordinates){
-        }
-        fetchListings(cityCoordinates);
+        fetchListings();
     }, [cityID]);
 
 
