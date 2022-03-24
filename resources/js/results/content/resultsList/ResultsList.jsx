@@ -22,11 +22,11 @@ export default function ResultsList() {
     const fetchCityId = async (userInput) => {
 
         if (userInput.startsWith("Coords")) {
-            setCityID(-1);
+            return -1;
         } else {
             const response = await axios.get(`api/cities/${userInput}`);
             const data = response.data;
-            setCityID(data[0] ? data[0].id : -1);
+            return data[0] ? data[0].id : -1;
         }
     }
 
@@ -36,7 +36,7 @@ export default function ResultsList() {
         if (userInput.startsWith("Coords")) {
             const arr = userInput.split(",");
             console.log(arr)
-            setCityCoordinates([arr[1], arr[2]]);
+            return [arr[1], arr[2]];
         } else {
             const options = {
                 params: {
@@ -47,7 +47,7 @@ export default function ResultsList() {
     
             const response = await axios.get(`https://nominatim.openstreetmap.org/search`, options);
             const data = response.data;
-            setCityCoordinates(data.features[0].geometry.coordinates.reverse());
+            return data.features[0].geometry.coordinates.reverse();
         }
     }
 
@@ -63,12 +63,14 @@ export default function ResultsList() {
     
     //function that fetches the listings based on the city, that has been searched
     const fetchListings = async () => {
-        fetchCityId(search);
-        await fetchCityCoordinates(search);
+        const cityID = await fetchCityId(search);
+        const cityCoordinates = await fetchCityCoordinates(search);
 
         const response = await axios.get(`api/listings/${cityID}/${cityCoordinates[0]}/${cityCoordinates[1]}`);
         const data = response.data;
         console.log('function',response);
+        setCityID(cityID)
+        setCityCoordinates(cityCoordinates)
         setResults(data);
     }
 
