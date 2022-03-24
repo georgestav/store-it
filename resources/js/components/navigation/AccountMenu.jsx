@@ -33,7 +33,16 @@ export default function AccountMenu({ setDisplay }) {
                     textAlign: "center",
                 }}
             >
-                <Typography sx={{ minWidth: 100 }}>Become a host</Typography>
+                <Typography sx={{ minWidth: 100 }} style={{ padding: 10 }}>
+                    Become a host
+                </Typography>
+                {user.name ? (
+                    <Typography sx={{ minWidth: 100 }}>
+                        Welcome {user.name}
+                    </Typography>
+                ) : (
+                    ""
+                )}
                 <Tooltip title="Account settings">
                     <IconButton
                         onClick={handleClick}
@@ -97,7 +106,13 @@ export default function AccountMenu({ setDisplay }) {
                         //if user is logged in, display Register and Login
                         <span>
                             <MenuItem>Profile</MenuItem>
-                            <MenuItem>My account</MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    window.location.href = "/user";
+                                }}
+                            >
+                                My Account
+                            </MenuItem>
                             <Divider />
                             <MenuItem>
                                 <Logout />
