@@ -21,7 +21,7 @@
 .containers {
     display: flex;
     flex-direction: column;
-    row-gap: 5em;
+    row-gap: 3em;
     font-size: 150%;
     text-shadow: 2px 2px 2px #000000;
 }
@@ -42,6 +42,6 @@
 }
 
 img {
-    max-width: 80vw;
+    max-width: 60vw;
     border-radius: 20px;
 }
