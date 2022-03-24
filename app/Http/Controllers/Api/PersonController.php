@@ -27,6 +27,9 @@ class PersonController extends Controller
      */
     public function indexSingle($id)
     {
+        if (!ctype_digit($id)) {
+            return 'Input is not a valid user id';
+        }
         $person = Person::findOrFail($id);
         return $person;
     }
