@@ -27,8 +27,29 @@ class PersonController extends Controller
      */
     public function indexSingle($id)
     {
-        $person = Person::findOrFail($id);
-        return $person;
+        /**
+         * If passed $id is not a number return
+         * 406 Not Acceptable
+         */
+        if (!ctype_digit($id)) {
+            return response('Input is not a valid user id', 406);
+        }
+
+        try {
+            /**
+             * If person found return the data
+             */
+            $person = Person::where('user_id', $id)->first();
+            return $person;
+        } catch (\Throwable $th) {
+            /**
+             * If person not found return 404
+             */
+            if ($th->getCode() === 0) {
+                return response('User Personal information not found', 404);
+            }
+            return $th;
+        }
     }
 
     /**
@@ -62,7 +83,7 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $person = Person::findOrFail($id);
+        $person = Person::where('user_id', $id)->first();
         $person->name = $request->name;
         $person->surname = $request->surname;
         $person->phone = $request->phone;
