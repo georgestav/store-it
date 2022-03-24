@@ -18,7 +18,7 @@ export default function Map({listings, cityCoordinates}) {
                 {listings.map((listing) => (
                     <Marker key={listing.id} position={listing.coordinates.split(",")}>
                         <Popup>
-                           {listing.coordinates} <br /> {listing.daily_rate} USD <br /> {listing.description}
+                           {listing.coordinates} <br /> {(listing.distance/1000).toFixed(2)} km <br /> {listing.daily_rate} USD <br /> {listing.description}
                         </Popup>
                     </Marker>
                 ))}
