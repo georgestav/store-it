@@ -67,7 +67,7 @@ Route::get('/user/logged-in', 'Api\UserController@logedIn'); //todo protect for 
 
 Route::get('/user/{id}', 'Api\UserController@indexSingle'); //todo protect for admins, or same user
 Route::post('/user', 'Api\UserController@store'); //todo put or patch / protect only for same user
-Route::post('/user/{id}', 'Api\UserController@update'); //todo put or patch / protect only for same user
+Route::patch('/user/{id}', 'Api\UserController@update'); //todo protect only for same user
 Route::delete('/user/{id}', 'Api\UserController@destroy'); //todo protect for admins, or same user
 
 //Person Controller group
