@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('index.index');
 });
 
-Route::get("/results/{search?}", "ListingController@showResults")->where(["search" => '[a-zA-Z]+']); //method, that takes a search input and finds all relevant listings
+Route::get("/results/{search?}", "ListingController@showResults"); //method, that takes a search input and finds all relevant listings
 
 Route::get('/user', 'UserController@showUser');

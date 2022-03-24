@@ -4,9 +4,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 export default function Map({listings, cityCoordinates}) {
 
-    console.log('map.jsx',cityCoordinates);
-    console.log('test message from map.jsx')
-
     return (
         <div>
             <h2>Map</h2>

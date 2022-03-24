@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Listings controller group
-Route::get("/listings/{city?}", "Api\ListingController@index");
+Route::get("/listings/{city?}/{cityCoordinates0?}/{cityCoordinates1?}", "Api\ListingController@index");
 Route::post("/listings", "Api\ListingController@store");
 Route::post("/listings/{id}", "Api\ListingController@update"); //todo put/patch
 Route::delete("/listings/{id}", "Api\ListingController@destroy");

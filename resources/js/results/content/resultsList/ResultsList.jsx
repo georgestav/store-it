@@ -20,53 +20,75 @@ export default function ResultsList() {
 
     //function that fetches the id of the city, that has been searched for
     const fetchCityId = async (userInput) => {
-        const response = await axios.get(`api/cities/${userInput}`);
-        const data = response.data;
 
-        if (userInput !== "Results") {
-            setCityID(data[0].id);
+        if (userInput.startsWith("Coords")) {
+            return -1;
         } else {
-            setCityID("");
+            const response = await axios.get(`api/cities/${userInput}`);
+            const data = response.data;
+            return data[0] ? data[0].id : -1;
         }
     }
 
+    //function that fetches the coordinates of a city based on the user input
     const fetchCityCoordinates = async (userInput) => {
-        const response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${userInput}&format=geojson`);
-        const data = response.data;
-        // console.log('fetchCityCoordinates',data.features[0].geometry.coordinates.reverse());
 
-        if (userInput !== "Results") {
-            setCityCoordinates(data.features[0].geometry.coordinates.reverse());
+        if (userInput.startsWith("Coords")) {
+            const arr = userInput.split(",");
+            console.log(arr)
+            return [arr[1], arr[2]];
         } else {
-            setCityCoordinates([51.509865, -0.118092]);
+            const options = {
+                params: {
+                    q: userInput,
+                    format: "geojson"
+                }
+            }
+    
+            const response = await axios.get(`https://nominatim.openstreetmap.org/search`, options);
+            const data = response.data;
+            return data.features[0].geometry.coordinates.reverse();
         }
     }
+
+    //function that fetches the address name based on the coordinates
+    // const fetchAddress = async (coordinates) => {
+    //     const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=${coordinates[0]}&lon=${coordinates[1]}`);
+    //     const data = response.data;
+    //     console.log("this", data.features[0].properties.geocoding.label);
+    //     setAddress(data.features[0].properties.geocoding.label);
+        
+    // }
+    
     
     //function that fetches the listings based on the city, that has been searched
     const fetchListings = async () => {
-        fetchCityId(search);
-        // console.log(cityID);
-        const response = await axios.get(`api/listings/${cityID}`);
+        const cityID = await fetchCityId(search);
+        const cityCoordinates = await fetchCityCoordinates(search);
+
+        const response = await axios.get(`api/listings/${cityID}/${cityCoordinates[0]}/${cityCoordinates[1]}`);
         const data = response.data;
-        // console.log(data);
+        console.log('function',response);
+        setCityID(cityID)
+        setCityCoordinates(cityCoordinates)
         setResults(data);
     }
 
     useEffect(() => {
         fetchListings();
-        fetchCityCoordinates(search);
     }, [cityID]);
+
 
     return (
         <div className={styles.container}>
             <div className={styles.container__results} >
                 <p>Results</p>
-                {results.map(listing => (
-                    <Listing key={listing.id} listing={listing} />
+                {results.map(listing => (                    
+                    <Listing key={listing.id} listing={listing}/>
                 ))}
             </div>
             <div className={styles.container__map}>
-                <Map listings={results} cityCoordinates={cityCoordinates}/>
+                <Map listings={results} cityCoordinates={cityCoordinates} />
             </div>
         </div>
         
