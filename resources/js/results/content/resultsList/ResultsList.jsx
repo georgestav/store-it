@@ -76,7 +76,10 @@ export default function ResultsList() {
 
     useEffect(() => {
         fetchListings();
-    }, [cityID]);
+        // setTimeout(()=>{
+        //     setCityCoordinates([60,60])
+        // },10000)
+    }, []);
 
 
     return (
