@@ -8,12 +8,22 @@ import styles from "./PersonalDetails.module.css";
 import axios from "axios";
 function PersonalDetails({ userid }) {
     //form inputs
-    const [formData, setFormData] = useState({});
+    const [editing, setEditing] = useState(false);
+    const [formData, setFormData] = useState({
+        user_id: userid,
+        name: "",
+        surname: "",
+        phone: "",
+        address: "",
+        city_id: "",
+        country_id: "",
+    });
     const [userExists, setUserExists] = useState(false); //if false do post, else do patch
-
     //state hooks
     const [cities, setCities] = useState([]);
     const [countries, setCountries] = useState([]);
+
+    console.log("Form data", formData);
 
     const getCities = async () => {
         try {
@@ -48,6 +58,7 @@ function PersonalDetails({ userid }) {
                 .post("/api/person", formData)
                 .then(function (response) {
                     console.log(response);
+                    setEditing(!editing);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -57,6 +68,7 @@ function PersonalDetails({ userid }) {
                 .patch(`/api/person/${userid}`, formData)
                 .then(function (response) {
                     console.log(response);
+                    setEditing(!editing);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -70,17 +82,20 @@ function PersonalDetails({ userid }) {
             if (userid === undefined) return;
             const getdetails = await axios.get(`/api/person/${userid}`);
             const data = await getdetails.data;
-            setFormData({
-                name: data.name,
-                surname: data.surname,
-                phone: data.phone,
-                address: data.address,
-                city_id: data.city_id,
-                country_id: data.country_id,
-                user_id: data.user_id,
-            });
-            setUserExists(true);
-            console.log(data);
+            if (data.name) {
+                setFormData({
+                    name: data.name,
+                    surname: data.surname,
+                    phone: data.phone,
+                    address: data.address,
+                    city_id: data.city_id,
+                    country_id: data.country_id,
+                    user_id: data.user_id,
+                });
+                setUserExists(true);
+            } else {
+                return;
+            }
         } catch (error) {
             if (error.response.status === 404) {
                 return "No personal information found";
@@ -123,9 +138,9 @@ function PersonalDetails({ userid }) {
         getCities(); //get cities list
         getCountries(); //get countries list
         fetchPersonDetails(); //get Person details
-    }, [userid]);
+    }, [userid, editing]);
 
-    if (userid) {
+    if (userid && cities && countries) {
         return (
             <form action="" onSubmit={formSubmitHandler}>
                 <div className={styles.inputField}>
@@ -173,7 +188,7 @@ function PersonalDetails({ userid }) {
                     <select
                         name="city_id"
                         id="city_id"
-                        value={formData.city_id}
+                        value={formData.city_id || 1}
                         onChange={formChangeHandler}
                     >
                         {cities.map((city) => {
@@ -191,7 +206,7 @@ function PersonalDetails({ userid }) {
                     <select
                         name="country_id"
                         id="country_id"
-                        value={formData.country_id}
+                        value={formData.country_id || 45}
                         onChange={formChangeHandler}
                     >
                         {countries.map((country) => {
@@ -205,7 +220,7 @@ function PersonalDetails({ userid }) {
                 </div>
                 <div className={styles.inputField}>
                     <Button type="submit" variant="outlined">
-                        Save
+                        {userExists ? "Update" : "Save"}
                     </Button>
                 </div>
             </form>
