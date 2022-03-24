@@ -42,7 +42,7 @@ export default function LoginForm({ setDisplay }) {
 
     return (
         <div className={styles.body}>
-            <form action="/login" onSubmit={loginSubmitHandler}>
+            <form className={styles.form} action="/login" onSubmit={loginSubmitHandler}>
                 {errors ? <p>{errors.email}</p> : null}
                 <div>
                     <label htmlFor="loginEmail">Email</label>
@@ -73,7 +73,7 @@ export default function LoginForm({ setDisplay }) {
                     />
                 </div>
                 <div>
-                    <Button onClick={() => setDisplay("")}>Back</Button>
+                    <Button variant="contained" onClick={() => setDisplay("")}>Back</Button>
                     <Button variant="contained" type="submit">
                         Submit
                     </Button>

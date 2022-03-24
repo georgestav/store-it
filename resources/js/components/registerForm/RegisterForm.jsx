@@ -52,9 +52,9 @@ export default function RegisterForm({ setDisplay }) {
 
     return (
         <div className={styles.body}>
-            <form action="" method="post" onSubmit={handleSubmit}>
+            <form className={styles.form} action="" method="post" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>
-                <br />
+
                 <input
                     id="name"
                     name="name"
@@ -64,7 +64,7 @@ export default function RegisterForm({ setDisplay }) {
                 {errors && errors.name ? <p>{errors.name}</p> : null}
                 <br />
                 <label htmlFor="email">Email:</label>
-                <br />
+                
                 <input
                     id="email"
                     name="email"
@@ -75,7 +75,7 @@ export default function RegisterForm({ setDisplay }) {
                 {errors && errors.email ? <p>{errors.email}</p> : null}
                 <br />
                 <label htmlFor="password">Password</label>
-                <br />
+                
                 <input
                     type="password"
                     name="password"
@@ -88,7 +88,7 @@ export default function RegisterForm({ setDisplay }) {
                 <label htmlFor="password_confirmation">
                     Password confirmation
                 </label>
-                <br />
+                
                 <input
                     type="password"
                     id="password_confirmation"
@@ -99,10 +99,21 @@ export default function RegisterForm({ setDisplay }) {
                 />
                 {errors && errors.password ? <p>{errors.password}</p> : null}
                 <br />
-                <Button onClick={() => setDisplay("")}>Back</Button>
-                <Button variant="contained" type="submit">
-                    Submit
-                </Button>
+                <div className={styles.buttons}>
+
+                    <div className={styles.backButton}>
+                        <Button variant="contained" onClick={() => setDisplay("")}>
+                            Back
+                        </Button>
+                    </div>
+
+                    <div className={styles.submitButton}>
+                        <Button variant="contained" type="submit">
+                            Submit
+                        </Button>
+                    </div>
+
+                </div>
             </form>
         </div>
     );

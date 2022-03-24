@@ -3,5 +3,21 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    min-width: 100%;
+    font-size: 200%;
     background-color: palegoldenrod;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+    min-width: 50%;
+}
+
+.form input {
+    border-radius: 20px;
+    line-height: 2;
+    padding: 0.5em;
+    margin-top: 1em;
 }

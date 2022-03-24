@@ -3,5 +3,35 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    min-width: 100%;
+    font-size: 200%;
     background-color: pink;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+}
+
+.form input {
+    border-radius: 20px;
+    line-height: 2;
+    padding: 0.5em;
+    margin-top: 1em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+
+.backButton {
+    width: 50%;
+    color: white;
+}
+
+.submitButton {
+    width: 50%;
 }
