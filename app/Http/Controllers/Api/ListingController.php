@@ -23,7 +23,7 @@ class ListingController extends Controller
 
         $earthRadius = 6371000;
 
-        foreach($listings as $listing) {
+        foreach ($listings as $listing) {
 
             $coordinates = explode(", ", $listing->coordinates);
             $listing_lat = $coordinates[0];
@@ -34,9 +34,9 @@ class ListingController extends Controller
             $difference_of_lats = ($listing_lat - $location_lat) * pi() / 180;
             $difference_of_lons = ($listing_lon - $location_lon) * pi() / 180;
 
-            $a = sin($difference_of_lats / 2)**2 + cos($location_lat_phi) * cos($listing_lat_phi) * sin($difference_of_lons / 2)**2;
+            $a = sin($difference_of_lats / 2) ** 2 + cos($location_lat_phi) * cos($listing_lat_phi) * sin($difference_of_lons / 2) ** 2;
 
-            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+            $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 
             $distance = $earthRadius * $c;
 

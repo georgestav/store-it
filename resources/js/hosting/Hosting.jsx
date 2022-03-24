@@ -4,6 +4,7 @@ import Footer from "../components/footer/Footer";
 import { UserContext } from "../components/context/UserContext";
 //styling
 import styles from "./Hosting.module.css";
+import Listings from "./content/Listings";
 
 function Hosting() {
     const [display, setDisplay] = useState(""); //set empty display
@@ -28,12 +29,13 @@ function Hosting() {
             console.error("User not Logged in", error.response.data.message);
         }
     };
-
     return (
         <>
             <UserContext.Provider value={values}>
                 <NavigationBar setDisplay={setDisplay} />
-                <div className={styles.hosting__container}></div>
+                <div className={styles.hosting__container}>
+                    <Listings user={user} />
+                </div>
             </UserContext.Provider>
             <Footer />
         </>
