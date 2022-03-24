@@ -5,52 +5,58 @@
     align-items: center;
     min-height: 100vh;
     min-width: 100%;
-    background: radial-gradient(#464646, #000000);
+    /* background: radial-gradient(#464646, #000000); */
+    background-image: url('../images/background-images/blackSheetMetal.jpg');
+    background-attachment: fixed;
     padding-bottom: 5%;
 }
 
 .WhyUs {
     font-size: 400%;
     color: white;
+    text-shadow: 2px 2px 2px #000000;
 }
 
 .containers {
     display: flex;
     flex-direction: column;
     max-width: 70vw;
-    row-gap: 10em;
+    row-gap: 7em;
     text-align: center;
 }
 
 .container1 {
-    min-height: 60vh;
+    min-height: 40vh;
     min-width: 60vw;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgb(166 166 166);
     color: white;
+    opacity: .94;
     border-radius: 20px;
     text-shadow: 2px 2px 2px #000000;
 }
 
 .container2 {
-    min-height: 60vh;
+    min-height: 40vh;
     min-width: 60vw;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgb(166 166 166);
     color: white;
+    opacity: .94;
     border-radius: 20px;
     text-shadow: 2px 2px 2px #000000;
 }
 
 .container3 {
-    min-height: 60vh;
+    min-height: 40vh;
     min-width: 60vw;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgb(166 166 166);
     color: white;
+    opacity: .94;
     border-radius: 20px;
     text-shadow: 2px 2px 2px #000000;
 }
 
 .containers p {
-    margin: 5em 2em;
+    margin: 3em 2em;
 }
 
 .headers {
