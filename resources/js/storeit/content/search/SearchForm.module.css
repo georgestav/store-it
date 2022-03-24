@@ -7,3 +7,14 @@
     margin: auto;
     gap: 1rem;
 }
+
+.location__and__date {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+    width: 25%;
+}
+
+.location {
+    background-color: orange;
+}

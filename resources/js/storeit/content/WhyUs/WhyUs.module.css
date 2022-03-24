@@ -20,32 +20,12 @@
 .containers {
     display: flex;
     flex-direction: column;
-    max-width: 70vw;
+    max-width: 60vw;
     row-gap: 7em;
     text-align: center;
 }
 
-.container1 {
-    min-height: 40vh;
-    min-width: 60vw;
-    background: rgb(166 166 166);
-    color: white;
-    opacity: .94;
-    border-radius: 20px;
-    text-shadow: 2px 2px 2px #000000;
-}
-
-.container2 {
-    min-height: 40vh;
-    min-width: 60vw;
-    background: rgb(166 166 166);
-    color: white;
-    opacity: .94;
-    border-radius: 20px;
-    text-shadow: 2px 2px 2px #000000;
-}
-
-.container3 {
+.containers__separated {
     min-height: 40vh;
     min-width: 60vw;
     background: rgb(166 166 166);

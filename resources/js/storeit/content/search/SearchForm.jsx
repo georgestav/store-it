@@ -55,32 +55,34 @@ function SearchForm({ setDisplaySearch }) {
             className={styles.search__form__container}
             onSubmit={sumbitSearchHandler}
         >
-            <h3>Search your next Storage</h3>
+            <h3>Find Storage</h3>
             <div>
                 <label htmlFor="location">Store it can use geolocation</label>
                 <Switch {...label} onChange={geoTogglerHandler} />
             </div>
-            {!geolocationStatus ? (
+            <div className={styles.location__and__date}>
+                {!geolocationStatus ? (
+                    <div className={styles.location}>
+                        <label htmlFor="location">Location</label>
+                        <input
+                            id="location"
+                            type="text"
+                            placeholder="Location"
+                            ref={locationInput}
+                            autoFocus
+                        />
+                    </div>
+                ) : (
+                    <></>
+                )}
                 <div>
-                    <label htmlFor="location">Location</label>
-                    <input
-                        id="location"
-                        type="text"
-                        placeholder="Location"
-                        ref={locationInput}
-                        autoFocus
-                    />
+                    <label htmlFor="fromDate">From date</label>
+                    <input id="fromDate" type="date" disabled />
                 </div>
-            ) : (
-                <></>
-            )}
-            <div>
-                <label htmlFor="fromDate">From date</label>
-                <input id="fromDate" type="date" disabled />
-            </div>
-            <div>
-                <label htmlFor="untilDate">Until Date</label>
-                <input id="untilDate" type="date" disabled />
+                <div>
+                    <label htmlFor="untilDate">Until Date</label>
+                    <input id="untilDate" type="date" disabled />
+                </div>
             </div>
             <select name="" id="" disabled>
                 <option value="">Attic</option>
@@ -89,10 +91,12 @@ function SearchForm({ setDisplaySearch }) {
                 <option value="">Room</option>
                 <option value="">Locker</option>
             </select>
-            <Button onClick={() => setDisplaySearch(false)}>Back</Button>
-            <Button variant="contained" type="submit">
-                Submit
-            </Button>
+            <div className={styles.buttons}>
+                <Button variant="contained" onClick={() => setDisplaySearch(false)}>Back</Button>
+                <Button variant="contained" type="submit">
+                    Submit
+                </Button>
+            </div>
         </form>
     );
 }
