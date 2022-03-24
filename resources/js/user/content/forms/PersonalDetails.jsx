@@ -1,17 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 //styles
 import styles from "./PersonalDetails.module.css";
+import axios from "axios";
 function PersonalDetails({ userid }) {
     //form inputs
-    const name = useRef();
-    const surname = useRef();
-    const phone = useRef();
-    const address = useRef();
-    const city_id = useRef();
-    const country_id = useRef();
-
+    const [editing, setEditing] = useState(false);
+    const [formData, setFormData] = useState({
+        user_id: userid,
+        name: "",
+        surname: "",
+        phone: "",
+        address: "",
+        city_id: "",
+        country_id: "",
+    });
+    const [userExists, setUserExists] = useState(false); //if false do post, else do patch
     //state hooks
     const [cities, setCities] = useState([]);
     const [countries, setCountries] = useState([]);
@@ -41,91 +48,190 @@ function PersonalDetails({ userid }) {
         }
     };
 
+    //form handling to save to the database
+    const formSubmitHandler = async (e) => {
+        e.preventDefault();
+        if (!userExists) {
+            await axios
+                .post("/api/person", formData)
+                .then(function (response) {
+                    console.log(response);
+                    setEditing(!editing);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
+            await axios
+                .patch(`/api/person/${userid}`, formData)
+                .then(function (response) {
+                    console.log(response);
+                    setEditing(!editing);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    };
+
+    // fetch pesonal details
+    const fetchPersonDetails = async () => {
+        try {
+            if (userid === undefined) return;
+            const getdetails = await axios.get(`/api/person/${userid}`);
+            const data = await getdetails.data;
+            if (data.name) {
+                setFormData({
+                    name: data.name,
+                    surname: data.surname,
+                    phone: data.phone,
+                    address: data.address,
+                    city_id: data.city_id,
+                    country_id: data.country_id,
+                    user_id: data.user_id,
+                });
+                setUserExists(true);
+            } else {
+                return;
+            }
+        } catch (error) {
+            if (error.response.status === 404) {
+                return "No personal information found";
+            }
+            console.error("Could not get personal data", error.response);
+            setFormData({
+                user_id: userid,
+                name: "",
+                surname: "",
+                phone: "",
+                address: "",
+                city_id: "",
+                country_id: "",
+            });
+        }
+    };
+
+    const formChangeHandler = (e) => {
+        console.log(formData);
+        setFormData((previous_values) => {
+            return {
+                ...previous_values,
+                [e.target.name]: e.target.value,
+            };
+        });
+        setUserid();
+    };
+
+    //Write user id to the formData
+    const setUserid = () => {
+        setFormData((previous_values) => {
+            return {
+                ...previous_values,
+                ["user_id"]: userid,
+            };
+        });
+    };
+
     useEffect(() => {
         getCities(); //get cities list
         getCountries(); //get countries list
-    }, []);
+        fetchPersonDetails(); //get Person details
+    }, [userid, editing]);
 
-    //form handling to save to the database
-    const personalInfoHandler = async (e) => {
-        e.preventDefault();
-        // console.log({
-        //     name: name.current.value,
-        //     surname: surname.current.value,
-        //     phone: phone.current.value,
-        //     address: address.current.value,
-        //     city_id: city_id.current.value,
-        //     country_id: country_id.current.value,
-        //     user_id: userid,
-        // });
-        await axios
-            .post("/api/person", {
-                name: name.current.value,
-                surname: surname.current.value,
-                phone: phone.current.value,
-                address: address.current.value,
-                city_id: city_id.current.value,
-                country_id: country_id.current.value,
-                user_id: userid,
-            })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
+    if (userid && cities && countries) {
+        return (
+            <form action="" onSubmit={formSubmitHandler}>
+                <div className={styles.inputField}>
+                    <label htmlFor="firstName">First Name</label>
+                    <input
+                        id="firstName"
+                        name="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={formChangeHandler}
+                    />
+                </div>
+                <div className={styles.inputField}>
+                    <label htmlFor="surname">Surname</label>
+                    <input
+                        id="surname"
+                        name="surname"
+                        type="text"
+                        value={formData.surname}
+                        onChange={formChangeHandler}
+                    />
+                </div>
+                <div className={styles.inputField}>
+                    <label htmlFor="phone">Phone</label>
+                    <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={formChangeHandler}
+                    />
+                </div>
+                <div className={styles.inputField}>
+                    <label htmlFor="address">Address</label>
+                    <input
+                        id="address"
+                        name="address"
+                        type="text"
+                        value={formData.address}
+                        onChange={formChangeHandler}
+                    />
+                </div>
+                <div className={styles.inputField}>
+                    <label htmlFor="city_id">City</label>
+                    <select
+                        name="city_id"
+                        id="city_id"
+                        value={formData.city_id || 1}
+                        onChange={formChangeHandler}
+                    >
+                        {cities.map((city) => {
+                            return (
+                                <option value={city.id} key={city.id}>
+                                    {city.name}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
 
-    return (
-        <form action="" onSubmit={personalInfoHandler}>
-            <div className={styles.inputField}>
-                <label htmlFor="firstName">First Name</label>
-                <input id="firstName" type="text" ref={name} />
+                <div className={styles.inputField}>
+                    <label htmlFor="country_id">Country</label>
+                    <select
+                        name="country_id"
+                        id="country_id"
+                        value={formData.country_id || 45}
+                        onChange={formChangeHandler}
+                    >
+                        {countries.map((country) => {
+                            return (
+                                <option value={country.id} key={country.id}>
+                                    {country.name}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
+                <div className={styles.inputField}>
+                    <Button type="submit" variant="outlined">
+                        {userExists ? "Update" : "Save"}
+                    </Button>
+                </div>
+            </form>
+        );
+    } else {
+        return (
+            <div>
+                <Stack sx={{ color: "grey.800" }} spacing={2} direction="row">
+                    <CircularProgress color="secondary" />
+                </Stack>
             </div>
-            <div className={styles.inputField}>
-                <label htmlFor="surname">Surname</label>
-                <input id="surname" type="text" ref={surname} />
-            </div>
-            <div className={styles.inputField}>
-                <label htmlFor="phone">Phone</label>
-                <input id="phone" type="tel" ref={phone} />
-            </div>
-            <div className={styles.inputField}>
-                <label htmlFor="address">Address</label>
-                <input id="address" type="text" ref={address} />
-            </div>
-            <div className={styles.inputField}>
-                <label htmlFor="city_id">City</label>
-                <select name="" id="city_id" ref={city_id}>
-                    {cities.map((city) => {
-                        return (
-                            <option value={city.id} key={city.id}>
-                                {city.name}
-                            </option>
-                        );
-                    })}
-                </select>
-            </div>
-
-            <div className={styles.inputField}>
-                <label htmlFor="country_id">Country</label>
-                <select name="" id="country_id" ref={country_id}>
-                    {countries.map((country) => {
-                        return (
-                            <option value={country.id} key={country.id}>
-                                {country.name}
-                            </option>
-                        );
-                    })}
-                </select>
-            </div>
-            <div className={styles.inputField}>
-                <Button type="submit" variant="outlined">
-                    Save
-                </Button>
-            </div>
-        </form>
-    );
+        );
+    }
 }
 
 export default PersonalDetails;
