@@ -23,8 +23,6 @@ function PersonalDetails({ userid }) {
     const [cities, setCities] = useState([]);
     const [countries, setCountries] = useState([]);
 
-    console.log("Form data", formData);
-
     const getCities = async () => {
         try {
             // get request to get list of cities in the DB that the user can register to
