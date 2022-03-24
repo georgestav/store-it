@@ -1,20 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 //styles
 import styles from "./PersonalDetails.module.css";
+import axios from "axios";
 function PersonalDetails({ userid }) {
     //form inputs
-    const [formData, setFormData] = useState(null);
-    // {
-    // name: "test",
-    // surname: "test",
-    // phone: "test",
-    // address: "test",
-    // city_id: 1,
-    // country_id: 1,
-    // user_id: 1,
-    // }
+    const [formData, setFormData] = useState({});
+    const [userExists, setUserExists] = useState(false); //if false do post, else do patch
 
     //state hooks
     const [cities, setCities] = useState([]);
@@ -48,23 +43,33 @@ function PersonalDetails({ userid }) {
     //form handling to save to the database
     const formSubmitHandler = async (e) => {
         e.preventDefault();
-
-        await axios
-            .post("/api/person", formData)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        if (!userExists) {
+            await axios
+                .post("/api/person", formData)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
+            await axios
+                .patch(`/api/person/${userid}`, formData)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     };
 
     // fetch pesonal details
     const fetchPersonDetails = async () => {
         try {
+            if (userid === undefined) return;
             const getdetails = await axios.get(`/api/person/${userid}`);
             const data = await getdetails.data;
-            console.log("fetched person data", data);
             setFormData({
                 name: data.name,
                 surname: data.surname,
@@ -72,24 +77,47 @@ function PersonalDetails({ userid }) {
                 address: data.address,
                 city_id: data.city_id,
                 country_id: data.country_id,
+                user_id: data.user_id,
             });
+            setUserExists(true);
+            console.log(data);
         } catch (error) {
-            console.error(
-                "Could not get person data",
-                error.response.data.message
-            );
+            if (error.response.status === 404) {
+                return "No personal information found";
+            }
+            console.error("Could not get personal data", error.response);
+            setFormData({
+                user_id: userid,
+                name: "",
+                surname: "",
+                phone: "",
+                address: "",
+                city_id: "",
+                country_id: "",
+            });
         }
     };
 
     const formChangeHandler = (e) => {
+        console.log(formData);
         setFormData((previous_values) => {
             return {
                 ...previous_values,
                 [e.target.name]: e.target.value,
             };
         });
+        setUserid();
     };
-    console.log(formData);
+
+    //Write user id to the formData
+    const setUserid = () => {
+        setFormData((previous_values) => {
+            return {
+                ...previous_values,
+                ["user_id"]: userid,
+            };
+        });
+    };
 
     useEffect(() => {
         getCities(); //get cities list
@@ -97,7 +125,7 @@ function PersonalDetails({ userid }) {
         fetchPersonDetails(); //get Person details
     }, [userid]);
 
-    if (formData) {
+    if (userid) {
         return (
             <form action="" onSubmit={formSubmitHandler}>
                 <div className={styles.inputField}>
@@ -183,7 +211,13 @@ function PersonalDetails({ userid }) {
             </form>
         );
     } else {
-        return <div>Loading...</div>;
+        return (
+            <div>
+                <Stack sx={{ color: "grey.800" }} spacing={2} direction="row">
+                    <CircularProgress color="secondary" />
+                </Stack>
+            </div>
+        );
     }
 }
 
