@@ -21,3 +21,6 @@ Route::get('/', function () {
 Route::get("/results/{search?}", "ListingController@showResults"); //method, that takes a search input and finds all relevant listings
 
 Route::get('/user', 'UserController@showUser');
+Route::get('/hosting', function () {
+    return view('hosting.hosting');
+});
