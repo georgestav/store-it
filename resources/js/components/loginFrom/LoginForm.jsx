@@ -35,8 +35,8 @@ export default function LoginForm({ setDisplay }) {
             setErrors({}); // set errors if any
             setDisplay(""); //set display to empty to switch back to main content
         } catch (error) {
-            setErrors(error.response.data.errors); //accessing the error messages
-            console.error(error.response.data.message);
+            setErrors(error.response?.data.errors); //accessing the error messages
+            console.error(error.response?.data.message);
         }
     };
 
