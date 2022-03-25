@@ -53,6 +53,22 @@ class ListingController extends Controller
     }
 
     /**
+     * accessing one specific listing
+     * 
+     * 
+     * @param $id
+     */
+    public function indexSingle($id)
+    {
+        $listing = Listing::findOrFail($id);
+
+        $listing->country = $listing->country;
+        $listing->city = $listing->city;
+
+        return $listing;
+    }
+
+    /**
      * add new listing to listing table
      *
      * @param  \Illuminate\Http\Request  $request

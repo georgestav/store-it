@@ -3,6 +3,10 @@ import NavigationBar from "../components/navigation/NavigationBar";
 import Content from "./content/Content";
 import Footer from "../components/footer/Footer";
 import { UserContext } from "../components/context/UserContext";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import DetailedInfo from "./content/detailedInfo/DetailedInfo";
+import BookingForm from "./content/bookingForm/BookingForm";
+
 
 export default function App() {
 
@@ -32,11 +36,18 @@ export default function App() {
     return (
         
         <UserContext.Provider value={values}>
-            <NavigationBar setDisplay={setDisplay} />
-            
-            <Content display={display} setDisplay={setDisplay}/>
+            <BrowserRouter>
+                <NavigationBar setDisplay={setDisplay} />
 
-            <Footer />
+                <Routes>
+                    
+                    <Route path="/results/listing/:id" element={<DetailedInfo />} />
+                    <Route path="/results/:location" element={<Content display={display} setDisplay={setDisplay}/>} />
+                    <Route path="/results/book/:listingId" element={<BookingForm />} />
+                </Routes>
+
+                <Footer />
+            </BrowserRouter>
         </UserContext.Provider>    
         
     );
