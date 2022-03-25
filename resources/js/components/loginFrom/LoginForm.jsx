@@ -44,7 +44,7 @@ export default function LoginForm({ setDisplay }) {
         <div className={styles.body}>
             <form className={styles.form} action="/login" onSubmit={loginSubmitHandler}>
                 {errors ? <p>{errors.email}</p> : null}
-                <div>
+                <div className={styles.email}>
                     <label htmlFor="loginEmail">Email</label>
                     <input
                         id="loginEmail"
@@ -54,7 +54,7 @@ export default function LoginForm({ setDisplay }) {
                         required
                     />
                 </div>
-                <div>
+                <div className={styles.password}>
                     <label htmlFor="loginPassword">Password</label>
                     <input
                         id="loginPassword"
@@ -73,12 +73,10 @@ export default function LoginForm({ setDisplay }) {
                     />
                 </div>
                 <div className={styles.buttons}>
-                    <div>
                         <Button variant="contained" onClick={() => setDisplay("")}>Back</Button>
                         <Button variant="contained" type="submit">
                             Submit
                         </Button>
-                    </div>
                 </div>
                 
             </form>

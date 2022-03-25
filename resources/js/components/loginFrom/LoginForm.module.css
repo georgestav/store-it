@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 95vh;
     min-width: 100%;
     font-size: 200%;
     background-color: palegoldenrod;
@@ -22,7 +22,18 @@
     margin-top: 1em;
 }
 
+.email {
+    display: flex;
+    flex-direction: column;
+}
+
+.password {
+    display: flex;
+    flex-direction: column;
+}
+
 .buttons {
     display: flex;
     justify-content: space-between;
+    width: 50%;
 }
