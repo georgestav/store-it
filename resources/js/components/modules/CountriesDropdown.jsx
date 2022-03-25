@@ -11,16 +11,31 @@ const fetchCountries = async () => {
     }
 };
 
-function CountriesDropdown() {
+/* 
+CountriesDropdown to be used inside a form
+country_id expected to reflect the changes or fetched data
+function formChangeHandler expected, to update the parent element form data
+*/
+function CountriesDropdown({ country_id, formChangeHandler }) {
     const [countries, setCountries] = useState([]);
     useEffect(async () => {
-        setCountries(await fetchCountries());
+        if (countries.length > 0) {
+            return;
+        } else {
+            setCountries(await fetchCountries());
+        }
     }, []);
 
     return (
         <>
             <label htmlFor="country_id">Country</label>
-            <select name="country_id" id="country_id">
+            <select
+                name="country_id"
+                id="country_id"
+                value={country_id}
+                onChange={formChangeHandler}
+                required
+            >
                 {countries.map((country) => {
                     return (
                         <option value={country.id} key={country.id}>

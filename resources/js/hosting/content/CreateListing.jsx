@@ -13,9 +13,19 @@ function CreateListing({ user }) {
         <div>
             <h2>Create a new Listing</h2>
             {expandForm ? <NewListingForm /> : <></>}
-            <Button onClick={toggleFormHandler}>
-                {expandForm ? "Close" : "Expand"}
-            </Button>
+            {expandForm ? (
+                <Button
+                    onClick={toggleFormHandler}
+                    color="error"
+                    variant="outlined"
+                >
+                    Close
+                </Button>
+            ) : (
+                <Button onClick={toggleFormHandler} variant="outlined">
+                    Add Listing
+                </Button>
+            )}
         </div>
     );
 }

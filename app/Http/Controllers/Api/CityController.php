@@ -24,6 +24,20 @@ class CityController extends Controller
         return $cities;
     }
 
+    public function findbyid($id)
+    {
+        /**
+         * If passed $id is not a number return
+         * 406 Not Acceptable
+         */
+        if (!ctype_digit($id)) {
+            return response('Input is not a valid city id', 406);
+        }
+        $builder = City::findOrFail($id);
+
+        return $builder;
+    }
+
     /**
      * Add new city to cities table
      *

@@ -11,17 +11,32 @@ const fetchCities = async () => {
     }
 };
 
-function CitiesDropdown() {
+/* 
+CitiesDropdown to be used inside a form
+city_id expected to reflect the changes or fetched data
+function formChangeHandler expected, to update the parent element form data
+*/
+function CitiesDropdown({ city_id, formChangeHandler }) {
     const [cities, setCities] = useState([]);
 
     useEffect(async () => {
-        setCities(await fetchCities());
+        if (cities.length > 0) {
+            return;
+        } else {
+            setCities(await fetchCities());
+        }
     }, []);
 
     return (
         <>
             <label htmlFor="city_id">City</label>
-            <select name="city_id" id="city_id">
+            <select
+                name="city_id"
+                id="city_id"
+                value={city_id}
+                onChange={formChangeHandler}
+                required
+            >
                 {cities.map((city) => {
                     return (
                         <option value={city.id} key={city.id}>

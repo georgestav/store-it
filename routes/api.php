@@ -29,12 +29,14 @@ Route::delete("/listings/{id}", "Api\ListingController@destroy");
 
 //Cities controller group
 Route::get('/cities/{name?}', 'Api\CityController@index');
+Route::get('/cities/{id}/id', 'Api\CityController@findbyid');
 Route::post('/cities', 'Api\CityController@store'); // create new city
 Route::post('/cities/{id}', 'Api\CityController@update'); //todo put or patch
 Route::delete('/cities/{id}', 'Api\CityController@destroy');
 
 //Countries controller group
 Route::get("/countries", "Api\CountryController@index");
+Route::get("/countries/{id}/id", "Api\CountryController@findbyid");
 
 
 //Reviews controller group

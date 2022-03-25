@@ -17,4 +17,18 @@ class CountryController extends Controller
 
         return $countries;
     }
+
+    public function findbyid($id)
+    {
+        /**
+         * If passed $id is not a number return
+         * 406 Not Acceptable
+         */
+        if (!ctype_digit($id)) {
+            return response('Input is not a valid country id', 406);
+        }
+        $builder = Country::findOrFail($id);
+
+        return $builder;
+    }
 }
