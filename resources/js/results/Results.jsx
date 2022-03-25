@@ -3,6 +3,9 @@ import NavigationBar from "../components/navigation/NavigationBar";
 import Content from "./content/Content";
 import Footer from "../components/footer/Footer";
 import { UserContext } from "../components/context/UserContext";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import DetailedInfo from "./content/detailedInfo/DetailedInfo";
+
 
 export default function App() {
 
@@ -32,11 +35,16 @@ export default function App() {
     return (
         
         <UserContext.Provider value={values}>
-            <NavigationBar setDisplay={setDisplay} />
-            
-            <Content display={display} setDisplay={setDisplay}/>
+            <BrowserRouter>
+                <NavigationBar setDisplay={setDisplay} />
 
-            <Footer />
+                <Routes>
+                    <Route exact path="/resutls/:location" element={<Content display={display} setDisplay={setDisplay}/>} />
+                    <Route exact path="/listing/:id" element={<DetailedInfo />} />
+                </Routes>
+
+                <Footer />
+            </BrowserRouter>
         </UserContext.Provider>    
         
     );
