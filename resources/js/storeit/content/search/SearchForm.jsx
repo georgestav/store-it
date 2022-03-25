@@ -52,47 +52,54 @@ function SearchForm({ setDisplaySearch }) {
     };
     return (
         <form
-            className={styles.search__form__container}
+            className={styles.body}
             onSubmit={sumbitSearchHandler}
         >
-            <h3>Search your next Storage</h3>
-            <div>
-                <label htmlFor="location">Store it can use geolocation</label>
-                <Switch {...label} onChange={geoTogglerHandler} />
-            </div>
-            {!geolocationStatus ? (
+            <div className={styles.search__form__container}>
+                <h3 className={styles.storage}>Find Storage</h3>
                 <div>
-                    <label htmlFor="location">Location</label>
-                    <input
-                        id="location"
-                        type="text"
-                        placeholder="Location"
-                        ref={locationInput}
-                        autoFocus
-                    />
+                    <label htmlFor="location">Store it can use geolocation</label>
+                    <Switch {...label} onChange={geoTogglerHandler} />
                 </div>
-            ) : (
-                <></>
-            )}
-            <div>
-                <label htmlFor="fromDate">From date</label>
-                <input id="fromDate" type="date" disabled />
+                
+                    {!geolocationStatus ? (
+                        <div className={styles.location}>
+                            <label htmlFor="location">Location</label>
+                            <input
+                                id="location"
+                                type="text"
+                                placeholder="Location"
+                                ref={locationInput}
+                                autoFocus
+                            />
+                        </div>
+                    ) : (
+                        <></>
+                    )}
+                    <div className={styles.fromDate}>
+                        <label htmlFor="fromDate">From date</label>
+                        <input id="fromDate" type="date" disabled />
+                    </div>
+                    <div className={styles.untilDate}>
+                        <label htmlFor="untilDate">Until Date</label>
+                        <input id="untilDate" type="date" disabled />
+                    </div>
+                
+                <select name="" id="" disabled>
+                    <option value="">Attic</option>
+                    <option value="">Shed</option>
+                    <option value="">Garage</option>
+                    <option value="">Room</option>
+                    <option value="">Locker</option>
+                </select>
+                <div className={styles.buttons}>
+                    <Button variant="contained" onClick={() => setDisplaySearch(false)}>Back</Button>
+                    <Button variant="contained" type="submit">
+                        Submit
+                    </Button>
+                </div>
             </div>
-            <div>
-                <label htmlFor="untilDate">Until Date</label>
-                <input id="untilDate" type="date" disabled />
-            </div>
-            <select name="" id="" disabled>
-                <option value="">Attic</option>
-                <option value="">Shed</option>
-                <option value="">Garage</option>
-                <option value="">Room</option>
-                <option value="">Locker</option>
-            </select>
-            <Button onClick={() => setDisplaySearch(false)}>Back</Button>
-            <Button variant="contained" type="submit">
-                Submit
-            </Button>
+
         </form>
     );
 }

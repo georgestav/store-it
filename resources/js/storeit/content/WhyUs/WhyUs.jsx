@@ -11,7 +11,7 @@ function WhyUs() {
 
                 <div className={styles.containers}>
 
-                    <div className={styles.container1}>
+                    <div className={styles.containers__separated}>
                     
                         <h2 className={styles.headers}>Efficient</h2>
 
@@ -19,7 +19,7 @@ function WhyUs() {
 
                     </div>
                     
-                    <div className={styles.container2}>
+                    <div className={styles.containers__separated}>
                     
                         <h2 className={styles.headers}>Secure</h2>
 
@@ -27,7 +27,7 @@ function WhyUs() {
 
                     </div>
                     
-                    <div className={styles.container3}>
+                    <div className={styles.containers__separated}>
                     
                         <h2 className={styles.headers}>Accessible</h2>
 
