@@ -20,7 +20,11 @@ function CitiesDropdown({ city_id, formChangeHandler }) {
     const [cities, setCities] = useState([]);
 
     useEffect(async () => {
-        setCities(await fetchCities());
+        if (cities.length > 0) {
+            return;
+        } else {
+            setCities(await fetchCities());
+        }
     }, []);
 
     return (

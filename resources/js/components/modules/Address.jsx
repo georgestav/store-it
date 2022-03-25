@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 
-const fetchCities = async (id = 1) => {
+const fetchCities = async (id = 1, city) => {
+    // if (city) return;
     try {
         // get request to get list of cities in the DB that the user can register to
         const getdetails = await axios.get(`/api/cities/${id}/id`);
@@ -12,7 +13,8 @@ const fetchCities = async (id = 1) => {
     }
 };
 
-const fetchCountry = async (id = 1) => {
+const fetchCountry = async (id = 1, country) => {
+    // if (country) return;
     try {
         // get request to get list of cities in the DB that the user can register to
         const getdetails = await axios.get(`/api/countries/${id}/id`);
@@ -78,9 +80,9 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
     };
 
     useEffect(async () => {
-        setCity(await fetchCities(formData.city_id));
-        setCountry(await fetchCountry(formData.country_id));
-    }, [formData]);
+        setCity(await fetchCities(formData.city_id, city));
+        setCountry(await fetchCountry(formData.country_id, country));
+    }, [formData.city_id, formData.country_id]);
 
     return (
         <>

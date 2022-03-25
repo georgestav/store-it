@@ -19,7 +19,11 @@ function formChangeHandler expected, to update the parent element form data
 function CountriesDropdown({ country_id, formChangeHandler }) {
     const [countries, setCountries] = useState([]);
     useEffect(async () => {
-        setCountries(await fetchCountries());
+        if (countries.length > 0) {
+            return;
+        } else {
+            setCountries(await fetchCountries());
+        }
     }, []);
 
     return (

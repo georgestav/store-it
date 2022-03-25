@@ -83,16 +83,16 @@ function NewListingForm() {
                 storage_type_id={formData.country_id}
                 formChangeHandler={formChangeHandler}
             />
-            <StorageTypeDropdown
-                className={styles.form__input}
-                storage_type_id={formData.storage_type_id}
-                formChangeHandler={formChangeHandler}
-            />
             <Address
                 className={styles.form__input}
                 formData={formData}
                 formChangeHandler={formChangeHandler}
                 setFormCoordinates={setFormCoordinates}
+            />
+            <StorageTypeDropdown
+                className={styles.form__input}
+                storage_type_id={formData.storage_type_id}
+                formChangeHandler={formChangeHandler}
             />
             <div className={styles.form__input}>
                 <label htmlFor="daily_rate">Daily Rate</label>
