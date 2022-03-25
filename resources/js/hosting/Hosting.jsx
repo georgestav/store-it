@@ -1,10 +1,11 @@
 import React, { useState, useMemo, useEffect } from "react";
+import { UserContext } from "../components/context/UserContext";
 import NavigationBar from "../components/navigation/NavigationBar";
 import Footer from "../components/footer/Footer";
-import { UserContext } from "../components/context/UserContext";
+import Listings from "./content/Listings";
+import CreateListing from "./content/CreateListing";
 //styling
 import styles from "./Hosting.module.css";
-import Listings from "./content/Listings";
 
 function Hosting() {
     const [display, setDisplay] = useState(""); //set empty display
@@ -34,6 +35,7 @@ function Hosting() {
             <UserContext.Provider value={values}>
                 <NavigationBar setDisplay={setDisplay} />
                 <div className={styles.hosting__container}>
+                    <CreateListing user={user} />
                     <Listings user={user} />
                 </div>
             </UserContext.Provider>

@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: baseline;
     background-color: rgb(238, 238, 238);
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     z-index: 1;
 }

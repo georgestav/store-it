@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Listing from "./Listing";
+import Card from "../../ui/Card";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import styles from "./Listings.module.css";
 
 function Listings({ user }) {
     const [listings, setListings] = useState([]);
@@ -21,7 +23,6 @@ function Listings({ user }) {
         }
     };
 
-    console.log(listings);
     useEffect(() => {
         fetchUserData();
     }, [user]);
@@ -29,11 +30,14 @@ function Listings({ user }) {
     if (listings.length > 0) {
         return (
             <div>
-                <div>Listings</div>
-                <div>
-                    listing
+                <h2>Listings</h2>
+                <div className={styles.listings__list}>
                     {listings.map((listing) => {
-                        return <Listing key={listing.id} listing={listing} />;
+                        return (
+                            <Card key={listing.id}>
+                                <Listing listing={listing} />
+                            </Card>
+                        );
                     })}
                 </div>
             </div>
