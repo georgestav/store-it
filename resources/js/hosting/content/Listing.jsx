@@ -2,8 +2,24 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import ListingDetails from "./ListingDetails";
 
+const deleteListing = async (id) => {
+    try {
+        // get request to get list of cities in the DB that the user can register to
+        const getdetails = await axios.delete(`api/listings/${id}`);
+        const data = await getdetails.data;
+        return data;
+    } catch (error) {
+        console.error("Could not delete", error.response.data.message);
+    }
+};
+
 function Listing({ listing }) {
     const [expanded, setExpanded] = useState(false);
+
+    const deleteListingHandler = () => {
+        deleteListing(listing.id);
+        console.log(listing);
+    };
 
     const showDetailsHandler = () => {
         setExpanded(!expanded);
@@ -26,10 +42,14 @@ function Listing({ listing }) {
             </div>
 
             {expanded ? <ListingDetails listing={listing} /> : <></>}
-
-            <Button onClick={showDetailsHandler}>
-                {expanded ? "Hide" : "Details"}
-            </Button>
+            <div>
+                <Button onClick={showDetailsHandler}>
+                    {expanded ? "Hide" : "Details"}
+                </Button>
+                <Button color="error" onClick={deleteListingHandler}>
+                    Delete Listing
+                </Button>
+            </div>
         </>
     );
 }
