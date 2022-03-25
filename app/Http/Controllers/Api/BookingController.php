@@ -24,17 +24,16 @@ class BookingController extends Controller
      * add new booking to the bookings table
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param $listing_id
      */
-    public function store(Request $request, $listing_id)
+    public function store(Request $request)
     {
         $booking = new Booking;
 
-        $booking->user_id = 1;
-        $booking->listing_id = $listing_id;
+        $booking->user_id = $request->input("user_id");
+        $booking->listing_id = $request->input("listing_id");
         $booking->booked_from = $request->input("booked_from");
         $booking->booked_until = $request->input("booked_until");
-        $booking->status = "not-confirmed";
+        $booking->status = $request->input("status");
 
         $booking->save();
     }
