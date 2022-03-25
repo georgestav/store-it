@@ -62,8 +62,8 @@ function SearchForm({ setDisplaySearch }) {
                     <Switch {...label} onChange={geoTogglerHandler} />
                 </div>
                 
-                    {!geolocationStatus ? (
-                        <div className={styles.location}>
+                {!geolocationStatus ? (
+                        <div className={styles.location__and__date}>
                             <label htmlFor="location">Location</label>
                             <input
                                 id="location"
@@ -76,14 +76,15 @@ function SearchForm({ setDisplaySearch }) {
                     ) : (
                         <></>
                     )}
-                    <div className={styles.fromDate}>
+                    <div className={styles.location__and__date}>
                         <label htmlFor="fromDate">From date</label>
                         <input id="fromDate" type="date" disabled />
                     </div>
-                    <div className={styles.untilDate}>
+                    <div className={styles.location__and__date}>
                         <label htmlFor="untilDate">Until Date</label>
                         <input id="untilDate" type="date" disabled />
                     </div>
+                
                 
                 <select name="" id="" disabled>
                     <option value="">Attic</option>

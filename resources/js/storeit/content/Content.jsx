@@ -5,6 +5,7 @@ import LoginForm from "../../components/loginFrom/LoginForm";
 import RegisterForm from "../../components/registerForm/RegisterForm";
 import WhyUs from "./whyus/WhyUs";
 import OurProcess from "./ourprocess/OurProcess";
+import StorageTypes from "./storagetypes/StorageTypes";
 
 function Content({ display, setDisplay }) {
     //use userContext
@@ -32,6 +33,7 @@ function Content({ display, setDisplay }) {
                 <Search />
                 <WhyUs />
                 <OurProcess />
+                <StorageTypes />
             </>
         );
     }
