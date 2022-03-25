@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 
-const fetchCities = async (id = 1, city) => {
-    // if (city) return;
-    try {
-        // get request to get list of cities in the DB that the user can register to
-        const getdetails = await axios.get(`/api/cities/${id}/id`);
-        const data = await getdetails.data;
-        return data;
-    } catch (error) {
-        console.error("Could not get cities", error.response.data.message);
-    }
-};
-
 const fetchCountry = async (id = 1, country) => {
     // if (country) return;
     try {
@@ -29,20 +17,15 @@ const fetchCountry = async (id = 1, country) => {
 const getCoordinates = async (city, country, listingAddress) => {
     //get coordinates with passed in address data
     try {
-        const options = {
-            params: {
-                street: listingAddress.address,
-                city: city.name,
-                country: country.name,
-                postalcode: listingAddress.postcode,
-                format: "jsonv2",
-                limit: "1",
-            },
-        };
+        let url = `https://nominatim.openstreetmap.org/search?&limit=1&format=jsonv2`;
+        if (listingAddress.address) url += `&street=${listingAddress.address}`;
+        if (city) url += `&city=${city}`;
+        if (country.name) url += `&country=${country.name}`;
+        if (listingAddress.postcode)
+            url += `&postalcode=${listingAddress.postcode}`;
 
-        const url = `https://nominatim.openstreetmap.org/search`;
         // get request to get list of cities in the DB that the user can register to
-        const coordsFetch = await axios(url, options);
+        const coordsFetch = await axios(url);
         const data = await coordsFetch.data;
 
         if (!data.length) throw Error("No results, check your inputs");
@@ -54,12 +37,12 @@ const getCoordinates = async (city, country, listingAddress) => {
 };
 
 function Address({ formData, formChangeHandler, setFormCoordinates }) {
-    const [coordinates, setCoordinates] = useState("Unknown");
+    const [coordinates, setCoordinates] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
     const [listingAddress, setListingAddress] = useState({
-        address: "none",
-        postcode: "none",
+        address: "",
+        postcode: "",
     });
 
     const addressHandler = (e) => {
@@ -73,16 +56,17 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
 
     const checkAddressHandler = async () => {
         const data = await getCoordinates(city, country, listingAddress);
-        const coord = `${data[0]["lat"]},${data[0]["lon"]}`;
+        const coord = `${data[0]["lat"]}, ${data[0]["lon"]}`;
         console.log(coord);
         setCoordinates(coord);
         setFormCoordinates(coord);
     };
 
     useEffect(async () => {
-        setCity(await fetchCities(formData.city_id, city));
+        console.log(formData);
+        setCity(formData.city);
         setCountry(await fetchCountry(formData.country_id, country));
-    }, [formData.city_id, formData.country_id]);
+    }, [formData.city, formData.country_id]);
 
     return (
         <>
