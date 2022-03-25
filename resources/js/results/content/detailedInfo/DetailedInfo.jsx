@@ -8,7 +8,7 @@ export default function DetailedInfo() {
     
     // console.log(`api/listings/${id}`);
 
-    console.log(id);
+    // console.log(id);
 
     const [listing, setListing] = useState(null);
 
