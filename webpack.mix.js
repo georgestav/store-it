@@ -43,6 +43,7 @@ mix.sass("resources/css/app.scss", "public/css");
 mix.js("resources/js/storeit.js", "public/js").react();
 mix.js("resources/js/results.js", "public/js").react();
 mix.js("resources/js/user.js", "public/js").react();
+mix.js("resources/js/hosting.js", "public/js").react();
 // Examples:
 // mix.sass('resources/css/app.scss', 'public/css');
 // mix.js('resources/js/library.js', 'public/js');

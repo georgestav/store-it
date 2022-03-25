@@ -77,7 +77,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->name = $request->name;
-        // $user->email = $request->email;
         $user->language_id = $request->language_id;
         $user->role_id = $request->role_id;
 
@@ -96,5 +95,17 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+        return response('User Deleted');
+    }
+
+    /**
+     * Get users listings
+     */
+    public function getlistings($id)
+    {
+        //todo
+        $user = User::findOrFail($id);
+        $user->listings;
+        return response($user);
     }
 }

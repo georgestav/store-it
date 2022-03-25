@@ -105,7 +105,13 @@ export default function AccountMenu({ setDisplay }) {
                     ) : (
                         //if user is logged in, display Register and Login
                         <span>
-                            <MenuItem>Profile</MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    window.location.href = "/hosting";
+                                }}
+                            >
+                                Profile
+                            </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     window.location.href = "/user";
