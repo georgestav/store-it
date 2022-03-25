@@ -72,12 +72,15 @@ export default function LoginForm({ setDisplay }) {
                         onClick={() => setRememberMe(!rememberMe)}
                     />
                 </div>
-                <div>
-                    <Button variant="contained" onClick={() => setDisplay("")}>Back</Button>
-                    <Button variant="contained" type="submit">
-                        Submit
-                    </Button>
+                <div className={styles.buttons}>
+                    <div>
+                        <Button variant="contained" onClick={() => setDisplay("")}>Back</Button>
+                        <Button variant="contained" type="submit">
+                            Submit
+                        </Button>
+                    </div>
                 </div>
+                
             </form>
         </div>
     );

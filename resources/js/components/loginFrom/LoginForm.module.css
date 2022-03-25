@@ -21,3 +21,8 @@
     padding: 0.5em;
     margin-top: 1em;
 }
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
