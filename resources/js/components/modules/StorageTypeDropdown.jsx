@@ -11,7 +11,12 @@ const fetchStorageTypes = async () => {
     }
 };
 
-function StorageTypeDropdown() {
+/* 
+StorageTypeDropdown to be used inside a form
+storage_type_id expected to reflect the changes or fetched data
+function formChangeHandler expected, to update the parent element form data
+*/
+function StorageTypeDropdown({ storage_type_id, formChangeHandler }) {
     const [storageType, setStorageType] = useState([]);
 
     useEffect(() => {}, []);
@@ -19,9 +24,15 @@ function StorageTypeDropdown() {
     return (
         <>
             <label htmlFor="storage_type_id">Storage Type</label>
-            <select name="storage_type_id" id="storage_type_id">
-                <option value="1">1</option>
-                <option value="2">2</option>
+            <select
+                name="storage_type_id"
+                id="storage_type_id"
+                value={storage_type_id}
+                onChange={formChangeHandler}
+                required
+            >
+                <option value="1">First Option</option>
+                <option value="2">Second Option</option>
             </select>
         </>
     );

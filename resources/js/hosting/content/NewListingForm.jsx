@@ -1,40 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Button } from "@mui/material";
 import axios from "axios";
-//styles
-import styles from "./NewListingForm.module.css";
+import { UserContext } from "../../components/context/UserContext";
 import CitiesDropdown from "../../components/modules/CitiesDropdown";
 import CountriesDropdown from "../../components/modules/CountriesDropdown";
 import StorageTypeDropdown from "../../components/modules/StorageTypeDropdown";
-
-/* 
-city_id: 4
-country_id: 58
-storage_type_id: 2
-coordinates: "49.19157528098001, 16.564066323361132"
-daily_rate: 0.9
-description: "This space can accommodate a large car or truck, and is in the front of my house. I'm usually home and can keep watch of your property. Access 24/7. Just let me know what you're looking to store and we can make it happen. Contact me for details."
-rating: 3
-size: 23
-user_id: 5
-created_at: "2022-03-22T10:11:41.000000Z"
-updated_at: "2022-03-22T10:11:41.000000Z"
-id: 5 
-*/
+import Address from "../../components/modules/Address";
+//styles
+import styles from "./NewListingForm.module.css";
 
 function NewListingForm() {
+    const { user, setUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
-        city_id: "",
-        country_id: "",
-        storage_type_id: "",
+        city_id: "1",
+        country_id: "1",
+        storage_type_id: "1",
         coordinates: "",
         daily_rate: "",
         description: "",
-        rating: "",
+        rating: "0",
         size: "",
         user_id: "",
     });
-
-    console.log(formData);
 
     const formChangeHandler = (e) => {
         setFormData((previous_values) => {
@@ -45,20 +32,77 @@ function NewListingForm() {
         });
     };
 
-    useEffect(() => {}, [formData]);
+    const formSubmitHandler = async (e) => {
+        e.preventDefault();
+        setUserid();
+
+        console.log(formData);
+
+        await axios
+            .post("/api/listings", formData)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    //Write user id to the formData
+    const setUserid = () => {
+        setFormData((previous_values) => {
+            return {
+                ...previous_values,
+                ["user_id"]: user.id,
+            };
+        });
+    };
+
+    const setFormCoordinates = (coords) => {
+        setFormData((previous_values) => {
+            return {
+                ...previous_values,
+                ["coordinates"]: coords,
+            };
+        });
+    };
+
+    useEffect(() => {
+        setUserid();
+    }, [user]);
 
     return (
-        <form className={styles.form}>
-            <CitiesDropdown className={styles.form__input} />
-            <CountriesDropdown className={styles.form__input} />
-            <StorageTypeDropdown className={styles.form__input} />
-            <div className={styles.form__input}>
-                <label htmlFor="coordinates">Location</label>
-                <input name="coordinates" id="coordinates" type="text" />
-            </div>
+        <form className={styles.form} onSubmit={formSubmitHandler}>
+            <CitiesDropdown
+                className={styles.form__input}
+                storage_type_id={formData.city_id}
+                formChangeHandler={formChangeHandler}
+            />
+            <CountriesDropdown
+                className={styles.form__input}
+                storage_type_id={formData.country_id}
+                formChangeHandler={formChangeHandler}
+            />
+            <StorageTypeDropdown
+                className={styles.form__input}
+                storage_type_id={formData.storage_type_id}
+                formChangeHandler={formChangeHandler}
+            />
+            <Address
+                className={styles.form__input}
+                formData={formData}
+                formChangeHandler={formChangeHandler}
+                setFormCoordinates={setFormCoordinates}
+            />
             <div className={styles.form__input}>
                 <label htmlFor="daily_rate">Daily Rate</label>
-                <input name="daily_rate" id="daily_rate" type="text" />
+                <input
+                    name="daily_rate"
+                    id="daily_rate"
+                    type="number"
+                    value={formData.daily_rate}
+                    onChange={formChangeHandler}
+                />
             </div>
             <div className={styles.form__input}>
                 <label htmlFor="description">Description</label>
@@ -67,12 +111,23 @@ function NewListingForm() {
                     id="description"
                     cols="30"
                     rows="10"
+                    value={formData.description}
+                    onChange={formChangeHandler}
                 ></textarea>
             </div>
             <div className={styles.form__input}>
                 <label htmlFor="size">Size</label>
-                <input name="size" id="size" type="number" />
+                <input
+                    name="size"
+                    id="size"
+                    type="number"
+                    value={formData.size}
+                    onChange={formChangeHandler}
+                />
             </div>
+            <Button type="submit" variant="outlined">
+                Add your listing
+            </Button>
         </form>
     );
 }

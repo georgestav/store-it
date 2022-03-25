@@ -62,17 +62,18 @@ class ListingController extends Controller
 
         $listing = new Listing;
 
-        $listing->user_id = 2;
-        $listing->country_id = 7;
-        $listing->city_id = 12;
-        $listing->storage_type_id = 3;
-        $listing->coordinates = "E°15.345 W°44.890";
+        $listing->user_id = $request->user_id;
+        $listing->country_id = $request->country_id;
+        $listing->city_id = $request->city_id;
+        $listing->storage_type_id = $request->storage_type_id;
+        $listing->coordinates = $request->coordinates;
         $listing->description = $request->input("description");
         $listing->size = $request->input("size");
         $listing->daily_rate = $request->input("daily_rate");
-        $listing->rating = "4";
+        $listing->rating = $request->rating;
 
         $listing->save();
+        return response($listing);
     }
 
     /**
@@ -92,6 +93,7 @@ class ListingController extends Controller
         $listing->daily_rate = $request->input("daily_rate");
 
         $listing->save();
+        return response($listing);
     }
 
     /**
@@ -105,5 +107,6 @@ class ListingController extends Controller
         $listing = Listing::findOrFail($id);
 
         $listing->delete();
+        return response('Record Deleted');
     }
 }
