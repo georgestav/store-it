@@ -30,7 +30,7 @@ function Listings({ user }) {
     if (listings.length > 0) {
         return (
             <div>
-                <h2>Listings</h2>
+                <h2>My Listings</h2>
                 <div className={styles.listings__list}>
                     {listings.map((listing) => {
                         return (

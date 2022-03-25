@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListingDetails from "./ListingDetails";
 
 const deleteListing = async (id) => {
@@ -15,17 +15,47 @@ const deleteListing = async (id) => {
 
 function Listing({ listing }) {
     const [expanded, setExpanded] = useState(false);
+    const [image, setImage] = useState([]);
 
     const deleteListingHandler = () => {
         deleteListing(listing.id);
-        console.log(listing);
     };
 
     const showDetailsHandler = () => {
         setExpanded(!expanded);
     };
+
+    const getImage = async (id) => {
+        try {
+            // get request to get list of cities in the DB that the user can register to
+            const imageFetch = await axios.get(`api/picture/${id}`);
+            const data = await imageFetch.data;
+            setImage(data);
+        } catch (error) {
+            console.error("Could not get images", error);
+        }
+    };
+    useEffect(() => {
+        getImage(listing.id);
+    }, []);
+    // console.log(image[0]["photo"]);
+    //src='data:image/jpeg;base64,{$picture->photo}'
     return (
         <>
+            <div>
+                <img
+                    src={
+                        image[0]
+                            ? `data:image/jpeg;base64,${image[0]["photo"]}`
+                            : ""
+                    }
+                    alt=""
+                    style={{
+                        height: 100,
+                        width: 100,
+                    }}
+                />
+            </div>
             <div>
                 <span>Location:</span>
                 <span>{listing.coordinates}</span>
@@ -40,7 +70,6 @@ function Listing({ listing }) {
                 <span>Rating:</span>
                 <span>{listing.rating}</span>
             </div>
-
             {expanded ? <ListingDetails listing={listing} /> : <></>}
             <div>
                 <Button onClick={showDetailsHandler}>

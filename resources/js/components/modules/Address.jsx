@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 
-const fetchCountry = async (id = 1, country) => {
-    // if (country) return;
+const fetchCountry = async (id = 1) => {
     try {
         // get request to get list of cities in the DB that the user can register to
         const getdetails = await axios.get(`/api/countries/${id}/id`);
@@ -18,21 +17,18 @@ const getCoordinates = async (city, country, listingAddress) => {
     //get coordinates with passed in address data
     try {
         let url = `https://nominatim.openstreetmap.org/search?&limit=1&format=jsonv2`;
-        if (listingAddress.address) url += `&street=${listingAddress.address}`;
+        if (country.name) url += `&country=${country.name || "Afghanistan"}`;
         if (city) url += `&city=${city}`;
-        if (country.name) url += `&country=${country.name}`;
+        if (listingAddress.address) url += `&street=${listingAddress.address}`;
         if (listingAddress.postcode)
             url += `&postalcode=${listingAddress.postcode}`;
 
         // get request to get list of cities in the DB that the user can register to
         const coordsFetch = await axios(url);
         const data = await coordsFetch.data;
-
-        if (!data.length) throw Error("No results, check your inputs");
         return data;
     } catch (error) {
         console.error("Could not get coordinates", error);
-        return data;
     }
 };
 
@@ -55,22 +51,26 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
     };
 
     const checkAddressHandler = async () => {
-        const data = await getCoordinates(city, country, listingAddress);
-        const coord = `${data[0]["lat"]}, ${data[0]["lon"]}`;
-        console.log(coord);
-        setCoordinates(coord);
-        setFormCoordinates(coord);
+        try {
+            const data = await getCoordinates(city, country, listingAddress);
+            if (data.length === 0) return;
+            const coord = `${data[0]["lat"]}, ${data[0]["lon"]}`;
+            setCoordinates(coord);
+            setFormCoordinates(coord);
+        } catch (error) {
+            console.error(error.message);
+        }
     };
 
     useEffect(async () => {
-        console.log(formData);
         setCity(formData.city);
-        setCountry(await fetchCountry(formData.country_id, country));
+        setCountry(await fetchCountry(formData.country_id));
+        checkAddressHandler();
     }, [formData.city, formData.country_id]);
 
     return (
         <>
-            <h4>Location</h4>
+            <h5>Improve accuracy</h5>
             <div>
                 <label htmlFor="coordinates">Coordinates</label>
                 <input
@@ -100,7 +100,13 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
                     onChange={addressHandler}
                 />
             </div>
-            <Button onClick={checkAddressHandler}>Check</Button>
+            <Button
+                onClick={checkAddressHandler}
+                color="success"
+                variant="contained"
+            >
+                Get Location
+            </Button>
         </>
     );
 }

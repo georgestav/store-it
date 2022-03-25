@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { UserContext } from "../../components/context/UserContext";
-import CitiesDropdown from "../../components/modules/CitiesDropdown";
 import CountriesDropdown from "../../components/modules/CountriesDropdown";
 import StorageTypeDropdown from "../../components/modules/StorageTypeDropdown";
 import Address from "../../components/modules/Address";
@@ -10,7 +9,9 @@ import Address from "../../components/modules/Address";
 import styles from "./NewListingForm.module.css";
 
 function NewListingForm() {
+    //user state that is saved to user context
     const { user, setUser } = useContext(UserContext);
+    //form data that gets sent to the listings db
     const [formData, setFormData] = useState({
         city_id: "1",
         city: "",
@@ -24,6 +25,8 @@ function NewListingForm() {
         user_id: "",
     });
 
+    /* function to change the state of the form data with data from the form
+    without loosing the previous data */
     const formChangeHandler = (e) => {
         setFormData((previous_values) => {
             return {
@@ -33,23 +36,7 @@ function NewListingForm() {
         });
     };
 
-    const formSubmitHandler = async (e) => {
-        e.preventDefault();
-        setUserid();
-
-        console.log(formData);
-
-        await axios
-            .post("/api/listings", formData)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-    //Write user id to the formData
+    //Write user id to the formData to send it to the db
     const setUserid = () => {
         setFormData((previous_values) => {
             return {
@@ -59,6 +46,7 @@ function NewListingForm() {
         });
     };
 
+    //Write the calculated coordinates to the form data
     const setFormCoordinates = (coords) => {
         setFormData((previous_values) => {
             return {
@@ -68,33 +56,72 @@ function NewListingForm() {
         });
     };
 
-    useEffect(() => {
+    //function that handles the form on submit
+    const formSubmitHandler = async (e) => {
+        e.preventDefault();
         setUserid();
+        await axios
+            .post("/api/listings", formData)
+            .then(function (response) {
+                console.log(response);
+                uploadFile(response.data.id);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    const [file, setFile] = useState();
+
+    const saveFile = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const uploadFile = async (id) => {
+        const imageData = new FormData();
+        imageData.append("photo", file);
+        imageData.append("listing_id", id);
+        try {
+            const res = await axios.post(
+                "http://localhost:3000/api/picture",
+                imageData
+            );
+            console.log(res);
+        } catch (ex) {
+            console.log(ex);
+        }
+    };
+
+    useEffect(() => {
+        setUserid(); //on load or change user make sure the user id is in the form data
     }, [user]);
 
     return (
         <form className={styles.form} onSubmit={formSubmitHandler}>
             <div className={styles.form__input}>
-                <label htmlFor="city">City</label>
-                <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={formData.city}
-                    onChange={formChangeHandler}
+                <h4>Location</h4>
+                <CountriesDropdown
+                    className={styles.form__input}
+                    storage_type_id={formData.country_id}
+                    formChangeHandler={formChangeHandler}
+                />
+                <div className={styles.form__input}>
+                    <label htmlFor="city">City</label>
+                    <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={formChangeHandler}
+                    />
+                </div>
+                <Address
+                    className={styles.form__input}
+                    formData={formData}
+                    formChangeHandler={formChangeHandler}
+                    setFormCoordinates={setFormCoordinates}
                 />
             </div>
-            <CountriesDropdown
-                className={styles.form__input}
-                storage_type_id={formData.country_id}
-                formChangeHandler={formChangeHandler}
-            />
-            <Address
-                className={styles.form__input}
-                formData={formData}
-                formChangeHandler={formChangeHandler}
-                setFormCoordinates={setFormCoordinates}
-            />
             <StorageTypeDropdown
                 className={styles.form__input}
                 storage_type_id={formData.storage_type_id}
@@ -129,6 +156,16 @@ function NewListingForm() {
                     type="number"
                     value={formData.size}
                     onChange={formChangeHandler}
+                />
+            </div>
+            <div>
+                <label htmlFor="">Images</label>
+                <input
+                    type="file"
+                    id="files"
+                    name="files"
+                    accept="image/*"
+                    onChange={saveFile}
                 />
             </div>
             <Button type="submit" variant="outlined">

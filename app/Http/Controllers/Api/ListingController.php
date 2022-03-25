@@ -54,8 +54,7 @@ class ListingController extends Controller
 
     /**
      * accessing one specific listing
-     * 
-     * 
+     *
      * @param $id
      */
     public function indexSingle($id)
@@ -64,6 +63,7 @@ class ListingController extends Controller
 
         $listing->country = $listing->country;
         $listing->city = $listing->city;
+        $listing->pictures;
 
         return $listing;
     }
