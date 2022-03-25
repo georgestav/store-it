@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styles from "./map.module.css";
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
-import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 
 export default function Map({listings, cityCoordinates}) {
 
@@ -86,8 +86,7 @@ export default function Map({listings, cityCoordinates}) {
             <h2>Map</h2>
             {cityCoordinates == false ?
             null :
-            (<MapContainer className={styles.container} center={cityCoordinates} whenCreated={setMap} zoom={1}
-                >
+            (<MapContainer className={styles.container} center={cityCoordinates} whenCreated={setMap} zoom={1}>
                 
                 <p>{distance}</p>
                 <p>{cityCoordinates}</p>
@@ -95,7 +94,7 @@ export default function Map({listings, cityCoordinates}) {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-
+                <MarkerClusterGroup>
                 {listings.map((listing) => (
                     <Marker key={listing.id} position={listing.coordinates.split(",")}>
                         <Popup>
@@ -103,6 +102,7 @@ export default function Map({listings, cityCoordinates}) {
                         </Popup>
                     </Marker>
                 ))}
+                </MarkerClusterGroup>
                 
             </MapContainer>)}
         </div>
