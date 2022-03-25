@@ -8,7 +8,7 @@ export default function Listing({listing}) {
 
         
     return (
-        <Link to={"listing/" + id} >
+        <Link to={"/results/listing/" + id} className={styles.link}>
             <div className={styles.container}>
                 <h3>Location:</h3>
                 <p>Distance: {(distance / 1000).toFixed(2)} km</p>
