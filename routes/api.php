@@ -91,3 +91,6 @@ Route::delete("/listed-dates/{id}", "Api\ListedDateController@destroy");
 Route::get('/picture/{listing_id}', 'Api\PictureController@indexListing'); //todo protect for logged in users
 Route::post('/picture', 'Api\PictureController@store'); //todo protect for manager of listing
 Route::delete('/picture/{id}', 'Api\PictureController@destroy'); //todo protect for manager of listing
+
+//Storage types controller group
+Route::get('/storagetypes', 'Api\StorageTypeController@index');
