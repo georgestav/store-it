@@ -1,0 +1,43 @@
+.containers {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.containers h2 {
+    margin: 0;
+    min-height: 25vh;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 3px 3px 3px black;
+    font-size: 350%;
+}
+
+.room {
+    background-image: url('../images/background-images/texture-wall.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.garage {
+    background-image: url('../images/background-images/texture-garage3.jpg');
+    background-position: bottom;
+    background-size: cover;
+}
+
+.shed {
+    background-image: url('../images/background-images/texture-shed.jpg');
+    background-position: bottom;
+    background-size: cover;
+}
+
+.attic {
+    background-image: url('../images/background-images/texture-attic.jpg');
+    background-position: center;
+    background-size: cover;
+}
