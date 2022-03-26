@@ -1,0 +1,14 @@
+.listing__container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.heading {
+    align-self: center;
+}
+
+.goback {
+    align-self: stretch;
+}

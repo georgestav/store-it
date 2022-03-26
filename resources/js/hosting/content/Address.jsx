@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
+import styles from "./NewListingForm.module.css";
 
 const fetchCountry = async (id = 1) => {
     try {
@@ -71,7 +72,7 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
     return (
         <>
             <h5>Improve accuracy</h5>
-            <div>
+            <div className={styles.form__input}>
                 <label htmlFor="coordinates">Coordinates</label>
                 <input
                     name="coordinates"
@@ -83,7 +84,7 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
                     required
                 />
             </div>
-            <div>
+            <div className={styles.form__input}>
                 <label htmlFor="address">Address</label>
                 <input
                     id="address"
@@ -92,7 +93,7 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
                     onChange={addressHandler}
                 />
             </div>
-            <div>
+            <div className={styles.form__input}>
                 <label htmlFor="postcode">Postcode</label>
                 <input
                     id="postcode"

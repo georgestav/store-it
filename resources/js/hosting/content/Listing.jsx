@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ListingDetails from "./ListingDetails";
+import Badge from "@mui/material/Badge";
+//styles
+import styles from "./Listing.module.css";
 
 const deleteListing = async (id) => {
     try {
@@ -13,7 +15,7 @@ const deleteListing = async (id) => {
     }
 };
 
-function Listing({ listing, forceRefresh }) {
+function Listing({ listing, forceRefresh, switchListingManagement }) {
     const [expanded, setExpanded] = useState(false);
     const deleteListingHandler = async () => {
         const status = await deleteListing(listing.id);
@@ -23,51 +25,75 @@ function Listing({ listing, forceRefresh }) {
     const showDetailsHandler = () => {
         setExpanded(!expanded);
     };
-    useEffect(() => {}, []);
 
+    const countPending = () => {
+        let count = 0;
+        listing.bookings.filter((booking) => {
+            if (booking.status === "pending") {
+                count++;
+            }
+        });
+        return count;
+    };
+
+    useEffect(() => {}, []);
     //src='data:image/jpeg;base64,${image[0]["photo"]}'
     return (
-        <>
-            <div>
+        <Badge
+            className={styles.listing__container}
+            color="secondary"
+            badgeContent={countPending()}
+        >
+            <div className={styles.image__container}>
                 <img
+                    className={styles.image}
                     src={
                         listing.pictures.length > 0
                             ? `data:image/jpeg;base64,${listing.pictures[0].photo}`
                             : ""
                     }
                     alt=""
-                    style={{
-                        height: 100,
-                        width: 100,
-                    }}
                 />
             </div>
-            <div>
-                <span>Location:</span>
-                <span>{listing.coordinates}</span>
+            <div className={styles.details__container}>
+                <div>
+                    <div className={styles.details__line}>
+                        <span>Location:</span>
+                        <span>{listing.coordinates}</span>
+                    </div>
+                    <div>
+                        <span>Rate:</span>
+                        <span>{listing.daily_rate}</span>
+                    </div>
+                    <div>
+                        <span>Open until:</span>
+                        <span>
+                            {
+                                listing.availabilities[0].available_until.split(
+                                    " "
+                                )[0]
+                            }
+                        </span>
+                    </div>
+                    <div>
+                        <span>Rating:</span>
+                        <span>{listing.rating}</span>
+                    </div>
+                    <div>
+                        <span>Total Bookings:</span>
+                        <span>{listing.bookings.length}</span>
+                    </div>
+                </div>
+                <div className={styles.actions__container}>
+                    <Button onClick={() => switchListingManagement(listing)}>
+                        Show More
+                    </Button>
+                    <Button color="error" onClick={deleteListingHandler}>
+                        Delete Listing
+                    </Button>
+                </div>
             </div>
-            <div>
-                <span>Daily Rate:</span>
-                <span>{listing.daily_rate}</span>
-                <span>Available until:</span>
-                <span>
-                    {listing.availabilities[0].available_until.split(" ")[0]}
-                </span>
-            </div>
-            <div>
-                <span>Rating:</span>
-                <span>{listing.rating}</span>
-            </div>
-            {expanded ? <ListingDetails listing={listing} /> : <></>}
-            <div>
-                <Button onClick={showDetailsHandler}>
-                    {expanded ? "Hide" : "Details"}
-                </Button>
-                <Button color="error" onClick={deleteListingHandler}>
-                    Delete Listing
-                </Button>
-            </div>
-        </>
+        </Badge>
     );
 }
 

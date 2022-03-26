@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./NewListingForm.module.css";
 
 function Availability({ availability, dateChangeHandler }) {
-    console.log(availability);
-
     return (
         <div className={styles.form__input}>
             <h4>Availability</h4>

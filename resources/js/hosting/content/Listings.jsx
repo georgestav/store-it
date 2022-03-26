@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Listing from "./Listing";
-import Card from "../../ui/Card";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./Listings.module.css";
 
-function Listings({ user, forceRefresh }) {
+function Listings({ user, forceRefresh, switchListingManagement }) {
     const [listings, setListings] = useState([]);
     const [listingsLoaded, setListingsLoaded] = useState(false);
 
@@ -31,21 +30,22 @@ function Listings({ user, forceRefresh }) {
 
     return (
         <div className={styles.listings__list}>
-            <h2>My listings</h2>
+            <h2 className={styles.my__listings}>My listings</h2>
             {listings.length > 0 && listingsLoaded ? (
-                <div>
-                    <div className={styles.listings__list}>
-                        {listings.map((listing) => {
-                            return (
-                                <Card key={listing.id}>
-                                    <Listing
-                                        listing={listing}
-                                        forceRefresh={forceRefresh}
-                                    />
-                                </Card>
-                            );
-                        })}
-                    </div>
+                <div className={styles.listings__container}>
+                    {listings.map((listing) => {
+                        return (
+                            <Listing
+                                className={styles.listing}
+                                key={listing.id}
+                                listing={listing}
+                                forceRefresh={forceRefresh}
+                                switchListingManagement={
+                                    switchListingManagement
+                                }
+                            />
+                        );
+                    })}
                 </div>
             ) : listings.length === 0 && listingsLoaded ? (
                 <div>

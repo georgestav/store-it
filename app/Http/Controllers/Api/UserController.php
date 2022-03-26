@@ -112,6 +112,7 @@ class UserController extends Controller
             $listing->storage_type;
             $listing->pictures;
             $listing->availabilities;
+            $listing->bookings;
         }
         return response($user);
     }

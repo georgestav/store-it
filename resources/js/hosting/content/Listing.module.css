@@ -1,0 +1,28 @@
+.listing__container {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.image {
+    height: 200px;
+    width: 200px;
+}
+.details__container {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.details__line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.actions__container {
+    display: flex;
+    justify-content: space-between;
+}

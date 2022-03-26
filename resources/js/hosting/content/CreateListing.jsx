@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 import NewListingForm from "./NewListingForm";
+//styles
+import styles from "./CreateListing.module.css";
 
 function CreateListing({ user, forceRefresh }) {
     const [expandForm, setExpandForm] = useState(false);
@@ -10,7 +12,7 @@ function CreateListing({ user, forceRefresh }) {
     };
 
     return (
-        <div>
+        <div className={styles.createListing__container}>
             <h2>Create a new Listing</h2>
             {expandForm ? (
                 <NewListingForm
@@ -30,7 +32,7 @@ function CreateListing({ user, forceRefresh }) {
                 </Button>
             ) : (
                 <Button onClick={toggleFormHandler} variant="outlined">
-                    Add Listing
+                    Add a Listing
                 </Button>
             )}
         </div>

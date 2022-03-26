@@ -4,7 +4,7 @@ import axios from "axios";
 import { UserContext } from "../../components/context/UserContext";
 import CountriesDropdown from "../../components/modules/CountriesDropdown";
 import StorageTypeDropdown from "../../components/modules/StorageTypeDropdown";
-import Address from "../../components/modules/Address";
+import Address from "./Address";
 //styles
 import styles from "./NewListingForm.module.css";
 import Availability from "./Availability";
