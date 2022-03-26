@@ -54,6 +54,7 @@ Route::delete("/availabilities/{id}", "Api\AvailabilityController@destroy");
 //Bookings controller group
 Route::get("/bookings/{listing_id}", "Api\BookingController@index");
 Route::post("/bookings", "Api\BookingController@store");
+Route::patch('/bookings/{id}', "Api\BookingController@updateById");
 Route::post("/bookings/{listing_id}/{id}", "Api\BookingController@update"); //todo put/patch
 Route::delete("/bookings/{id}", "Api\BookingController@destroy");
 
@@ -79,7 +80,7 @@ Route::delete('/user/{id}', 'Api\UserController@destroy'); //todo protect for ad
 Route::get('/people', 'Api\PersonController@indexAll'); //todo protect for admins only
 Route::get('/person/{id}', 'Api\PersonController@indexSingle'); //todo protect for admins, or same user
 Route::post('/person', 'Api\PersonController@store'); //todo put or patch / protect only for same user
-Route::patch('/person/{id}', 'Api\PersonController@update'); //todo put or patch / protect only for same user
+Route::patch('/person/{id}', 'Api\PersonController@update'); //todo protect only for same user
 Route::delete('/person/{id}', 'Api\PersonController@destroy'); //todo protect for admins, or same user
 
 //ListedDates Controller group

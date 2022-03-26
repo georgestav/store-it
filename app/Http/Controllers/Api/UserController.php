@@ -109,8 +109,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->listings;
         foreach ($user->listings as $listing) {
-            $listing->storage_type;
+            $listing->country;
+            $listing->city;
             $listing->pictures;
+            $listing->storage_type;
             $listing->availabilities;
             $listing->bookings;
         }

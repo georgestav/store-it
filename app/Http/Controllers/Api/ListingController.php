@@ -62,13 +62,14 @@ class ListingController extends Controller
     {
         $listing = Listing::findOrFail($id);
 
-        $listing->country = $listing->country;
-        $listing->city = $listing->city;
+        $listing->country;
+        $listing->city;
         $listing->pictures;
         $listing->storage_type;
         $listing->availabilities;
+        $listing->bookings;
 
-        return $listing;
+        return response($listing);
     }
 
     /**

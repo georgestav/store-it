@@ -57,6 +57,19 @@ class BookingController extends Controller
         $booking->save();
     }
 
+    public function updateById(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        $booking->listing_id = $request->input("listing_id");
+        $booking->booked_from = $request->input("booked_from");
+        $booking->booked_until = $request->input("booked_until");
+        $booking->status = $request->status;
+
+        $booking->save();
+        return response($booking);
+    }
+
     /**
      * deleting a specific availability from the availabilities table
      *
@@ -67,5 +80,6 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
 
         $booking->delete();
+        return response('Booking Deleted');
     }
 }
