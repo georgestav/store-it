@@ -112,4 +112,16 @@ class UserController extends Controller
         }
         return response($user);
     }
+
+    public function getBookings($id)
+    {
+        $user = User::findOrFail($id);
+
+        foreach ($user->bookings as $booking) {
+            $booking->listing;
+            $booking->listing->pictures;
+        }
+        
+        return $user->bookings;
+    }
 }

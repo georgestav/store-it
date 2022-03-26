@@ -66,6 +66,7 @@ Route::delete('/features/{id}', 'Api\FeatureController@destroy');
 //Users controller group
 Route::get('/users', 'Api\UserController@indexAll'); //todo protect for admins only
 Route::get('/user/{id}/getlistings', 'Api\UserController@getlistings'); //todo protect for same user
+Route::get("/user/{id}/getbookings", "Api\UserController@getBookings");
 
 Route::get('/user/logged-in', 'Api\UserController@logedIn'); //todo protect for same user
 
