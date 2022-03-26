@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import NewListingForm from "./NewListingForm";
 
 function CreateListing({ user, forceRefresh }) {
-    const [expandForm, setExpandForm] = useState(true);
+    const [expandForm, setExpandForm] = useState(false);
 
     const toggleFormHandler = () => {
         setExpandForm(!expandForm);

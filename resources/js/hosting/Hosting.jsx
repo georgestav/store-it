@@ -21,7 +21,7 @@ function Hosting() {
         setRefreshTrigger(!refreshTrigger);
     };
 
-    //Use efftect triggered when display changes, ex register, login
+    //Use effect triggered when display changes, ex register, login
     useEffect(() => {
         checkUserLogged();
     }, [display, refreshTrigger]);

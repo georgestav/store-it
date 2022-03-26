@@ -7,16 +7,19 @@ import styles from "./Listings.module.css";
 
 function Listings({ user, forceRefresh }) {
     const [listings, setListings] = useState([]);
+    const [listingsLoaded, setListingsLoaded] = useState(false);
 
     //fetch the listings of the user
     const fetchUserData = async () => {
         if (!user.id) return;
+        setListingsLoaded(false);
         try {
             const getListings = await axios.get(
                 `/api/user/${user.id}/getlistings`
             );
             const listings = await getListings.data;
             setListings(listings.listings);
+            setListingsLoaded(true);
         } catch (error) {
             console.error("error", error.response.data.message);
         }
@@ -26,38 +29,42 @@ function Listings({ user, forceRefresh }) {
         fetchUserData();
     }, [user]);
 
-    if (listings.length > 0) {
-        return (
-            <div>
-                <h2>My Listings</h2>
-                <div className={styles.listings__list}>
-                    {listings.map((listing) => {
-                        return (
-                            <Card key={listing.id}>
-                                <Listing
-                                    listing={listing}
-                                    forceRefresh={forceRefresh}
-                                />
-                            </Card>
-                        );
-                    })}
+    return (
+        <div className={styles.listings__list}>
+            <h2>My listings</h2>
+            {listings.length > 0 && listingsLoaded ? (
+                <div>
+                    <div className={styles.listings__list}>
+                        {listings.map((listing) => {
+                            return (
+                                <Card key={listing.id}>
+                                    <Listing
+                                        listing={listing}
+                                        forceRefresh={forceRefresh}
+                                    />
+                                </Card>
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
-        );
-    } else {
-        return (
-            <div>
-                <Stack
-                    sx={{ color: "grey.800" }}
-                    spacing={2}
-                    direction="column"
-                >
-                    <CircularProgress color="secondary" />
-                    <span>Loading your listings...</span>
-                </Stack>
-            </div>
-        );
-    }
+            ) : listings.length === 0 && listingsLoaded ? (
+                <div>
+                    <div>No listings....</div>
+                </div>
+            ) : (
+                <div>
+                    <Stack
+                        sx={{ color: "grey.800" }}
+                        spacing={2}
+                        direction="column"
+                    >
+                        <CircularProgress color="secondary" />
+                        <span>Loading your listings...</span>
+                    </Stack>
+                </div>
+            )}
+        </div>
+    );
 }
 
 export default Listings;

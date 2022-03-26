@@ -99,16 +99,19 @@ class UserController extends Controller
     }
 
     /**
-     * Get users listings
+     * Get users listings by user id
+     *
+     * @param $id
+     * @return array
      */
     public function getlistings($id)
     {
-        //todo
         $user = User::findOrFail($id);
         $user->listings;
         foreach ($user->listings as $listing) {
             $listing->storage_type;
             $listing->pictures;
+            $listing->availabilities;
         }
         return response($user);
     }
@@ -121,7 +124,7 @@ class UserController extends Controller
             $booking->listing;
             $booking->listing->pictures;
         }
-        
+
         return $user->bookings;
     }
 }

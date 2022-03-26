@@ -50,7 +50,9 @@ function Listing({ listing, forceRefresh }) {
                 <span>Daily Rate:</span>
                 <span>{listing.daily_rate}</span>
                 <span>Available until:</span>
-                <span>15/2/2233</span>
+                <span>
+                    {listing.availabilities[0].available_until.split(" ")[0]}
+                </span>
             </div>
             <div>
                 <span>Rating:</span>

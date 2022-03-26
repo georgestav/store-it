@@ -17,7 +17,7 @@ function ListingDetails({ listing }) {
             </div>
             <div>
                 <span>Last update:</span>
-                <span>{listing.updated_at}</span>
+                <span>{listing.updated_at.split("T")[0]}</span>
             </div>
         </div>
     );
