@@ -6,19 +6,20 @@ const deleteListing = async (id) => {
     try {
         // get request to get list of cities in the DB that the user can register to
         const getdetails = await axios.delete(`api/listings/${id}`);
-        const data = await getdetails.data;
+        const data = await getdetails;
         return data;
     } catch (error) {
         console.error("Could not delete", error.response.data.message);
     }
 };
 
-function Listing({ listing }) {
+function Listing({ listing, forceRefresh }) {
     const [expanded, setExpanded] = useState(false);
     const [image, setImage] = useState([]);
 
-    const deleteListingHandler = () => {
-        deleteListing(listing.id);
+    const deleteListingHandler = async () => {
+        const status = await deleteListing(listing.id);
+        if (status.status === 200) forceRefresh();
     };
 
     const showDetailsHandler = () => {
@@ -38,7 +39,7 @@ function Listing({ listing }) {
     useEffect(() => {
         getImage(listing.id);
     }, []);
-    // console.log(image[0]["photo"]);
+
     //src='data:image/jpeg;base64,{$picture->photo}'
     return (
         <>

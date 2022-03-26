@@ -8,16 +8,22 @@ import CreateListing from "./content/CreateListing";
 import styles from "./Hosting.module.css";
 
 function Hosting() {
+    const [refreshTrigger, setRefreshTrigger] = useState(false);
     const [display, setDisplay] = useState(""); //set empty display
     const [user, setUser] = useState("guest"); //set default user to guest
 
     //passed values with UserContext custom effect hook
     const values = useMemo(() => ({ user, setUser }), [user]);
 
+    //function to trigger a refresh
+    const forceRefresh = () => {
+        setRefreshTrigger(!refreshTrigger);
+    };
+
     //Use efftect triggered when display changes, ex register, login
     useEffect(() => {
         checkUserLogged();
-    }, [display]);
+    }, [display, refreshTrigger]);
 
     //check for already logged in user
     const checkUserLogged = async () => {
@@ -35,8 +41,8 @@ function Hosting() {
             <UserContext.Provider value={values}>
                 <NavigationBar setDisplay={setDisplay} />
                 <div className={styles.hosting__container}>
-                    <CreateListing user={user} />
-                    <Listings user={user} />
+                    <CreateListing user={user} forceRefresh={forceRefresh} />
+                    <Listings user={user} forceRefresh={forceRefresh} />
                 </div>
             </UserContext.Provider>
             <Footer />

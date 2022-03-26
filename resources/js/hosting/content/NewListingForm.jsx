@@ -8,7 +8,7 @@ import Address from "../../components/modules/Address";
 //styles
 import styles from "./NewListingForm.module.css";
 
-function NewListingForm() {
+function NewListingForm({ toggleFormHandler, forceRefresh }) {
     //user state that is saved to user context
     const { user, setUser } = useContext(UserContext);
     //form data that gets sent to the listings db
@@ -78,6 +78,12 @@ function NewListingForm() {
     };
 
     const uploadFile = async (id) => {
+        if (!file) {
+            // stop if no file submited
+            toggleFormHandler();
+            forceRefresh();
+            return;
+        }
         const imageData = new FormData();
         imageData.append("photo", file);
         imageData.append("listing_id", id);
@@ -87,9 +93,11 @@ function NewListingForm() {
                 imageData
             );
             console.log(res);
+            forceRefresh();
         } catch (ex) {
             console.log(ex);
         }
+        toggleFormHandler();
     };
 
     useEffect(() => {
@@ -135,6 +143,7 @@ function NewListingForm() {
                     type="number"
                     value={formData.daily_rate}
                     onChange={formChangeHandler}
+                    required
                 />
             </div>
             <div className={styles.form__input}>
@@ -146,6 +155,7 @@ function NewListingForm() {
                     rows="10"
                     value={formData.description}
                     onChange={formChangeHandler}
+                    required
                 ></textarea>
             </div>
             <div className={styles.form__input}>
@@ -156,6 +166,7 @@ function NewListingForm() {
                     type="number"
                     value={formData.size}
                     onChange={formChangeHandler}
+                    required
                 />
             </div>
             <div>

@@ -80,6 +80,7 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
                     value={formData.coordinates}
                     onChange={formChangeHandler}
                     disabled
+                    required
                 />
             </div>
             <div>

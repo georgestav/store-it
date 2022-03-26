@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./Listings.module.css";
 
-function Listings({ user }) {
+function Listings({ user, forceRefresh }) {
     const [listings, setListings] = useState([]);
 
     //fetch the listings of the user
@@ -35,7 +35,10 @@ function Listings({ user }) {
                     {listings.map((listing) => {
                         return (
                             <Card key={listing.id}>
-                                <Listing listing={listing} />
+                                <Listing
+                                    listing={listing}
+                                    forceRefresh={forceRefresh}
+                                />
                             </Card>
                         );
                     })}
