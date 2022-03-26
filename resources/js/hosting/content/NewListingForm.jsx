@@ -7,6 +7,7 @@ import StorageTypeDropdown from "../../components/modules/StorageTypeDropdown";
 import Address from "../../components/modules/Address";
 //styles
 import styles from "./NewListingForm.module.css";
+import Availability from "./Availability";
 
 function NewListingForm({ toggleFormHandler, forceRefresh }) {
     //user state that is saved to user context
@@ -24,6 +25,42 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
         size: "",
         user_id: "",
     });
+
+    // new Date().toISOString().slice(0, 10)
+    let defaultDate = new Date().toISOString().slice(0, 10);
+
+    const [availability, setAvailability] = useState({
+        listing_id: "",
+        available_from: defaultDate,
+        available_until: "2100-03-26",
+    });
+
+    const dateChangeHandler = (e) => {
+        setAvailability((previous_values) => {
+            return {
+                ...previous_values,
+                [e.target.name]: e.target.value,
+            };
+        });
+    };
+
+    const saveAvailableDates = async (id) => {
+        setAvailability((previous_values) => {
+            return {
+                ...previous_values,
+                listing_id: id,
+            };
+        });
+        try {
+            const res = await axios.post(
+                `api/availabilities/${id}`,
+                availability
+            );
+            console.log(res);
+        } catch (ex) {
+            console.log(ex);
+        }
+    };
 
     /* function to change the state of the form data with data from the form
     without loosing the previous data */
@@ -65,6 +102,7 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
             .then(function (response) {
                 console.log(response);
                 uploadFile(response.data.id);
+                saveAvailableDates(response.data.id);
             })
             .catch(function (error) {
                 console.log(error);
@@ -169,8 +207,10 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
                     required
                 />
             </div>
-            <div>
-                <label htmlFor="">Images</label>
+            <div className={styles.form__input}>
+                <label htmlFor="files">
+                    Images <span>*max size 1mb</span>
+                </label>
                 <input
                     type="file"
                     id="files"
@@ -179,6 +219,12 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
                     onChange={saveFile}
                 />
             </div>
+            {/* availability component */}
+            <Availability
+                availability={availability}
+                dateChangeHandler={dateChangeHandler}
+            />
+            {/* availability component */}
             <Button type="submit" variant="outlined">
                 Add your listing
             </Button>

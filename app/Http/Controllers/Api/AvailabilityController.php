@@ -30,11 +30,12 @@ class AvailabilityController extends Controller
     {
         $availability = new Availability;
 
-        $availability->listing_id =$listing_id;
+        $availability->listing_id = $listing_id;
         $availability->available_from = $request->input("available_from");
         $availability->available_until = $request->input("available_until");
 
         $availability->save();
+        return $availability;
     }
 
     /**

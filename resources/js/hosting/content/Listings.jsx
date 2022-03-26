@@ -47,10 +47,14 @@ function Listings({ user, forceRefresh }) {
     } else {
         return (
             <div>
-                <Stack sx={{ color: "grey.800" }} spacing={2} direction="row">
+                <Stack
+                    sx={{ color: "grey.800" }}
+                    spacing={2}
+                    direction="column"
+                >
                     <CircularProgress color="secondary" />
+                    <span>Loading your listings...</span>
                 </Stack>
-                Loading your listings...
             </div>
         );
     }
