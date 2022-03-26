@@ -13,6 +13,7 @@ function NewListingForm() {
     const { user, setUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
         city_id: "1",
+        city: "",
         country_id: "1",
         storage_type_id: "1",
         coordinates: "",
@@ -73,11 +74,16 @@ function NewListingForm() {
 
     return (
         <form className={styles.form} onSubmit={formSubmitHandler}>
-            <CitiesDropdown
-                className={styles.form__input}
-                storage_type_id={formData.city_id}
-                formChangeHandler={formChangeHandler}
-            />
+            <div className={styles.form__input}>
+                <label htmlFor="city">City</label>
+                <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    value={formData.city}
+                    onChange={formChangeHandler}
+                />
+            </div>
             <CountriesDropdown
                 className={styles.form__input}
                 storage_type_id={formData.country_id}
