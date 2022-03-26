@@ -22,6 +22,9 @@ function SearchForm({ setDisplaySearch }) {
     };
     const errorLocation = (err) => {
         console.warn(err);
+        alert(
+            "For this function to work please allow your devices geolocation services"
+        );
     };
     if (geolocationStatus && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getLocation, errorLocation, {
@@ -51,41 +54,39 @@ function SearchForm({ setDisplaySearch }) {
         }
     };
     return (
-        <form
-            className={styles.body}
-            onSubmit={sumbitSearchHandler}
-        >
+        <form className={styles.body} onSubmit={sumbitSearchHandler}>
             <div className={styles.search__form__container}>
                 <h3 className={styles.storage}>Find Storage</h3>
                 <div>
-                    <label htmlFor="location">Store it can use geolocation</label>
+                    <label htmlFor="location">
+                        Store it can use geolocation
+                    </label>
                     <Switch {...label} onChange={geoTogglerHandler} />
                 </div>
-                
+
                 {!geolocationStatus ? (
-                        <div className={styles.location__and__date}>
-                            <label htmlFor="location">Location</label>
-                            <input
-                                id="location"
-                                type="text"
-                                placeholder="Location"
-                                ref={locationInput}
-                                autoFocus
-                            />
-                        </div>
-                    ) : (
-                        <></>
-                    )}
                     <div className={styles.location__and__date}>
-                        <label htmlFor="fromDate">From date</label>
-                        <input id="fromDate" type="date" disabled />
+                        <label htmlFor="location">Location</label>
+                        <input
+                            id="location"
+                            type="text"
+                            placeholder="Location"
+                            ref={locationInput}
+                            autoFocus
+                        />
                     </div>
-                    <div className={styles.location__and__date}>
-                        <label htmlFor="untilDate">Until Date</label>
-                        <input id="untilDate" type="date" disabled />
-                    </div>
-                
-                
+                ) : (
+                    <></>
+                )}
+                <div className={styles.location__and__date}>
+                    <label htmlFor="fromDate">From date</label>
+                    <input id="fromDate" type="date" disabled />
+                </div>
+                <div className={styles.location__and__date}>
+                    <label htmlFor="untilDate">Until Date</label>
+                    <input id="untilDate" type="date" disabled />
+                </div>
+
                 <select name="" id="" disabled>
                     <option value="">Attic</option>
                     <option value="">Shed</option>
@@ -94,13 +95,17 @@ function SearchForm({ setDisplaySearch }) {
                     <option value="">Locker</option>
                 </select>
                 <div className={styles.buttons}>
-                    <Button variant="contained" onClick={() => setDisplaySearch(false)}>Back</Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => setDisplaySearch(false)}
+                    >
+                        Back
+                    </Button>
                     <Button variant="contained" type="submit">
                         Submit
                     </Button>
                 </div>
             </div>
-
         </form>
     );
 }
