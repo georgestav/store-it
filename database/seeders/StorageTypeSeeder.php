@@ -21,19 +21,19 @@ class StorageTypeSeeder extends Seeder
 
         $storage_types = [
             [
-                'name' => 'attic'
+                'name' => 'Attic'
             ],
             [
-                'name' => 'basement'
+                'name' => 'Basement'
             ],
             [
-                'name' => 'room'
+                'name' => 'Room'
             ],
             [
-                'name' => 'garage'
+                'name' => 'Garage'
             ],
             [
-                'name' => 'locker'
+                'name' => 'Locker'
             ],
         ];
 

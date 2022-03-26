@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 const fetchStorageTypes = async () => {
     try {
         // get request to get storage type a listing can register to
-        const getdetails = await axios.get("api/countries");
+        const getdetails = await axios.get("api/storagetypes");
         const data = await getdetails.data;
         return data;
     } catch (error) {
-        console.error("Could not get countries", error.response.data.message);
+        console.error(
+            "Could not get storage types",
+            error.response.data.message
+        );
     }
 };
 
@@ -17,10 +20,11 @@ storage_type_id expected to reflect the changes or fetched data
 function formChangeHandler expected, to update the parent element form data
 */
 function StorageTypeDropdown({ storage_type_id, formChangeHandler }) {
-    const [storageType, setStorageType] = useState([]);
+    const [storageTypes, setStorageType] = useState([]);
 
-    useEffect(() => {}, []);
-
+    useEffect(async () => {
+        setStorageType(await fetchStorageTypes());
+    }, []);
     return (
         <>
             <label htmlFor="storage_type_id">Storage Type</label>
@@ -31,8 +35,13 @@ function StorageTypeDropdown({ storage_type_id, formChangeHandler }) {
                 onChange={formChangeHandler}
                 required
             >
-                <option value="1">First Option</option>
-                <option value="2">Second Option</option>
+                {storageTypes.map((storageType) => {
+                    return (
+                        <option value={storageType.id} key={storageType.id}>
+                            {storageType.name}
+                        </option>
+                    );
+                })}
             </select>
         </>
     );
