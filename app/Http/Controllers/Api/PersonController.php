@@ -65,7 +65,8 @@ class PersonController extends Controller
         $person->surname = $request->surname;
         $person->phone = $request->phone;
         $person->address = $request->address;
-        $person->city_id = $request->city_id;
+        $person->city_id = 1;
+        $person->city = $request->city;
         $person->country_id = $request->country_id;
         $person->user_id = $request->user_id;
 
@@ -88,7 +89,8 @@ class PersonController extends Controller
         $person->surname = $request->surname;
         $person->phone = $request->phone;
         $person->address = $request->address;
-        $person->city_id = $request->city_id;
+        $person->city_id = 1;
+        $person->city = $request->city;
         $person->country_id = $request->country_id;
         $person->user_id = $request->user_id;
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("phone");
             $table->string("address");
             $table->foreignId("city_id");
+            $table->string("city");
             $table->foreignId("country_id");
             $table->foreignId("user_id");
             $table->timestamps();

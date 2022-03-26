@@ -15,7 +15,8 @@ function PersonalDetails({ userid }) {
         surname: "",
         phone: "",
         address: "",
-        city_id: "",
+        city: "",
+        city_id: "1",
         country_id: "",
     });
     const [userExists, setUserExists] = useState(false); //if false do post, else do patch
@@ -86,7 +87,7 @@ function PersonalDetails({ userid }) {
                     surname: data.surname,
                     phone: data.phone,
                     address: data.address,
-                    city_id: data.city_id,
+                    city: data.city,
                     country_id: data.country_id,
                     user_id: data.user_id,
                 });
@@ -105,7 +106,7 @@ function PersonalDetails({ userid }) {
                 surname: "",
                 phone: "",
                 address: "",
-                city_id: "",
+                city: "",
                 country_id: "",
             });
         }
@@ -182,21 +183,13 @@ function PersonalDetails({ userid }) {
                     />
                 </div>
                 <div className={styles.inputField}>
-                    <label htmlFor="city_id">City</label>
-                    <select
-                        name="city_id"
-                        id="city_id"
-                        value={formData.city_id || 1}
+                    <label htmlFor="city">City</label>
+                    <input
+                        name="city"
+                        id="city"
+                        value={formData.city}
                         onChange={formChangeHandler}
-                    >
-                        {cities.map((city) => {
-                            return (
-                                <option value={city.id} key={city.id}>
-                                    {city.name}
-                                </option>
-                            );
-                        })}
-                    </select>
+                    />
                 </div>
 
                 <div className={styles.inputField}>

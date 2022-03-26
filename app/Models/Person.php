@@ -40,6 +40,7 @@ class Person extends Model
         'phone',
         'address',
         'city_id',
+        'city',
         'country_id',
         'user_id',
     ];
