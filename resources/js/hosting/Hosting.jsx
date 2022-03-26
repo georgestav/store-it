@@ -3,6 +3,7 @@ import { UserContext } from "../components/context/UserContext";
 import NavigationBar from "../components/navigation/NavigationBar";
 import Footer from "../components/footer/Footer";
 import Listings from "./content/Listings";
+import Bookings from "./content/Bookings";
 import CreateListing from "./content/CreateListing";
 //styling
 import styles from "./Hosting.module.css";
@@ -43,6 +44,7 @@ function Hosting() {
                 <div className={styles.hosting__container}>
                     <CreateListing user={user} forceRefresh={forceRefresh} />
                     <Listings user={user} forceRefresh={forceRefresh} />
+                    <Bookings user={user} />
                 </div>
             </UserContext.Provider>
             <Footer />
