@@ -4,7 +4,7 @@ import Booking from "./Booking";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function Bookings({user}) {
+export default function Bookings({user, forceRefresh}) {
     const [bookings, setBookings] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
 
@@ -44,7 +44,7 @@ export default function Bookings({user}) {
                     <p>No bookings to display</p> :
                     <div className={styles.bookings__list}>
                         {bookings.map((booking) => (
-                                <Booking key={booking.id} booking={booking}/>
+                                <Booking key={booking.id} booking={booking} forceRefresh={forceRefresh}/>
                             )
                         )}
                     </div>

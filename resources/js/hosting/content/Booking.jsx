@@ -1,8 +1,15 @@
+import axios from "axios";
 import React from "react";
 
-export default function Booking({booking}) {
+export default function Booking({booking, forceRefresh}) {
 
-    const {booked_from, booked_until, status, listing} = booking;
+    const {booked_from, booked_until, status, listing, id} = booking;
+
+    const handleDelete = async () => {
+        const response = await axios.delete(`api/bookings/${id}`);
+        console.log("deleted", response.status);
+        if (response.status === 200) forceRefresh();
+    }
 
     return (
         <div>
@@ -15,9 +22,9 @@ export default function Booking({booking}) {
             <p>Booked from: {booked_from}</p>
             <p>Booked until: {booked_until}</p>
             <p>Status: {status}</p>
-            <button>Details</button>
+            <button><a href={`results/listing/${listing.id}`}>Details</a></button>
             <br />
-            <button>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
         </div>
     );
 }

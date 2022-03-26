@@ -44,7 +44,7 @@ function Hosting() {
                 <div className={styles.hosting__container}>
                     <CreateListing user={user} forceRefresh={forceRefresh} />
                     <Listings user={user} forceRefresh={forceRefresh} />
-                    <Bookings user={user} />
+                    <Bookings user={user} forceRefresh={forceRefresh} />
                 </div>
             </UserContext.Provider>
             <Footer />
