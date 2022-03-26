@@ -15,8 +15,6 @@ const deleteListing = async (id) => {
 
 function Listing({ listing, forceRefresh }) {
     const [expanded, setExpanded] = useState(false);
-    const [image, setImage] = useState([]);
-
     const deleteListingHandler = async () => {
         const status = await deleteListing(listing.id);
         if (status.status === 200) forceRefresh();
@@ -25,29 +23,16 @@ function Listing({ listing, forceRefresh }) {
     const showDetailsHandler = () => {
         setExpanded(!expanded);
     };
+    useEffect(() => {}, []);
 
-    const getImage = async (id) => {
-        try {
-            // get request to get list of cities in the DB that the user can register to
-            const imageFetch = await axios.get(`api/picture/${id}`);
-            const data = await imageFetch.data;
-            setImage(data);
-        } catch (error) {
-            console.error("Could not get images", error);
-        }
-    };
-    useEffect(() => {
-        getImage(listing.id);
-    }, []);
-
-    //src='data:image/jpeg;base64,{$picture->photo}'
+    //src='data:image/jpeg;base64,${image[0]["photo"]}'
     return (
         <>
             <div>
                 <img
                     src={
-                        image[0]
-                            ? `data:image/jpeg;base64,${image[0]["photo"]}`
+                        listing.pictures.length > 0
+                            ? `data:image/jpeg;base64,${listing.pictures[0].photo}`
                             : ""
                     }
                     alt=""

@@ -106,6 +106,10 @@ class UserController extends Controller
         //todo
         $user = User::findOrFail($id);
         $user->listings;
+        foreach ($user->listings as $listing) {
+            $listing->storage_type;
+            $listing->pictures;
+        }
         return response($user);
     }
 }

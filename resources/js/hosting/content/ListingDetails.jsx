@@ -9,7 +9,7 @@ function ListingDetails({ listing }) {
             </div>
             <div>
                 <span>Storage Type:</span>
-                <span>{listing.storage_type_id}</span>
+                <span>{listing.storage_type.name}</span>
             </div>
             <div>
                 <span>Description:</span>
@@ -18,10 +18,6 @@ function ListingDetails({ listing }) {
             <div>
                 <span>Last update:</span>
                 <span>{listing.updated_at}</span>
-            </div>
-            <div>
-                <span>Location:</span>
-                <span>{listing.coordinates}</span>
             </div>
         </div>
     );

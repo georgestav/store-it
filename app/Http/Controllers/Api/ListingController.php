@@ -64,6 +64,7 @@ class ListingController extends Controller
         $listing->country = $listing->country;
         $listing->city = $listing->city;
         $listing->pictures;
+        $listing->storage_type;
 
         return $listing;
     }

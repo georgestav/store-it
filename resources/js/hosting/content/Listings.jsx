@@ -16,7 +16,6 @@ function Listings({ user, forceRefresh }) {
                 `/api/user/${user.id}/getlistings`
             );
             const listings = await getListings.data;
-
             setListings(listings.listings);
         } catch (error) {
             console.error("error", error.response.data.message);
