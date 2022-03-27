@@ -20,7 +20,8 @@ export default function Booking({booking, forceRefresh}) {
                 ""
             } alt="" style={{ height: 100, width: 100}} />
             <p>Location: {listing.coordinates}</p>
-            
+            <p>Booked from: {booked_from}</p>
+            <p>Booked until: {booked_until}</p>
             <p>Status: {status}</p>
             <button><a href={`results/listing/${listing.id}`}>Details</a></button>
             <br />
