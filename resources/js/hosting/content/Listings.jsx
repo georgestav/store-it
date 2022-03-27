@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Listing from "./Listing";
-import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./Listings.module.css";
 
@@ -53,14 +52,8 @@ function Listings({ user, forceRefresh, switchListingManagement }) {
                 </div>
             ) : (
                 <div>
-                    <Stack
-                        sx={{ color: "grey.800" }}
-                        spacing={2}
-                        direction="column"
-                    >
-                        <CircularProgress color="secondary" />
-                        <span>Loading your listings...</span>
-                    </Stack>
+                    <CircularProgress color="secondary" />
+                    <div>Loading your listings...</div>
                 </div>
             )}
         </div>

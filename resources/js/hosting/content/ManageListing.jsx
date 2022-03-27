@@ -1,34 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-//styles
-import styles from "./ManageListing.module.css";
 import BookingManagement from "./management/BookingManagement";
 import PastBookingsRequests from "./management/PastBookingsRequests";
-/* 
-//uncomment for dev
-const fetchUserData = async () => {
+import CircularProgress from "@mui/material/CircularProgress";
+//styles
+import styles from "./ManageListing.module.css";
+
+const fetchListing = async (id = 17) => {
+    //Need to fetch listing in order to have access to updated db data
+    //if working with passed in data on re-render it holds the same values
     try {
-        const getListings = await axios.get(`/api/listings/17`);
+        const getListings = await axios.get(`/api/listings/${id}`);
         const listings = await getListings.data;
         return listings;
     } catch (error) {
         console.error("error", error.response.data.message);
     }
-}; */
+};
 
-function ManageListing({ listing, switchListingManagement }) {
-    // const [listing, setListings] = useState(null); //uncomment for dev
-    const [triggerRefresh, setTriggerRefresh] = useState(false);
+function ManageListing({ manageListing, switchListingManagement }) {
+    const [listing, setListings] = useState(null); // state for the listing that is displayed
+    const [triggerRefresh, setTriggerRefresh] = useState(false); //refresh trigger, currently used for when the booking status changes
     const refreshTrig = () => {
+        //the function to trigger the refresh
         setTriggerRefresh(!triggerRefresh);
     };
 
-    useEffect(() => {
-        // setListings(await fetchUserData()); //uncomment for dev
+    useEffect(async () => {
+        setListings(await fetchListing(manageListing.id)); //fetch listing data on use
     }, [triggerRefresh]);
 
     if (!listing) {
-        return <div>No listing Found</div>;
+        return (
+            <div>
+                <CircularProgress color="secondary" />
+                <div>Loading...</div>
+            </div>
+        );
     } else {
         return (
             <div className={styles.listing__container}>

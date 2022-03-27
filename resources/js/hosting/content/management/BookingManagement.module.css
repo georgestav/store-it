@@ -11,3 +11,12 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.accepted {
+    /* transition: all ease-in-out 1s; */
+    box-shadow: 0 2px 8px rgba(0, 150, 0, 0.2);
+}
+.rejected {
+    /* transition: all ease-in-out 1s; */
+    box-shadow: 0 2px 8px rgba(150, 0, 0, 0.2);
+}

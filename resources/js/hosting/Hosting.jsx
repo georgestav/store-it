@@ -13,7 +13,7 @@ function Hosting() {
     const [refreshTrigger, setRefreshTrigger] = useState(false);
     const [display, setDisplay] = useState(""); //set empty display
     const [user, setUser] = useState("guest"); //set default user to guest
-    const [manageListing, setManageListing] = useState(false); // set state of the listing to manage
+    const [manageListing, setManageListing] = useState(true); // set state of the listing to manage
 
     //passed values with UserContext custom effect hook
     const values = useMemo(() => ({ user, setUser }), [user]);
@@ -67,7 +67,7 @@ function Hosting() {
                         </>
                     ) : (
                         <ManageListing
-                            listing={manageListing}
+                            manageListing={manageListing}
                             switchListingManagement={switchListingManagement}
                         />
                     )}
