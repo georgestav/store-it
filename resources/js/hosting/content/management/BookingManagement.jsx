@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 //styles
 import styles from "./BookingManagement.module.css";
 
-function BookingManagement({ listingid, booking, refreshTrig }) {
+function BookingManagement({
+    listingid,
+    booking,
+    triggerRefresh,
+    refreshTrig,
+}) {
     const updateBookingStatus = async (id, status) => {
         await axios
             .patch(`api/bookings/${id}`, status)
             .then(function (response) {
                 console.log(response);
-                refreshTrig();
             })
             .catch(function (error) {
                 console.warn(error);
             });
+        refreshTrig();
     };
 
     const acceptBookingHandler = () => {
@@ -33,6 +38,7 @@ function BookingManagement({ listingid, booking, refreshTrig }) {
             booked_until: booking.booked_until,
         });
     };
+    useEffect(() => {}, [triggerRefresh]);
 
     return (
         <div className={styles.card}>

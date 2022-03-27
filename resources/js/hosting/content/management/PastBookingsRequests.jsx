@@ -6,19 +6,11 @@ function PastBookingsRequests({ booking }) {
     return (
         <div className={styles.card}>
             <div>
-                Made by user:
+                <div>Made by user:</div>
                 <div>{booking.user_id}</div>
             </div>
             <div>
-                Requesting to book it from:
-                <div>{booking.booked_from}</div>
-            </div>
-            <div>
-                Until:
-                <div>{booking.booked_until}</div>
-            </div>
-            <div>
-                Status
+                <div>Status:</div>
                 <div>{booking.status}</div>
             </div>
         </div>

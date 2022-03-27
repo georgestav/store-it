@@ -17,7 +17,10 @@ class UserController extends Controller
     public function logedIn()
     {
         $user = Auth::user();
-        $user->role = $user->role; //relationship to get the role name and data
+        if (!$user) {
+            return response('No user logged in');
+        }
+        $user->role; //relationship to get the role name and data
         return $user;
     }
 

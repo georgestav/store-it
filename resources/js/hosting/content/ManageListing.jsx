@@ -4,6 +4,8 @@ import { Button } from "@mui/material";
 import styles from "./ManageListing.module.css";
 import BookingManagement from "./management/BookingManagement";
 import PastBookingsRequests from "./management/PastBookingsRequests";
+/* 
+//uncomment for dev
 const fetchUserData = async () => {
     try {
         const getListings = await axios.get(`/api/listings/17`);
@@ -12,23 +14,21 @@ const fetchUserData = async () => {
     } catch (error) {
         console.error("error", error.response.data.message);
     }
-};
+}; */
 
-function ManageListing({ switchListingManagement }) {
-    //fetch the listings of the user
-    const [listing, setListings] = useState(null);
+function ManageListing({ listing, switchListingManagement }) {
+    // const [listing, setListings] = useState(null); //uncomment for dev
     const [triggerRefresh, setTriggerRefresh] = useState(false);
-
     const refreshTrig = () => {
         setTriggerRefresh(!triggerRefresh);
     };
 
-    useEffect(async () => {
-        setListings(await fetchUserData());
+    useEffect(() => {
+        // setListings(await fetchUserData()); //uncomment for dev
     }, [triggerRefresh]);
 
     if (!listing) {
-        return <div>'loading'</div>;
+        return <div>No listing Found</div>;
     } else {
         return (
             <div className={styles.listing__container}>
@@ -111,6 +111,9 @@ function ManageListing({ switchListingManagement }) {
                                                     booking={booking}
                                                     listingid={listing.id}
                                                     refreshTrig={refreshTrig}
+                                                    triggerRefresh={
+                                                        triggerRefresh
+                                                    }
                                                 />
                                             );
                                         })}
