@@ -55,7 +55,7 @@ function ManageListing({ manageListing, switchListingManagement }) {
                                     ? `data:image/jpeg;base64,${listing.pictures[0].photo}`
                                     : ""
                             }
-                            alt={listing.pictures[0].name}
+                            alt={listing.pictures[0]?.name}
                             className={styles.image}
                         />
                     </div>
