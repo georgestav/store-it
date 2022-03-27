@@ -6,6 +6,7 @@ import Listings from "./content/Listings";
 import Bookings from "./content/Bookings";
 import CreateListing from "./content/CreateListing";
 import ManageListing from "./content/ManageListing";
+import { Button } from "@mui/material";
 //styling
 import styles from "./Hosting.module.css";
 
@@ -21,7 +22,7 @@ function Hosting() {
     const userCategory = () => {
         //check user category returns true if user is role 4 (user) or guest
         //else returns false
-        if (user.role_id === 4 || user === "guest") return true;
+        if (user.role_id === 4) return true;
         return false;
     };
 
@@ -37,11 +38,10 @@ function Hosting() {
         setManageListing(listing);
     };
 
-    console.log(userCategory());
-
     //Use effect triggered when display changes, ex register, login
     useEffect(() => {
         checkUserLogged();
+        userCategory();
     }, [display, refreshTrigger]);
 
     //check for already logged in user
@@ -55,39 +55,56 @@ function Hosting() {
             console.error("User not Logged in", error.response.data.message);
         }
     };
+    console.log(user);
     return (
         <>
             <UserContext.Provider value={values}>
                 <NavigationBar setDisplay={setDisplay} />
-                <div className={styles.hosting__container}>
-                    {!userCategory() ? (
-                        !manageListing ? (
-                            <>
-                                <CreateListing
-                                    user={user}
-                                    forceRefresh={forceRefresh}
-                                />
-                                <Listings
-                                    user={user}
-                                    forceRefresh={forceRefresh}
+                {user === "guest" ? (
+                    <div
+                        className={styles.hosting__container}
+                        style={{ height: "80vh" }}
+                    >
+                        <div>you need to register to view this page</div>
+                        <Button
+                            onClick={() => {
+                                window.location.href = "/";
+                            }}
+                        >
+                            Home Page
+                        </Button>
+                    </div>
+                ) : (
+                    <div className={styles.hosting__container}>
+                        {!userCategory() ? (
+                            !manageListing ? (
+                                <>
+                                    <CreateListing
+                                        user={user}
+                                        forceRefresh={forceRefresh}
+                                    />
+                                    <Listings
+                                        user={user}
+                                        forceRefresh={forceRefresh}
+                                        switchListingManagement={
+                                            switchListingManagement
+                                        }
+                                    />
+                                </>
+                            ) : (
+                                <ManageListing
+                                    manageListing={manageListing}
                                     switchListingManagement={
                                         switchListingManagement
                                     }
                                 />
-                            </>
+                            )
                         ) : (
-                            <ManageListing
-                                manageListing={manageListing}
-                                switchListingManagement={
-                                    switchListingManagement
-                                }
-                            />
-                        )
-                    ) : (
-                        <></>
-                    )}
-                    <Bookings user={user} forceRefresh={forceRefresh} />
-                </div>
+                            <></>
+                        )}
+                        <Bookings user={user} forceRefresh={forceRefresh} />
+                    </div>
+                )}
             </UserContext.Provider>
             <Footer />
         </>

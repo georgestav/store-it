@@ -35,15 +35,16 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
 
-        // $data = ['message' => 'This is a test!'];
-        // Mail::to('george.stavroulakis@hotmail.com')->send(new TestEmail($data));
-
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             "role_id" => 4,
             "language_id" => 1
         ]);
+        $data = ['message' => 'successfull', 'user' => $user->name];
+        // Mail::to($user)->send(new TestEmail($data)); //uncomment to send mails
+
+        return $user;
     }
 }
