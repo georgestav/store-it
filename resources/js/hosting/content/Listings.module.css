@@ -3,14 +3,14 @@
     flex-direction: column;
     flex-wrap: wrap;
     row-gap: 1rem;
-    width: 35rem;
 }
 .listings__container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     row-gap: 1rem;
     align-content: center;
+    justify-content: space-evenly;
 }
 .my__listings {
     align-self: center;
