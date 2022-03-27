@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Rokkitt:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Asap+Condensed&family=Rokkitt:wght@500&display=swap");
+
 .body {
     background-color: black;
 }
@@ -10,23 +13,26 @@
 
 .containers div {
     width: 50%;
-    padding: 3% 4%;
+    padding: 0% 4%;
 }
 
 .header {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 300%;
+    font-family: "Rokkitt", sans-serif;
+    font-size: 550%;
     height: 15vh;
     color: white;
 }
 
-h2 {
+.faq1, .faq2, .faq3, .faq4 {
+    font-family: "Asap Condensed", sans-serif;
+    font-size: 200%;
     color: white;
 }
 
 .containers p {
-    font-size: 150%;
+    font-family: "Asap Condensed", sans-serif;
     color: #c2a383;
 }
