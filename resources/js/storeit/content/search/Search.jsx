@@ -4,7 +4,7 @@ import styles from "./Search.module.css";
 import SearchForm from "./SearchForm";
 
 function Search() {
-    const [displaySearch, setDisplaySearch] = useState(true); //set display status
+    const [displaySearch, setDisplaySearch] = useState(false); //set display status
 
     //handler to bring search form up if search box is clicked
     const displaySearchHandler = () => {
