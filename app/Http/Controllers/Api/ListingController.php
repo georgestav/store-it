@@ -134,3 +134,18 @@ class ListingController extends Controller
         return response('Record Deleted');
     }
 }
+
+
+// public function indexSingle($id)
+//     {
+//         $listing = Listing::findOrFail($id);
+
+//         $listing->country;
+//         $listing->city;
+//         $listing->pictures;
+//         $listing->storage_type;
+//         $listing->availabilities;
+//         $listing->bookings;
+
+//         return response($listing);
+//     }
