@@ -6,6 +6,7 @@ import RegisterForm from "../../components/registerForm/RegisterForm";
 import WhyUs from "./whyus/WhyUs";
 import OurProcess from "./ourprocess/OurProcess";
 import StorageTypes from "./storagetypes/StorageTypes";
+import Faq from "./faq/Faq";
 
 function Content({ display, setDisplay }) {
     //use userContext
@@ -34,6 +35,7 @@ function Content({ display, setDisplay }) {
                 <WhyUs />
                 <OurProcess />
                 <StorageTypes />
+                <Faq />
             </>
         );
     }

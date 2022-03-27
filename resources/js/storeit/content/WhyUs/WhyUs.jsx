@@ -7,7 +7,7 @@ function WhyUs() {
         <>
             <div className={styles.body}>
 
-                <h1 className={styles.WhyUs}>Why us?</h1>
+                <h2 className={styles.WhyUs}>Why us?</h2>
 
                 <div className={styles.containers}>
 

@@ -11,7 +11,7 @@ function OurProcess() {
             
             <div className={styles.body}>
 
-                    <h1 className={styles.ourProcess}>Our Process</h1>
+                    <h2 className={styles.ourProcess}>Our Process</h2>
 
                     <div className={styles.containers}>
 

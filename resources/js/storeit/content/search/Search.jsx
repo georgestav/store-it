@@ -15,7 +15,7 @@ function Search() {
         return (
             <>
                 <div className={styles.body}>
-                    <h1 className={styles.header}>Store your valuables</h1>
+                    <h2 className={styles.header}>Store your valuables</h2>
 
                     <input
                         type="Search"
