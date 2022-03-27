@@ -72,6 +72,7 @@ Route::get("/user/{id}/getbookings", "Api\UserController@getBookings");
 Route::get('/user/logged-in', 'Api\UserController@logedIn'); //todo protect for same user
 
 Route::get('/user/{id}', 'Api\UserController@indexSingle'); //todo protect for admins, or same user
+Route::get('/user/{id}/name', 'Api\UserController@findusername'); //todo protect for users
 Route::post('/user', 'Api\UserController@store'); //todo put or patch / protect only for same user
 Route::patch('/user/{id}', 'Api\UserController@update'); //todo protect only for same user
 Route::delete('/user/{id}', 'Api\UserController@destroy'); //todo protect for admins, or same user
