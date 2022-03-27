@@ -16,6 +16,7 @@ class ListingController extends Controller
 
         $distances = [];
 
+        //latitude in both radians and degrees
         $location_lat = $cityCoordinates0;
         $location_lat_phi = $location_lat * pi() / 180;
 
@@ -23,6 +24,7 @@ class ListingController extends Controller
 
         $earthRadius = 6371000;
 
+        //calculating the distance between every listing and the specific location and inserting it to the array
         foreach ($listings as $listing) {
 
             $coordinates = explode(", ", $listing->coordinates);
@@ -45,8 +47,10 @@ class ListingController extends Controller
             $distances[$distance] = $listing;
         }
 
+        //sorting the array based on the distance
         ksort($distances);
 
+        //returning only the first three listings
         $listings = array_slice($distances, 0, 3);
 
         return $listings;
