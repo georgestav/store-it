@@ -13,6 +13,7 @@ export default function Logout() {
             const response_data = await response.data;
             console.log("logout");
             setUser("guest"); //On successfull logout set userContex user data back to Guest
+            window.location.href = "/";
         } catch (error) {
             console.log(error.response);
         }

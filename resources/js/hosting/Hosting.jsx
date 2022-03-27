@@ -18,6 +18,13 @@ function Hosting() {
     //passed values with UserContext custom effect hook
     const values = useMemo(() => ({ user, setUser }), [user]);
 
+    const userCategory = () => {
+        //check user category returns true if user is role 4 (user) or guest
+        //else returns false
+        if (user.role_id === 4 || user === "guest") return true;
+        return false;
+    };
+
     //function to trigger a refresh
     const forceRefresh = () => {
         setRefreshTrigger(!refreshTrigger);
@@ -29,6 +36,8 @@ function Hosting() {
     const switchListingManagement = (listing) => {
         setManageListing(listing);
     };
+
+    console.log(userCategory());
 
     //Use effect triggered when display changes, ex register, login
     useEffect(() => {
@@ -51,25 +60,31 @@ function Hosting() {
             <UserContext.Provider value={values}>
                 <NavigationBar setDisplay={setDisplay} />
                 <div className={styles.hosting__container}>
-                    {!manageListing ? (
-                        <>
-                            <CreateListing
-                                user={user}
-                                forceRefresh={forceRefresh}
-                            />
-                            <Listings
-                                user={user}
-                                forceRefresh={forceRefresh}
+                    {!userCategory() ? (
+                        !manageListing ? (
+                            <>
+                                <CreateListing
+                                    user={user}
+                                    forceRefresh={forceRefresh}
+                                />
+                                <Listings
+                                    user={user}
+                                    forceRefresh={forceRefresh}
+                                    switchListingManagement={
+                                        switchListingManagement
+                                    }
+                                />
+                            </>
+                        ) : (
+                            <ManageListing
+                                manageListing={manageListing}
                                 switchListingManagement={
                                     switchListingManagement
                                 }
                             />
-                        </>
+                        )
                     ) : (
-                        <ManageListing
-                            manageListing={manageListing}
-                            switchListingManagement={switchListingManagement}
-                        />
+                        <></>
                     )}
                     <Bookings user={user} forceRefresh={forceRefresh} />
                 </div>

@@ -44,7 +44,13 @@ class UserController extends Controller
     public function indexSingle($id)
     {
         $user = User::findOrFail($id);
-        return $user;
+        return $user->name;
+    }
+
+    public function findusername($id)
+    {
+        $user = User::findOrFail($id);
+        return $user->person;
     }
 
     /**

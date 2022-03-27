@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 //styles
 import styles from "./BookingManagement.module.css";
@@ -9,6 +9,7 @@ function BookingManagement({
     triggerRefresh,
     refreshTrig,
 }) {
+    const [bookUser, setBookUser] = useState({});
     const updateBookingStatus = async (id, status) => {
         await axios
             .patch(`api/bookings/${id}`, status)
@@ -38,13 +39,21 @@ function BookingManagement({
             booked_until: booking.booked_until,
         });
     };
-    useEffect(() => {}, [triggerRefresh]);
+
+    const getUserName = async (id) => {
+        const user = await axios.get(`/api/user/${id}/name`);
+        return user.data;
+    };
+
+    useEffect(async () => {
+        setBookUser(await getUserName(booking.user_id));
+    }, [triggerRefresh]);
 
     return (
         <div className={styles.card}>
             <div>
                 Made by user:
-                <div>{booking.user_id}</div>
+                <div>{bookUser.name || booking.user_id}</div>
             </div>
             <div>
                 Requesting to book it from:
