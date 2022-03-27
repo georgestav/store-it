@@ -5,6 +5,7 @@ export default function Booking({booking, forceRefresh}) {
 
     const {booked_from, booked_until, status, listing, id} = booking;
 
+    //function that deletes the booking
     const handleDelete = async () => {
         const response = await axios.delete(`api/bookings/${id}`);
         console.log("deleted", response.status);
