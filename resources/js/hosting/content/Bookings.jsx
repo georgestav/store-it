@@ -5,6 +5,8 @@ import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Bookings({ user, forceRefresh }) {
+    
+    //states
     const [bookings, setBookings] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
 

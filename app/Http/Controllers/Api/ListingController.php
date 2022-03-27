@@ -16,6 +16,7 @@ class ListingController extends Controller
 
         $distances = [];
 
+        //latitude in both radians and degrees
         $location_lat = $cityCoordinates0;
         $location_lat_phi = $location_lat * pi() / 180;
 
@@ -23,6 +24,7 @@ class ListingController extends Controller
 
         $earthRadius = 6371000;
 
+        //calculating the distance between every listing and the specific location and inserting it to the array
         foreach ($listings as $listing) {
 
             $coordinates = explode(", ", $listing->coordinates);
@@ -45,8 +47,10 @@ class ListingController extends Controller
             $distances[$distance] = $listing;
         }
 
+        //sorting the array based on the distance
         ksort($distances);
 
+        //returning only the first three listings
         $listings = array_slice($distances, 0, 3);
 
         return $listings;
@@ -130,3 +134,28 @@ class ListingController extends Controller
         return response('Record Deleted');
     }
 }
+
+
+// foreach ($listings as $listing) {
+
+//     $coordinates = explode(", ", $listing->coordinates);
+//     $listing_lat = $coordinates[0];
+//     $listing_lon = $coordinates[1];
+
+//     $listing_lat_phi = $listing_lat * pi() / 180;
+
+//     $difference_of_lats = ($listing_lat - $location_lat) * pi() / 180; //could be done in a different way
+// must be in a reverse order to be able to get the correct location
+//     $difference_of_lons = ($listing_lon - $location_lon) * pi() / 180;
+
+//     $middlestep = sin($difference_of_lats / 2) ** 2 + cos($location_lat_phi) * cos($listing_lat_phi) * sin($difference_of_lons / 2) ** 2;
+
+//     $doubleAtan = atan2(sqrt($a), sqrt(1 - $a)) / pi() * 3 + cos($location_lat_phi);
+
+//     $distance = $earthRadius * $doubleAtan;
+
+//     $listing->distance = $distance;
+
+//     $distances[$distance] = $listing;
+// }
+
