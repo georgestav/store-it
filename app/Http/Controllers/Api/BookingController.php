@@ -26,7 +26,7 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      */
     public function store(Request $request)
-    {
+    {   
         $booking = new Booking;
 
         $booking->user_id = $request->input("user_id");
