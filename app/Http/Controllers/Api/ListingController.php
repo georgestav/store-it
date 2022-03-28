@@ -44,14 +44,24 @@ class ListingController extends Controller
 
             $listing->distance = $distance;
 
-            $distances[$distance] = $listing;
+            array_push($distances, $listing);
         }
 
+        // dd($distances);
+        
         //sorting the array based on the distance
-        ksort($distances);
+        usort($distances, function($listing1, $listing2) {
+            if($listing1->distance < $listing2->distance) {
+                return -1;
+            } elseif ($listing1->distance == $listing2->distance) {
+                return 0;
+            } elseif ($listing1->distance > $listing2->distance) {
+                return 1;
+            }
+        });
 
         //returning only the first three listings
-        $listings = array_slice($distances, 0, 3);
+        $listings = array_slice($distances, 0, 15);
 
         return $listings;
     }

@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./ManageListing.module.css";
 import axios from "axios";
 
-const fetchListing = async (id = 21) => {
+const fetchListing = async (id) => {
     //Need to fetch listing in order to have access to updated db data
     //if working with passed in data on re-render it holds the same values
     try {
