@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId("city_id");
             $table->foreignId("storage_type_id");
             $table->string("coordinates");
+            $table->text('address');
             $table->text("description");
             $table->integer("size");
             $table->float("daily_rate", 8, 2);

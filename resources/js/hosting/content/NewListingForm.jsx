@@ -19,6 +19,7 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
         country_id: "1",
         storage_type_id: "1",
         coordinates: "",
+        address: "test",
         daily_rate: "",
         description: "",
         rating: "0",
@@ -26,9 +27,7 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
         user_id: "",
     });
 
-    // new Date().toISOString().slice(0, 10)
     let defaultDate = new Date().toISOString().slice(0, 10);
-
     const [availability, setAvailability] = useState({
         listing_id: "",
         available_from: defaultDate,
@@ -79,6 +78,14 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
             return {
                 ...previous_values,
                 ["user_id"]: user.id,
+            };
+        });
+    };
+    const setFromAddress = (addressFetched) => {
+        setFormData((previous_values) => {
+            return {
+                ...previous_values,
+                ["address"]: addressFetched,
             };
         });
     };
@@ -166,6 +173,7 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
                     formData={formData}
                     formChangeHandler={formChangeHandler}
                     setFormCoordinates={setFormCoordinates}
+                    setFromAddress={setFromAddress}
                 />
             </div>
             <StorageTypeDropdown

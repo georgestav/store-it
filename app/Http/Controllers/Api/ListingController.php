@@ -48,10 +48,10 @@ class ListingController extends Controller
         }
 
         // dd($distances);
-        
+
         //sorting the array based on the distance
-        usort($distances, function($listing1, $listing2) {
-            if($listing1->distance < $listing2->distance) {
+        usort($distances, function ($listing1, $listing2) {
+            if ($listing1->distance < $listing2->distance) {
                 return -1;
             } elseif ($listing1->distance == $listing2->distance) {
                 return 0;
@@ -102,6 +102,7 @@ class ListingController extends Controller
         $listing->country_id = $request->country_id;
         $listing->city_id = $request->city_id;
         $listing->storage_type_id = $request->storage_type_id;
+        $listing->address = $request->address;
         $listing->coordinates = $request->coordinates;
         $listing->description = $request->input("description");
         $listing->size = $request->input("size");
@@ -124,6 +125,7 @@ class ListingController extends Controller
         $listing = Listing::findOrFail($id);
 
         $listing->storage_type_id = 2;
+        $listing->address = $request->address;
         $listing->description = $request->input("description");
         $listing->size = $request->input("size");
         $listing->daily_rate = $request->input("daily_rate");
@@ -146,4 +148,3 @@ class ListingController extends Controller
         return response('Record Deleted');
     }
 }
-

@@ -50,7 +50,7 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
                         src={
                             listing.pictures.length > 0
                                 ? `data:image/jpeg;base64,${listing.pictures[0].photo}`
-                                : ""
+                                : "https://picsum.photos/200?blur=2"
                         }
                         alt=""
                     />
@@ -61,7 +61,7 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
                             <span className={styles.title}>
                                 Location:&nbsp;
                             </span>
-                            <span>{listing.coordinates}</span>
+                            <span>{listing.address}</span>
                         </div>
                         <div>
                             <span className={styles.title}>
@@ -78,7 +78,7 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
                                     ? listing.availabilities[0].available_until.split(
                                           " "
                                       )[0]
-                                    : "nothing"}
+                                    : "n/a"}
                             </span>
                         </div>
                         <div>

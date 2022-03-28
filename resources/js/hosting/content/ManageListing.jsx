@@ -24,34 +24,15 @@ const fetchListing = async (id) => {
 function ManageListing({ manageListing, switchListingManagement }) {
     const [listing, setListings] = useState(null); // state for the listing that is displayed
     const [triggerRefresh, setTriggerRefresh] = useState(false); //refresh trigger, currently used for when the booking status changes
-    const [address, setAddress] = useState({});
     const refreshTrig = () => {
         //the function to trigger the refresh
         setTriggerRefresh(!triggerRefresh);
     };
-
-    // listing.coordinates
-    // 33.7680065, 66.2385139
-    const fetchAddress = async (coords) => {
-        console.log(coords);
-        // if (!coords) return;
-        try {
-            const fetch = await axios.get(
-                `https://nominatim.openstreetmap.org/reverse.php?lat=${coords[0]}&lon=${coords[1]}&zoom=12&format=jsonv2`
-            );
-            const location = await fetch.data;
-            console.log(location);
-            setAddress(location);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    let searchCoords = listing?.coordinates.split(", "); //array [0]=lat, [1]=lon
     useEffect(async () => {
-        // refactor this to its own function and chain the fetch address???
         setListings(await fetchListing(manageListing.id)); //fetch listing data on use
     }, [triggerRefresh]);
 
+    console.log(listing);
     if (!listing) {
         return (
             <div>
@@ -68,7 +49,7 @@ function ManageListing({ manageListing, switchListingManagement }) {
                         src={
                             listing.pictures.length > 0
                                 ? `data:image/jpeg;base64,${listing.pictures[0].photo}`
-                                : ""
+                                : "https://picsum.photos/200?blur=2"
                         }
                         alt={listing.pictures[0]?.name}
                         className={styles.image}
@@ -89,7 +70,7 @@ function ManageListing({ manageListing, switchListingManagement }) {
                                     <span className={styles.title}>
                                         Location:&nbsp;
                                     </span>
-                                    {/* <span>{address.display_name}</span> */}
+                                    <span>{listing.address}</span>
                                 </div>
                                 <div>
                                     <span className={styles.title}>
@@ -172,7 +153,7 @@ function ManageListing({ manageListing, switchListingManagement }) {
                                 </div>
                             </div>
                             <div>
-                                <h4>Past Bookings</h4>
+                                <h4>Previous Bookings</h4>
                                 <div
                                     className={
                                         styles.pending__bookings__container
@@ -204,10 +185,39 @@ function ManageListing({ manageListing, switchListingManagement }) {
                                 />
                             </div>
                             <div>
-                                <span className={styles.title}>
-                                    Reviews:&nbsp;
-                                </span>
-                                <span>Reviews of your space will be here</span>
+                                <h4 className={styles.title}>Reviews:&nbsp;</h4>
+                                <ul>
+                                    <li>
+                                        Lorem ipsum dolor sit, amet consectetur
+                                        adipisicing elit. Blanditiis saepe sint
+                                        rem voluptate magnam ad necessitatibus
+                                        dignissimos! Assumenda fugiat officiis
+                                        vel, odit libero deleniti aspernatur
+                                        reprehenderit voluptatibus? Enim, saepe
+                                        expedita? Eius nesciunt dolorum,
+                                        accusamus dolore ad nemo distinctio
+                                        minima non sint. Excepturi quia soluta
+                                        molestiae quisquam atque distinctio.
+                                        Quisquam doloremque, facere error vitae
+                                        doloribus corporis laborum molestias
+                                        voluptates possimus explicabo.
+                                    </li>
+                                    <li>
+                                        Lorem ipsum dolor sit, amet consectetur
+                                        adipisicing elit. Blanditiis saepe sint
+                                        rem voluptate magnam ad necessitatibus
+                                        dignissimos! Assumenda fugiat officiis
+                                        vel, odit libero deleniti aspernatur
+                                        reprehenderit voluptatibus? Enim, saepe
+                                        expedita? Eius nesciunt dolorum,
+                                        accusamus dolore ad nemo distinctio
+                                        minima non sint. Excepturi quia soluta
+                                        molestiae quisquam atque distinctio.
+                                        Quisquam doloremque, facere error vitae
+                                        doloribus corporis laborum molestias
+                                        voluptates possimus explicabo.
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
