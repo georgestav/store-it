@@ -55,6 +55,7 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
         try {
             const data = await getCoordinates(city, country, listingAddress);
             if (data.length === 0) return;
+            console.log(data);
             const coord = `${data[0]["lat"]}, ${data[0]["lon"]}`;
             setCoordinates(coord);
             setFormCoordinates(coord);
@@ -85,7 +86,7 @@ function Address({ formData, formChangeHandler, setFormCoordinates }) {
                 />
             </div>
             <div className={styles.form__input}>
-                <label htmlFor="address">Address</label>
+                <label htmlFor="address">Street</label>
                 <input
                     id="address"
                     name="address"

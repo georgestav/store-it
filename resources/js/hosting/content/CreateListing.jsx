@@ -5,7 +5,7 @@ import NewListingForm from "./NewListingForm";
 import styles from "./CreateListing.module.css";
 
 function CreateListing({ user, forceRefresh }) {
-    const [expandForm, setExpandForm] = useState(false);
+    const [expandForm, setExpandForm] = useState(true);
 
     const toggleFormHandler = () => {
         setExpandForm(!expandForm);

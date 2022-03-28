@@ -26,9 +26,7 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
         user_id: "",
     });
 
-    // new Date().toISOString().slice(0, 10)
     let defaultDate = new Date().toISOString().slice(0, 10);
-
     const [availability, setAvailability] = useState({
         listing_id: "",
         available_from: defaultDate,
