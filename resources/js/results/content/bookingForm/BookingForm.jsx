@@ -11,6 +11,7 @@ export default function BookingForm() {
 
     const [availability, setAvailability] = useState(true);
     const [refreshTrigger, setRefreshTrigger] = useState(false);
+    const [invalidDates, setInvalidDates] = useState(false);
 
     const userId = user.user.id;
     
@@ -42,6 +43,7 @@ export default function BookingForm() {
             }
         });
         setAvailability(true);
+        setInvalidDates(false);
     }
 
     const handleSubmit = async (event) => {
@@ -52,14 +54,20 @@ export default function BookingForm() {
         if (data == false) {
             setAvailability(false);
             console.log("hey");
-            forceRefresh();
         }
+
+        if (data === "false order") {
+            setInvalidDates(true);
+        }
+
+        forceRefresh();
     }
 
 
     return (
         <>
         {availability ? <></> : <p><strong>Not available at this date</strong></p>}
+        {invalidDates ? <p><strong>Invalid order of dates.</strong></p> : <></>}
         <form action="" method="post" onSubmit={handleSubmit}>
             <label htmlFor="book-from">Book from</label>
             <br />

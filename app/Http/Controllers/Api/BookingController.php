@@ -38,8 +38,12 @@ class BookingController extends Controller
         $booking_start = strtotime($request->input("booked_from"));
         $booking_end = strtotime($request->input("booked_until"));
 
+        //check, whether the start date is before the end date
+        if ($booking_start > $booking_end) {
+            return "false order";
+        }
+        
         //check, whether the listing is available in the period
-
         if (!($booking_start >= $available_start && $booking_start <= $available_end) || !($booking_end >= $available_start) && ($booking_end <= $available_end)) {
             return "false";
         }
