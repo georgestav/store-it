@@ -20,12 +20,12 @@ const getCoordinates = async (city, country, listingAddress) => {
         let url = `https://nominatim.openstreetmap.org/search?&limit=1&format=jsonv2`;
         if (country.name)
             url += `&country=${
-                country.name.replace(" ", "%") || "Afghanistan"
+                country.name.replaceAll(" ", "+") || "Afghanistan"
             }`;
-        if (city) url += `&city=${city.replace(" ", "%")}`;
+        if (city) url += `&city=${city.replaceAll(" ", "+")}`;
         if (listingAddress.street)
-            url += `&street=${listingAddress.street.replace(" ", "%")}`;
-        if (listingAddress.postcode.replace(" ", "%"))
+            url += `&street=${listingAddress.street.replaceAll(" ", "+")}`;
+        if (listingAddress.postcode.replaceAll(" ", "+"))
             url += `&postalcode=${listingAddress.postcode}`;
 
         console.log(url);
