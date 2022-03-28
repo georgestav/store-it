@@ -29,7 +29,7 @@ class BookingController extends Controller
     public function store(Request $request)
     {   
         //accessing all bookings for the specific listing
-        $all_bookings = Booking::query()->where("listing_id", $request->input("listing_id"))->get();
+        $all_bookings = Booking::query()->where("listing_id", $request->input("listing_id"))->where("status", "accepted")->get();
         //accessing availability for the specific listing
         $availability = Availability::query()->where("listing_id", $request->input("listing_id"))->first();
         
@@ -41,6 +41,22 @@ class BookingController extends Controller
         //check, whether the listing is available in the period
 
         if (!($booking_start >= $available_start && $booking_start <= $available_end) || !($booking_end >= $available_start) && ($booking_end <= $available_end)) {
+            return "false";
+        }
+
+        //check, whether the there are no other bookings in the period
+        $overlap = false;
+        foreach ($all_bookings as $old) {
+            $old_start = strtotime($old->booked_from);
+            $old_end = strtotime($old->booked_until);
+
+            if (($booking_start <= $old_end) && ($booking_end >= $old_start)) {
+                $overlap = true;
+                break;
+            }
+        }
+
+        if ($overlap) {
             return "false";
         }
           
