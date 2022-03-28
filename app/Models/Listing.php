@@ -15,6 +15,7 @@ use App\Models\Review;
 use App\Models\Feature;
 use App\Models\Booking;
 use App\Models\StorageType;
+use App\Models\Person;
 
 class Listing extends Model
 {

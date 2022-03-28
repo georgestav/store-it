@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styles from "./map.module.css";
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import Rating from "@mui/material/Rating";
 
 export default function Map({listings, cityCoordinates}) {
 
@@ -98,7 +99,7 @@ export default function Map({listings, cityCoordinates}) {
                 {listings.map((listing) => (
                     <Marker key={listing.id} position={listing.coordinates.split(",")}>
                         <Popup>
-                           {listing.coordinates} <br /> {(listing.distance/1000).toFixed(2)} km <br /> {listing.daily_rate} USD <br /> {listing.description}
+                           {listing.coordinates} <br /> <div className={styles.cluster}><Rating name="read-only" value={listing.rating} readOnly /></div> <br /> {(listing.distance/1000).toFixed(2)} km <br /> {listing.daily_rate} USD <br /> {listing.description}
                         </Popup>
                     </Marker>
                 ))}

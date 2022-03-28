@@ -82,6 +82,8 @@ class ListingController extends Controller
         $listing->storage_type;
         $listing->availabilities;
         $listing->bookings;
+        $listing->user;
+        $listing->user->person;
 
         return response($listing);
     }

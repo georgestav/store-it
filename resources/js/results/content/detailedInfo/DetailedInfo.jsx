@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import axios from "axios";
+import styles from "./detailedInfo.module.css";
+import Rating from "@mui/material/Rating";
 
 export default function DetailedInfo() {
 
@@ -33,8 +35,17 @@ export default function DetailedInfo() {
     return (
         <>
             {listing ?
-            <> 
+            <>
+            <img className={styles.image} src={listing.pictures.length > 0 ? `data:image/jpeg;base64,${listing.picutres[0].photo}` : ""} alt="" />
+            <Rating
+                                name="read-only"
+                                value={listing.rating}
+                                readOnly
+                            /> 
             <h3>Location: {listing.coordinates}</h3>
+            {listing.user.person != null ? <p>Name: {listing.user.person.name} {listing.user.person.surname}</p>  : <p>By user: {listing.user.name}</p> }
+            <p>Email: {listing.user.email}</p>
+            {listing.user.person != null && listing.user.person != null ? <p>Phone: {listing.user.person.phone}</p> : <></>}
             <p>City: {listing.city.name}</p>
             <p>Country: {listing.country.name}</p>
             <p>Daily rate: {listing.daily_rate}</p>

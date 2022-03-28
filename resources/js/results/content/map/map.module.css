@@ -1,7 +1,6 @@
 .container {
     height: 70vh;
 }
-
 .container span {
     height: 5vh;
     width: 5vh;
@@ -18,3 +17,16 @@
     font-size: 20px;
     opacity: 0.55;
 }
+
+.cluster span {
+    height: 5vh;
+    width: 5vh;
+    display: inline;
+    border: none;
+    background-color: transparent;
+    color: black;
+    opacity: 1;
+    margin: 0px;
+    padding: 0px;
+}
+
