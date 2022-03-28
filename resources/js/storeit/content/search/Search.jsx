@@ -19,7 +19,7 @@ function Search() {
 
                     <input
                         type="Search"
-                        placeholder="Search"
+                        placeholder="🔎 Search"
                         className={styles.searchbar}
                         onClick={displaySearchHandler}
                     />

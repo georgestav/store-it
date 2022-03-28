@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./NavigationBar.module.css";
 import AccountMenu from "./AccountMenu";
 import BurgerMenu from "./BurgerMenu";
-import logo from "./logo/storeit.svg"; 
+import logo from "./logo/storeit.svg";
 
 function NavigationBar({ setDisplay }) {
     return (

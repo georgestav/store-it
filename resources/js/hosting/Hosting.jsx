@@ -14,13 +14,13 @@ function Hosting() {
     const [refreshTrigger, setRefreshTrigger] = useState(false);
     const [display, setDisplay] = useState(""); //set empty display
     const [user, setUser] = useState("guest"); //set default user to guest
-    const [manageListing, setManageListing] = useState(false); // set state of the listing to manage
+    const [manageListing, setManageListing] = useState(true); // set state of the listing to manage
 
     //passed values with UserContext custom effect hook
     const values = useMemo(() => ({ user, setUser }), [user]);
 
     const userCategory = () => {
-        //check user category returns true if user is role 4 (user) or guest
+        //check user category returns true if user is role 4 (user)
         //else returns false
         if (user.role_id === 4) return true;
         return false;
@@ -65,7 +65,9 @@ function Hosting() {
                         className={styles.hosting__container}
                         style={{ height: "80vh" }}
                     >
-                        <div>you need to register to view this page</div>
+                        <div>
+                            You need to register or login to view this page
+                        </div>
                         <Button
                             onClick={() => {
                                 window.location.href = "/";

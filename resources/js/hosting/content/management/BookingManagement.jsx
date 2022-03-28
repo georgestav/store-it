@@ -57,11 +57,11 @@ function BookingManagement({
             </div>
             <div>
                 Requesting to book it from:
-                <div>{booking.booked_from}</div>
+                <div>{booking.booked_from.split(" ")[0]}</div>
             </div>
             <div>
                 Until:
-                <div>{booking.booked_until}</div>
+                <div>{booking.booked_until.split(" ")[0]}</div>
             </div>
             <div className={styles.button__container}>
                 <Button onClick={acceptBookingHandler}>Accept</Button>

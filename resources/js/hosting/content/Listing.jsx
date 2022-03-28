@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import Rating from "@mui/material/Rating";
 import React, { useEffect, useState } from "react";
 import Badge from "@mui/material/Badge";
 //styles
@@ -35,7 +36,7 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
     //src='data:image/jpeg;base64,${image[0]["photo"]}'
     console.log(listing);
     if (!listing) {
-        return <div>test</div>;
+        return <div>No listings</div>;
     } else {
         return (
             <Badge
@@ -57,15 +58,21 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
                 <div className={styles.details__container}>
                     <div>
                         <div className={styles.details__line}>
-                            <span>Location:</span>
+                            <span className={styles.title}>
+                                Location:&nbsp;
+                            </span>
                             <span>{listing.coordinates}</span>
                         </div>
                         <div>
-                            <span>Rate:</span>
+                            <span className={styles.title}>
+                                Rate per day:&nbsp;
+                            </span>
                             <span>{listing.daily_rate}</span>
                         </div>
                         <div>
-                            <span>Open until:</span>
+                            <span className={styles.title}>
+                                Open until:&nbsp;
+                            </span>
                             <span>
                                 {listing.availabilities.length
                                     ? listing.availabilities[0].available_until.split(
@@ -75,19 +82,24 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
                             </span>
                         </div>
                         <div>
-                            <span>Rating:</span>
-                            <span>{listing.rating}</span>
+                            <span className={styles.title}>
+                                Total Bookings:&nbsp;
+                            </span>
+                            <span>{listing.bookings.length}</span>
                         </div>
                         <div>
-                            <span>Total Bookings:</span>
-                            <span>{listing.bookings.length}</span>
+                            <Rating
+                                name="read-only"
+                                value={listing.rating}
+                                readOnly
+                            />
                         </div>
                     </div>
                     <div className={styles.actions__container}>
                         <Button
                             onClick={() => switchListingManagement(listing)}
                         >
-                            Show More
+                            Manage
                         </Button>
                         <Button color="error" onClick={deleteListingHandler}>
                             Delete Listing

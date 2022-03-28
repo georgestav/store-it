@@ -1,7 +1,7 @@
 .footer__container {
     display: flex;
     justify-content: space-between;
-    padding: .5rem 5px;
+    padding: 4rem 5px 1rem;
     border: 1px solid black;
     min-width: 100%;
     bottom: 0px;
@@ -36,7 +36,7 @@
 
 @media (max-width: 768px) {
     .center__container {
-    padding: 3%;
-    gap: 3%;
+        padding: 3%;
+        gap: 3%;
     }
 }
