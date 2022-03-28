@@ -43,6 +43,7 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
                 className={styles.listing__container}
                 color="secondary"
                 badgeContent={countPending()}
+                style={{ width: "32rem" }}
             >
                 <div className={styles.image__container}>
                     <img
