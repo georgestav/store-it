@@ -5,13 +5,13 @@ import Rating from "@mui/material/Rating";
 
 export default function Listing({listing}) {
     
-    const {id, distance, daily_rate: dailyRate, description, size} = listing;
+    const {id, distance, daily_rate: dailyRate, description, size, address} = listing;
 
         
     return (
         <Link to={"/results/listing/" + id} className={styles.link}>
             <div className={styles.container}>
-                <h3>Location:</h3>
+                <h3>Location: {address}</h3>
                 <Rating name="read-only" value={listing.rating} readOnly />
                 <p>Distance: {(distance / 1000).toFixed(2)} km</p>
                 <p>Daily rate: {dailyRate}</p>

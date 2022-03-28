@@ -42,7 +42,7 @@ export default function DetailedInfo() {
                                 value={listing.rating}
                                 readOnly
                             /> 
-            <h3>Location: {listing.coordinates}</h3>
+            <h3>Location: {listing.address}</h3>
             {listing.user.person != null ? <p>Name: {listing.user.person.name} {listing.user.person.surname}</p>  : <p>By user: {listing.user.name}</p> }
             <p>Email: {listing.user.email}</p>
             {listing.user.person != null && listing.user.person != null ? <p>Phone: {listing.user.person.phone}</p> : <></>}
