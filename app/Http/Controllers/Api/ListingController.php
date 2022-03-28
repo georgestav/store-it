@@ -61,7 +61,7 @@ class ListingController extends Controller
         });
 
         //returning only the first three listings
-        $listings = array_slice($distances, 0, 3);
+        $listings = array_slice($distances, 0, 15);
 
         return $listings;
     }
