@@ -34,7 +34,7 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
 
     useEffect(() => {}, []);
     //src='data:image/jpeg;base64,${image[0]["photo"]}'
-    console.log(listing);
+
     if (!listing) {
         return <div>No listings</div>;
     } else {
