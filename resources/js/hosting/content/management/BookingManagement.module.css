@@ -11,7 +11,9 @@
     display: flex;
     justify-content: space-evenly;
 }
-
+.title {
+    font-weight: 600;
+}
 .accepted {
     transition: all ease-in-out 1s;
     border-radius: 12px;

@@ -10,6 +10,7 @@ function BookingManagement({
     refreshTrig,
 }) {
     const [bookUser, setBookUser] = useState({});
+
     const updateBookingStatus = async (id, status) => {
         await axios
             .patch(`api/bookings/${id}`, status)
@@ -42,26 +43,39 @@ function BookingManagement({
 
     const getUserName = async (id) => {
         const user = await axios.get(`/api/user/${id}/name`);
-        return user.data;
+        setBookUser(await user.data);
     };
 
     useEffect(async () => {
-        setBookUser(await getUserName(booking.user_id));
+        getUserName(booking.user_id);
     }, [triggerRefresh]);
 
     return (
         <div className={styles.card}>
             <div>
-                Made by user:
-                <div>{bookUser.name || booking.user_id}</div>
+                <span className={styles.title}>Requested by:&nbsp;</span>
+                <span>
+                    {`${bookUser.person?.name} ${bookUser.person?.surname}` ||
+                        booking.user_id}
+                </span>
             </div>
             <div>
-                Requesting to book it from:
-                <div>{booking.booked_from.split(" ")[0]}</div>
+                <span className={styles.title}>Email:&nbsp;</span>
+                <span>{bookUser.email || "Not provided"}</span>
             </div>
             <div>
-                Until:
-                <div>{booking.booked_until.split(" ")[0]}</div>
+                <span className={styles.title}>Phone number:&nbsp;</span>
+                <span>{bookUser.person?.phone || "Not provided"}</span>
+            </div>
+            <div>
+                <span className={styles.title}>
+                    Requesting to book it from:&nbsp;
+                </span>
+                <span>{booking.booked_from.split(" ")[0]}</span>
+            </div>
+            <div>
+                <span className={styles.title}>Until:&nbsp;</span>
+                <span>{booking.booked_until.split(" ")[0]}</span>
             </div>
             <div className={styles.button__container}>
                 <Button onClick={acceptBookingHandler}>Accept</Button>

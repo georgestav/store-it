@@ -50,7 +50,8 @@ class UserController extends Controller
     public function findusername($id)
     {
         $user = User::findOrFail($id);
-        return $user->person;
+        $user->person;
+        return $user;
     }
 
     /**
