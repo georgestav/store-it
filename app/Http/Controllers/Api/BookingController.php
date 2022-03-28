@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Availability;
 
 class BookingController extends Controller
 {
@@ -27,6 +28,43 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {   
+        //accessing all bookings for the specific listing
+        $all_bookings = Booking::query()->where("listing_id", $request->input("listing_id"))->where("status", "accepted")->get();
+        //accessing availability for the specific listing
+        $availability = Availability::query()->where("listing_id", $request->input("listing_id"))->first();
+        
+        $available_start = strtotime($availability->available_from);
+        $available_end = strtotime($availability->available_until);
+        $booking_start = strtotime($request->input("booked_from"));
+        $booking_end = strtotime($request->input("booked_until"));
+
+        //check, whether the start date is before the end date
+        if ($booking_start > $booking_end) {
+            return "false order";
+        }
+        
+        //check, whether the listing is available in the period
+        if (!($booking_start >= $available_start && $booking_start <= $available_end) || !($booking_end >= $available_start) && ($booking_end <= $available_end)) {
+            return "false";
+        }
+
+        //check, whether the there are no other bookings in the period
+        $overlap = false;
+        foreach ($all_bookings as $old) {
+            $old_start = strtotime($old->booked_from);
+            $old_end = strtotime($old->booked_until);
+
+            if (($booking_start <= $old_end) && ($booking_end >= $old_start)) {
+                $overlap = true;
+                break;
+            }
+        }
+
+        if ($overlap) {
+            return "false";
+        }
+          
+        
         $booking = new Booking;
 
         $booking->user_id = $request->input("user_id");
@@ -36,6 +74,8 @@ class BookingController extends Controller
         $booking->status = $request->input("status");
 
         $booking->save();
+
+        return $availability;
     }
 
     /**
