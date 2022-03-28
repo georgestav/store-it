@@ -9,6 +9,9 @@ export default function BookingForm() {
 
     const user = useContext(UserContext);
 
+    const [availability, setAvailability] = useState(true);
+    const [refreshTrigger, setRefreshTrigger] = useState(false);
+
     const userId = user.user.id;
     
     // console.log(userId);
@@ -23,6 +26,11 @@ export default function BookingForm() {
         booked_until: "",
     })
 
+    //function to trigger a refresh
+    const forceRefresh = () => {
+        setRefreshTrigger(!refreshTrigger);
+    };
+
     // console.log(values);
     // console.log(userId);
 
@@ -32,7 +40,8 @@ export default function BookingForm() {
                 ...oldValues,
                 [event.target.name]: event.target.value
             }
-        })
+        });
+        setAvailability(true);
     }
 
     const handleSubmit = async (event) => {
@@ -40,10 +49,17 @@ export default function BookingForm() {
         const response = await axios.post("/api/bookings", values);
         const data = response.data;
         console.log(data);
+        if (data == false) {
+            setAvailability(false);
+            console.log("hey");
+            forceRefresh();
+        }
     }
 
 
     return (
+        <>
+        {availability ? <></> : <p><strong>Not available at this date</strong></p>}
         <form action="" method="post" onSubmit={handleSubmit}>
             <label htmlFor="book-from">Book from</label>
             <br />
@@ -55,5 +71,6 @@ export default function BookingForm() {
             <br />
             <button>Book</button>
         </form>
+        </>
     );
 }
