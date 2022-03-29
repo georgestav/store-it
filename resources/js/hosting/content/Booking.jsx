@@ -31,10 +31,12 @@ export default function Booking({ booking, forceRefresh }) {
                         <span>Location:</span> <span>{listing.address}</span>
                     </div>
                     <div className={styles.mybooking__description__detail}>
-                        <span>Booked from:</span> <span>{booked_from}</span>
+                        <span>Booked from:</span>{" "}
+                        <span>{booked_from.split(" ")[0]}</span>
                     </div>
                     <div className={styles.mybooking__description__detail}>
-                        <span>Booked until:</span> <span>{booked_until}</span>
+                        <span>Booked until:</span>{" "}
+                        <span>{booked_until.split(" ")[0]}</span>
                     </div>
                     <div className={styles.mybooking__description__detail}>
                         <span>Status:</span> <span>{status}</span>

@@ -34,3 +34,12 @@
     gap: 1rem;
     justify-content: center;
 }
+.details__location__container {
+    width: 30%;
+}
+
+.listing__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

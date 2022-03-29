@@ -18,10 +18,13 @@ function AvailableDates({ listingId }) {
     if (booking) {
         return (
             <div>
-                <div>Your Selected Storage at: {booking.address}</div>
+                <div>
+                    <strong>Your Selected Storage at: </strong>{" "}
+                    {booking.address}
+                </div>
                 <div>
                     <div>
-                        Is available from:
+                        <strong>Is available from: </strong>
                         {
                             booking.availabilities[0]?.available_from.split(
                                 " "
@@ -29,7 +32,7 @@ function AvailableDates({ listingId }) {
                         }
                     </div>
                     <div>
-                        Until:{" "}
+                        <strong>Until: </strong>{" "}
                         {
                             booking.availabilities[0]?.available_until.split(
                                 " "
@@ -38,7 +41,9 @@ function AvailableDates({ listingId }) {
                     </div>
                 </div>
                 <div>
-                    <div>It's booked the following dates:</div>
+                    <div>
+                        <strong>It's booked the following dates: </strong>
+                    </div>
                     <ul>
                         {booking.bookings.map((reserved) => {
                             return (

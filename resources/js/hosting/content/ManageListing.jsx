@@ -43,8 +43,8 @@ function ManageListing({ manageListing, switchListingManagement }) {
     } else {
         return (
             <div className={styles.listing__container}>
-                <h2 className={styles.heading}>Manage listing</h2>
-                <div>
+                <div className={styles.listing__heading}>
+                    <h2 className={styles.heading}>Manage listing</h2>
                     <img
                         src={
                             listing.pictures.length > 0
@@ -54,16 +54,17 @@ function ManageListing({ manageListing, switchListingManagement }) {
                         alt={listing.pictures[0]?.name}
                         className={styles.image}
                     />
+                    <Button
+                        variant="outlined"
+                        className={styles.goback}
+                        onClick={() => switchListingManagement(false)}
+                    >
+                        Go back
+                    </Button>
                 </div>
-                <Button
-                    className={styles.goback}
-                    onClick={() => switchListingManagement(false)}
-                >
-                    Go back
-                </Button>
                 <div>
                     <div className={styles.details}>
-                        <div>
+                        <div className={styles.details__location__container}>
                             <div>
                                 <h3>Location details</h3>
                                 <div>
