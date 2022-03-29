@@ -120,7 +120,7 @@ export default function DetailedInfo() {
                 reviews.length > 0 ?
                 (
                 reviews.map(review => (
-                    <Review key={review.id} review={review}/>
+                    <Review key={review.id} userId={user.user.id} review={review} refreshTrigger={refreshTrigger} setRefreshTrigger={setRefreshTrigger}/>
                 ))
                  ) :
                 <p>No reviews</p>
