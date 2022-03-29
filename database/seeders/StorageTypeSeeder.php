@@ -21,20 +21,23 @@ class StorageTypeSeeder extends Seeder
 
         $storage_types = [
             [
-                'name' => 'Attic'
+                'name' => 'attic'
             ],
             [
-                'name' => 'Basement'
+                'name' => 'basement'
             ],
             [
-                'name' => 'Room'
+                'name' => 'room'
             ],
             [
-                'name' => 'Garage'
+                'name' => 'garage'
             ],
             [
-                'name' => 'Locker'
+                'name' => 'locker'
             ],
+            [
+                "name" => "shed"
+            ]
         ];
 
         foreach ($storage_types as $storage_type) {
