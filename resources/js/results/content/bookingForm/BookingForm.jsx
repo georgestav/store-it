@@ -133,7 +133,7 @@ export default function BookingForm() {
                             />
                         </div>
                     </div>
-                    <Button variant="outlined" color="success">
+                    <Button variant="outlined" color="success" type="submit">
                         Book
                     </Button>
                 </form>
