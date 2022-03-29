@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./detailedInfo.module.css";
 import Rating from "@mui/material/Rating";
+import ReviewForm from "../reviewForm/ReviewForm";
+import { UserContext } from "../../../components/context/UserContext";
+import Review from "../review/Review";
 
 export default function DetailedInfo() {
+    
     const { id } = useParams();
 
-    // console.log(`api/listings/${id}`);
+    const user = useContext(UserContext);
 
-    // console.log(id);
+    const [bookings, setBookings] = useState([]);
+    const [form, setForm] = useState(false);
+    const [reviews, setReviews] = useState([]);
+    const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+    console.log(user);
 
     const [listing, setListing] = useState(null);
 
@@ -25,9 +34,30 @@ export default function DetailedInfo() {
         }
     };
 
+    //function that checks, whether there are some bookings made by the user
+    const fetchBookings = async () => {
+        const response = await axios.get(`/api/bookings/${user.user.id}/${id}`);
+        const data = response.data;
+        console.log("this", data);
+        setBookings(data);
+    }
+
+    //function that fetches reviews
+    const fetchReviews = async () => {
+        const response = await axios.get(`/api/reviews/${id}`);
+        const data = response.data;
+        console.log("reviews", data);
+        setReviews(data);
+    }
+
     useEffect(() => {
         fetchListing(id);
-    }, []);
+        fetchReviews();
+    }, [refreshTrigger]);
+
+    useEffect(() => {
+        user.user.id && fetchBookings();
+    }, [user]);
 
     return (
         <>
@@ -68,8 +98,34 @@ export default function DetailedInfo() {
                     <Link to={`/results/book/${listing.id}`}>
                         <button>Book</button>{" "}
                     </Link>
+                    <br />
                 </>
             ) : null}
+
+            {
+                user.user == "guest" ?
+                <p>Reviews can be written only by logged-in users.</p> :
+                (bookings.length > 0 ?
+                <button onClick={() => setForm(!form)}>Write a review</button> :
+                <p>You cannot write reviews, if you have not booked the listing in the past.</p>)
+            }            
+            
+            {
+                form ?
+                <ReviewForm refreshTrigger={refreshTrigger} setRefreshTrigger={setRefreshTrigger} listingId={id} userId={user.user.id} setForm={setForm} form={form}/> :
+                <></>
+            }
+
+            <h3>Reviews</h3>
+            {
+                reviews.length > 0 ?
+                (
+                reviews.map(review => (
+                    <Review key={review.id} review={review}/>
+                ))
+                 ) :
+                <p>No reviews</p>
+            }
         </>
     );
 }

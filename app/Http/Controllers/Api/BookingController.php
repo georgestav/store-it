@@ -9,6 +9,19 @@ use App\Models\Availability;
 
 class BookingController extends Controller
 {
+    
+    /**
+     * Get all bookings from booking table by a specific user
+     *
+     * @param  mixed $user_id
+     * @return void
+     */
+    public function indexUserBookings($user_id, $listing_id)
+    {
+        $bookings = Booking::where('user_id', $user_id)->where("listing_id", $listing_id)->get();
+        return $bookings;
+    }
+    
     /**
      * get all bookings from the bookings table
      * 
