@@ -1,11 +1,9 @@
 .navigation {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     background-color: rgb(238, 238, 238);
-    /* position: fixed; */
     width: 100%;
-    z-index: 1;
 }
 
 .left__container {

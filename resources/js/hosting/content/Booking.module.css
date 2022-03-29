@@ -1,0 +1,30 @@
+.mybooking__container {
+    display: flex;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    border-radius: 6px;
+}
+
+.mybooking__description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.mybooking__description__details {
+    display: flex;
+    flex-direction: column;
+}
+.mybooking__description__detail > :first-child {
+    font-weight: 600;
+}
+.mybooking__actions {
+    display: flex;
+    justify-content: space-between;
+}

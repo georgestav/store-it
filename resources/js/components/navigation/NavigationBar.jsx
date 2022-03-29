@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./NavigationBar.module.css";
 import AccountMenu from "./AccountMenu";
-import BurgerMenu from "./BurgerMenu";
 import logo from "./logo/storeit.svg";
 
 function NavigationBar({ setDisplay }) {
@@ -9,7 +8,7 @@ function NavigationBar({ setDisplay }) {
         <>
             <nav className={styles.navigation}>
                 <div className={styles.left__container}>
-                    <BurgerMenu />
+                    {/* <BurgerMenu /> */}
                     <a href="/">
                         <img src={logo} className={styles.logo} alt="logo" />
                     </a>
