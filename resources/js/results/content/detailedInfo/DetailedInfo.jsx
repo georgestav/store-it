@@ -21,7 +21,7 @@ export default function DetailedInfo() {
             const response = await axios.get(`api/listings/${id}`);
             const data = response.data;
             setListing(data);
-            // console.log(data);
+            console.log(data);
         } catch(error) {
             console.log(error);
         }
@@ -36,7 +36,7 @@ export default function DetailedInfo() {
         <>
             {listing ?
             <>
-            <img className={styles.image} src={listing.pictures.length > 0 ? `data:image/jpeg;base64,${listing.picutres[0].photo}` : ""} alt="" />
+            <img className={styles.image} src={listing.pictures.length > 0 ? `data:image/jpeg;base64,${listing.pictures[0].photo}` : "https://picsum.photos/200?blur=2"} alt="" />
             <Rating
                                 name="read-only"
                                 value={listing.rating}

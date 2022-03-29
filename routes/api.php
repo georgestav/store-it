@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Listings controller group
+Route::get("/listings/type/{type_id}", "Api\ListingController@indexType"); //getting listings based on type
 Route::get("/listings/{id}", "Api\ListingController@indexSingle"); //getting information of only one listing
 Route::get("/listings/{city?}/{cityCoordinates0?}/{cityCoordinates1?}", "Api\ListingController@index");
 Route::post("/listings", "Api\ListingController@store");

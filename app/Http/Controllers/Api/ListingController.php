@@ -9,6 +9,12 @@ use App\Models\Listing;
 class ListingController extends Controller
 {
 
+    //get listings based on a storage type
+    public function indexType($type_id)
+    {
+        
+    }
+    
     //get all listings from the listings table
     public function index($city = null, $cityCoordinates0 = null, $cityCoordinates1 = null)
     {

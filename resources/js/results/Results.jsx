@@ -6,6 +6,7 @@ import { UserContext } from "../components/context/UserContext";
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import DetailedInfo from "./content/detailedInfo/DetailedInfo";
 import BookingForm from "./content/bookingForm/BookingForm";
+import StorageTypes from "./storageTypes/StorageTypes";
 
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
                     <Route path="/results/listing/:id" element={<DetailedInfo />} />
                     <Route path="/results/:location" element={<Content display={display} setDisplay={setDisplay}/>} />
                     <Route path="/results/book/:listingId" element={<BookingForm />} />
+                    <Route path="/results/storage/:typeId" element={<StorageTypes />} />
                 </Routes>
 
                 <Footer />
