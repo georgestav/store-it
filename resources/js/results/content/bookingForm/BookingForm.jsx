@@ -43,9 +43,10 @@ export default function BookingForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const response = await axios.post("/api/bookings", values);
-        // setBookingSubmited(true); //if booking is successful set to true to display a status message
         const data = response.data;
-        console.log(data);
+        if (data.id) {
+            setBookingSubmited(true); //if booking is successful set to true to display a status message
+        }
         if (data == false) {
             setAvailability(false);
         }
