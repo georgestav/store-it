@@ -25,7 +25,7 @@ export default function Listing({ listing }) {
                 <div>Size: {size}</div>
             </div>
             <Link to={"/results/listing/" + id} className={styles.link}>
-                <Button variant="outlined">Book</Button>
+                <Button variant="outlined">Details</Button>
             </Link>
         </div>
     );

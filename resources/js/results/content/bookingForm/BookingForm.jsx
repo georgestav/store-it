@@ -4,6 +4,7 @@ import { UserContext } from "../../../components/context/UserContext";
 import axios from "axios";
 import AvailableDates from "./AvailableDates";
 import { Button } from "@mui/material";
+import styles from "./BookingForm.modules.css";
 
 export default function BookingForm() {
     const { listingId } = useParams();
@@ -59,7 +60,7 @@ export default function BookingForm() {
     };
 
     return (
-        <>
+        <div className={styles.bookingContainer}>
             <AvailableDates listingId={listingId} />
             {availability ? (
                 <></>
@@ -102,30 +103,41 @@ export default function BookingForm() {
                     </div>
                 </div>
             ) : (
-                <form action="" method="post" onSubmit={handleSubmit}>
-                    <label htmlFor="book-from">Book from</label>
-                    <br />
-                    <input
-                        id="book-from"
-                        name="booked_from"
-                        type="date"
-                        value={values.booked_from}
-                        onChange={handleChange}
-                    />
-                    <br />
-                    <label htmlFor="book-until">Book until</label>
-                    <br />
-                    <input
-                        type="date"
-                        name="booked_until"
-                        id="book-until"
-                        value={values.booked_until}
-                        onChange={handleChange}
-                    />
-                    <br />
-                    <button>Book</button>
+                <form
+                    className={styles.bookingForm}
+                    action=""
+                    method="post"
+                    onSubmit={handleSubmit}
+                >
+                    <h4>Book this space</h4>
+                    <div className={styles.inputs}>
+                        <div>
+                            <label htmlFor="book-from">From: </label>
+                            <input
+                                id="book-from"
+                                name="booked_from"
+                                type="date"
+                                value={values.booked_from}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="book-until">To: </label>
+
+                            <input
+                                type="date"
+                                name="booked_until"
+                                id="book-until"
+                                value={values.booked_until}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <Button variant="outlined" color="success">
+                        Book
+                    </Button>
                 </form>
             )}
-        </>
+        </div>
     );
 }
