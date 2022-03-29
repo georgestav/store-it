@@ -80,23 +80,22 @@ export default function ResultsList() {
     return (
         <>
             {!resultsLoaded ? (
-                <div>
+                <div className={styles.loader}>
                     <CircularProgress color="secondary" />
-                    <div>Loading listings...</div>
+                    <div>Loading Map...</div>
                 </div>
             ) : (
                 <div className={styles.container}>
-                    <div className={styles.container__results}>
-                        <p>Results</p>
-                        {results.map((listing) => (
-                            <Listing key={listing.id} listing={listing} />
-                        ))}
-                    </div>
                     <div className={styles.container__map}>
                         <Map
                             listings={results}
                             cityCoordinates={cityCoordinates}
                         />
+                    </div>
+                    <div className={styles.container__results}>
+                        {results.map((listing) => (
+                            <Listing key={listing.id} listing={listing} />
+                        ))}
                     </div>
                 </div>
             )}

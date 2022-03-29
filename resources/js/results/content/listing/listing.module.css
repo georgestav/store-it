@@ -1,9 +1,18 @@
-.container {
-    background-color: pink;
-}
-
 .link {
     text-decoration: none;
-    color:black;
+    /* color: #1976d2; */
+}
+.heading {
+    margin: 0;
+}
+.container {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1rem;
+    width: 49%;
 }
 
+.details {
+    display: flex;
+    flex-direction: column;
+}
