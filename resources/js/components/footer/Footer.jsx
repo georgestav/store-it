@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 //styles
 import styles from "./Footer.module.css";
+import { Button } from "@mui/material";
 
 function Footer() {
     return (
@@ -41,7 +42,13 @@ function Footer() {
                 </div>
             </div>
             <div className={styles.right__container}>
-                <button>Back to top</button>
+                <Button
+                    onClick={() => {
+                        window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                    }}
+                >
+                    Back to top
+                </Button>
                 <div>&copy; StoreIt {new Date().getFullYear()}</div>
             </div>
         </footer>

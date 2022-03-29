@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./map.module.css";
-import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import Rating from "@mui/material/Rating";
 
-export default function Map({listings, cityCoordinates}) {
-
-    const [map, setMap] = useState('something')
+export default function Map({ listings, cityCoordinates }) {
+    const [map, setMap] = useState("something");
 
     const [distance, setDistance] = useState(null);
-    
+
     const [limit, setLimit] = useState(0);
 
     const all = listings.length ? listings : null;
@@ -19,23 +18,21 @@ export default function Map({listings, cityCoordinates}) {
     let tempDistance = null;
 
     if (all) {
-        all.forEach(element => {
+        all.forEach((element) => {
             if (element.distance > tempDistance) {
                 tempDistance = element.distance;
             }
-        })
+        });
     }
 
     if (all && limit < 2) {
-        setDistance((tempDistance/1000).toFixed(2));
+        setDistance((tempDistance / 1000).toFixed(2));
         setLimit(limit + 1);
         // console.log(distance);
     }
 
     useEffect(() => {
-        
-        if (map !== "something") {            
-            
+        if (map !== "something") {
             switch (true) {
                 case distance > 7241:
                     map.setView(cityCoordinates, 1);
@@ -51,7 +48,7 @@ export default function Map({listings, cityCoordinates}) {
                     break;
                 case distance > 420:
                     map.setView(cityCoordinates, 5);
-                    break;    
+                    break;
                 case distance > 250:
                     map.setView(cityCoordinates, 6);
                     break;
@@ -78,34 +75,48 @@ export default function Map({listings, cityCoordinates}) {
                     break;
             }
         }
-
-    }, [distance, map])
-    
+    }, [distance, map]);
 
     return (
         <div>
-            <h2>Map</h2>
-            {cityCoordinates == false ?
-            null :
-            (<MapContainer className={styles.container} center={cityCoordinates} whenCreated={setMap} zoom={1}>
-                
-                <p>{distance}</p>
-                <p>{cityCoordinates}</p>
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <MarkerClusterGroup>
-                {listings.map((listing) => (
-                    <Marker key={listing.id} position={listing.coordinates.split(",")}>
-                        <Popup>
-                           {listing.address} <br /> <div className={styles.cluster}><Rating name="read-only" value={listing.rating} readOnly /></div> <br /> {(listing.distance/1000).toFixed(2)} km <br /> {listing.daily_rate} USD <br /> {listing.description}
-                        </Popup>
-                    </Marker>
-                ))}
-                </MarkerClusterGroup>
-                
-            </MapContainer>)}
+            {cityCoordinates == false ? null : (
+                <MapContainer
+                    className={styles.container}
+                    center={cityCoordinates}
+                    whenCreated={setMap}
+                    zoom={1}
+                >
+                    <p>{distance}</p>
+                    <p>{cityCoordinates}</p>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <MarkerClusterGroup>
+                        {listings.map((listing) => (
+                            <Marker
+                                key={listing.id}
+                                position={listing.coordinates.split(",")}
+                            >
+                                <Popup>
+                                    {listing.address} <br />{" "}
+                                    <div className={styles.cluster}>
+                                        <Rating
+                                            name="read-only"
+                                            value={listing.rating}
+                                            readOnly
+                                        />
+                                    </div>{" "}
+                                    <br />{" "}
+                                    {(listing.distance / 1000).toFixed(2)} km{" "}
+                                    <br /> {listing.daily_rate} USD <br />{" "}
+                                    {listing.description}
+                                </Popup>
+                            </Marker>
+                        ))}
+                    </MarkerClusterGroup>
+                </MapContainer>
+            )}
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Badge from "@mui/material/Badge";
 //styles
 import styles from "./Listing.module.css";

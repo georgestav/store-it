@@ -28,7 +28,6 @@ export default function DetailedInfo() {
             const response = await axios.get(`api/listings/${id}`);
             const data = response.data;
             setListing(data);
-            console.log(data);
         } catch (error) {
             console.log(error);
         }

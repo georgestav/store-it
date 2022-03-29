@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Bookings({ user, forceRefresh }) {
-    
     //states
     const [bookings, setBookings] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
@@ -29,7 +28,7 @@ export default function Bookings({ user, forceRefresh }) {
     }, [user]);
 
     return (
-        <>
+        <div className={styles.mybookings__container}>
             <h2>My bookings</h2>
             {!dataLoaded ? (
                 <div>
@@ -55,6 +54,6 @@ export default function Bookings({ user, forceRefresh }) {
                     ))}
                 </div>
             )}
-        </>
+        </div>
     );
 }
