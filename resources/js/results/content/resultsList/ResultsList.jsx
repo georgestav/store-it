@@ -6,10 +6,12 @@ import styles from "./resultsList.module.css";
 //custom components
 import Listing from "../listing/Listing";
 import Map from "../map/Map";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function ResultsList() {
 
     const [results, setResults] = useState([]);
+    const [resultsLoaded, setResultsLoaded] = useState(false);
     const [cityID, setCityID] = useState(null);
     const [cityCoordinates, setCityCoordinates] = useState([]);
 
@@ -75,6 +77,7 @@ export default function ResultsList() {
         setCityID(cityID)
         setCityCoordinates(cityCoordinates)
         setResults(data);
+        setResultsLoaded(true);
     }
 
     useEffect(() => {
@@ -86,7 +89,13 @@ export default function ResultsList() {
 
 
     return (
-        <div className={styles.container}>
+        <>
+        {!resultsLoaded ?
+            (<div>
+                    <CircularProgress color="secondary" />
+                    <div>Loading listings...</div>
+            </div>) :
+        (<div className={styles.container}>
             <div className={styles.container__results} >
                 <p>Results</p>
                 {results.map(listing => (                    
@@ -96,7 +105,9 @@ export default function ResultsList() {
             <div className={styles.container__map}>
                 <Map listings={results} cityCoordinates={cityCoordinates} />
             </div>
-        </div>
+        </div>)
+    }
+    </>
         
     );
 }
