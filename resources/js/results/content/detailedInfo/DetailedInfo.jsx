@@ -7,10 +7,6 @@ import Rating from "@mui/material/Rating";
 export default function DetailedInfo() {
     const { id } = useParams();
 
-    // console.log(`api/listings/${id}`);
-
-    // console.log(id);
-
     const [listing, setListing] = useState(null);
 
     //function that fetches the listing
@@ -19,7 +15,6 @@ export default function DetailedInfo() {
             const response = await axios.get(`api/listings/${id}`);
             const data = response.data;
             setListing(data);
-            console.log(data);
         } catch (error) {
             console.log(error);
         }

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding: 4rem 5px 1rem;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.329);
     min-width: 100%;
     bottom: 0px;
     background-color: rgb(238, 238, 238);

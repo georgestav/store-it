@@ -4,3 +4,4 @@ import Storeit from "./storeit/Storeit.jsx";
 import "./storeit.css";
 
 ReactDOM.render(<Storeit />, document.querySelector("#app"));
+console.log("Team Store it!");

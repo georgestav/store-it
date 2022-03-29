@@ -55,7 +55,7 @@ function Hosting() {
             console.error("User not Logged in", error.response.data.message);
         }
     };
-    console.log(user);
+
     return (
         <>
             <UserContext.Provider value={values}>
