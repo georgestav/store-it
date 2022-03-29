@@ -12,7 +12,14 @@ class ListingController extends Controller
     //get listings based on a storage type
     public function indexType($type_id)
     {
-        
+        $listings = Listing::query()->where("storage_type_id", $type_id)->get();
+
+        foreach ($listings as $listing) {
+            $listing->storage_type;
+            $listing->pictures;
+        }
+
+        return $listings;
     }
     
     //get all listings from the listings table
