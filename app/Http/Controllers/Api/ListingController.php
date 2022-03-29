@@ -23,9 +23,15 @@ class ListingController extends Controller
     }
     
     //get all listings from the listings table
-    public function index($city = null, $cityCoordinates0 = null, $cityCoordinates1 = null)
+    public function index($city = null, $cityCoordinates0 = null, $cityCoordinates1 = null, $type)
     {
-        $listings = Listing::query()->get();
+        if($type == 0) {
+            $listings = Listing::query()->get();
+        } else {
+            $listings = Listing::query()->where("storage_type_id", $type)->get();
+        }
+        
+        
 
         $distances = [];
 

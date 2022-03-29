@@ -9,6 +9,7 @@ function SearchForm({ setDisplaySearch }) {
     const [geolocationStatus, setGeolocationStatus] = useState(false);
     const [userCoordinates, setUserCoordinates] = useState({});
     const locationInput = useRef();
+    const [type, setType] = useState(0)
 
     //toggle geolocation status
     const geoTogglerHandler = () => {
@@ -41,9 +42,9 @@ function SearchForm({ setDisplaySearch }) {
             if (!geolocationStatus) {
                 // if geolocation is off, redirect with form input
                 window.location.href =
-                    "/results/" + locationInput.current.value;
+                    "/results/" + type + "/" + locationInput.current.value;
             } else if (geolocationStatus) {
-                window.location.href = `/results/coords,${userCoordinates.latitude},${userCoordinates.longitude}`;
+                window.location.href = `/results/${type}/coords,${userCoordinates.latitude},${userCoordinates.longitude}`;
             } else {
                 throw new Error(
                     "Could not use search, please report it to our team!"
@@ -78,21 +79,23 @@ function SearchForm({ setDisplaySearch }) {
                 ) : (
                     <></>
                 )}
-                <div className={styles.location__and__date}>
+                {/* <div className={styles.location__and__date}>
                     <label htmlFor="fromDate">From date</label>
                     <input id="fromDate" type="date" disabled />
                 </div>
                 <div className={styles.location__and__date}>
                     <label htmlFor="untilDate">Until Date</label>
                     <input id="untilDate" type="date" disabled />
-                </div>
+                </div> */}
 
-                <select name="" id="" disabled>
-                    <option value="">Attic</option>
-                    <option value="">Shed</option>
-                    <option value="">Garage</option>
-                    <option value="">Room</option>
-                    <option value="">Locker</option>
+                <select name="" id="" value={type} onChange={(e) => setType(e.target.value)}>
+                    <option value="0">All</option>
+                    <option value="1">Attic</option>
+                    <option value="6">Shed</option>
+                    <option value="4">Garage</option>
+                    <option value="3">Room</option>
+                    <option value="2">Basement</option>
+                    <option value="5">Locker</option>
                 </select>
                 <div className={styles.buttons}>
                     <Button

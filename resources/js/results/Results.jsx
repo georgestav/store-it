@@ -43,7 +43,7 @@ export default function App() {
                 <Routes>
                     
                     <Route path="/results/listing/:id" element={<DetailedInfo />} />
-                    <Route path="/results/:location" element={<Content display={display} setDisplay={setDisplay}/>} />
+                    <Route path="/results/:type/:location" element={<Content display={display} setDisplay={setDisplay}/>} />
                     <Route path="/results/book/:listingId" element={<BookingForm />} />
                     <Route path="/results/storage/:typeId" element={<StorageTypes />} />
                 </Routes>

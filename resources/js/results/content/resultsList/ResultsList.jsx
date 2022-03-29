@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 //css
 import styles from "./resultsList.module.css";
 //custom components
@@ -11,6 +12,8 @@ export default function ResultsList() {
     const [results, setResults] = useState([]);
     const [cityID, setCityID] = useState(null);
     const [cityCoordinates, setCityCoordinates] = useState([]);
+
+    const {type} = useParams();
 
     //accessing the search from the url
     const path = location.pathname;
@@ -66,7 +69,7 @@ export default function ResultsList() {
         const cityID = await fetchCityId(search);
         const cityCoordinates = await fetchCityCoordinates(search);
 
-        const response = await axios.get(`api/listings/${cityID}/${cityCoordinates[0]}/${cityCoordinates[1]}`);
+        const response = await axios.get(`api/listings/${cityID}/${cityCoordinates[0]}/${cityCoordinates[1]}/${type}`);
         const data = response.data;
         console.log('function',response);
         setCityID(cityID)
