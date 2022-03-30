@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../../components/context/UserContext";
 import axios from "axios";
@@ -58,6 +58,12 @@ export default function BookingForm() {
 
         forceRefresh();
     };
+
+    useEffect(() => {
+        return () => {
+            setErrors({});
+          };
+    }, []);
 
     return (
         <div className={styles.bookingContainer}>

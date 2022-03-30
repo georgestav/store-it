@@ -7,10 +7,14 @@ import ReviewForm from "../reviewForm/ReviewForm";
 import { UserContext } from "../../../components/context/UserContext";
 import Review from "../review/Review";
 import { Button } from "@mui/material";
+import LoginForm from "../../../components/loginFrom/LoginForm";
+import RegisterForm from "../../../components/registerForm/RegisterForm";
 
-export default function DetailedInfo() {
+export default function DetailedInfo({ display, setDisplay }) {
+    
     const { id } = useParams();
 
+    //use userContext
     const user = useContext(UserContext);
 
     const [bookings, setBookings] = useState([]);
@@ -54,6 +58,22 @@ export default function DetailedInfo() {
         user.user.id && fetchBookings();
     }, [user]);
 
+    if (display === "login") {
+        return (
+            <>
+                <LoginForm
+                    setDisplay={setDisplay}
+                    values={{ display, setDisplay }}
+                />
+            </>
+        );
+    } else if (display === "register") {
+        return (
+            <>
+                <RegisterForm setDisplay={setDisplay} />
+            </>
+        );
+    } else {
     return (
         <div className={styles.detailed__info}>
             {listing ? (
@@ -167,4 +187,5 @@ export default function DetailedInfo() {
             )}
         </div>
     );
+        }
 }
