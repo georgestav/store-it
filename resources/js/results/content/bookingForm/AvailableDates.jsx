@@ -6,8 +6,9 @@ function AvailableDates({ listingId }) {
     const [listing, setListing] = useState(null);
 
     const fetchListing = async () => {
-        const request = await axios.get(`/api/listings/${listingId}`);
+        const request = await axios.get(`/api/listings/${listingId}/accepted`);
         const response = await request.data;
+        // console.log(response);
         setListing(response);
     };
 

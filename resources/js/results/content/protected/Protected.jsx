@@ -7,7 +7,7 @@ import RegisterForm from "../../../components/registerForm/RegisterForm";
 
 export default function Protected({user, display, setDisplay}) {
 
-    console.log(user);
+    // console.log(user);
 
     if (display === "login") {
         return (
@@ -29,7 +29,7 @@ export default function Protected({user, display, setDisplay}) {
     if (user == "guest") {
         return <LoginForm/>;
     } else {
-        return <BookingForm />;
+        return <BookingForm/>;
     }
 }
 }

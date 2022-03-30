@@ -8,22 +8,31 @@ import styles from "./BookingForm.modules.css";
 
 export default function BookingForm() {
     const { listingId } = useParams();
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const [availability, setAvailability] = useState(true);
     const [refreshTrigger, setRefreshTrigger] = useState(false);
     const [invalidDates, setInvalidDates] = useState(false);
     const [bookingSubmited, setBookingSubmited] = useState(false); //default false
 
-    const userId = user.user.id;
 
     const [values, setValues] = useState({
-        user_id: userId,
+        user_id: null,
         listing_id: listingId,
         status: "pending",
         booked_from: "",
         booked_until: "",
     });
+
+    
+    useEffect(() => {
+       setValues({
+           ...values,
+           user_id: user.id,
+       })
+    }, [user])
+
+    console.log(values);
 
     //function to trigger a refresh
     const forceRefresh = () => {

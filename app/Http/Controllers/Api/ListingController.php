@@ -89,18 +89,24 @@ class ListingController extends Controller
      * Accessing one specific listing by id
      *
      * @param $id
+     * @param $accepted (only accepted bookings)
      * @return array
      */
-    public function indexSingle($id)
+    public function indexSingle($id, $accepted = null)
     {
         $listing = Listing::findOrFail($id);
+
+        if ($accepted === null) {
+            $listing->bookings = $listing->bookings()->orderBy("booked_from", "asc")->get();
+        } else {
+            $listing->bookings = $listing->bookings()->where("status", "accepted")->orderBy("booked_from", "asc")->get();
+        }
 
         $listing->country;
         $listing->city;
         $listing->pictures;
         $listing->storage_type;
         $listing->availabilities;
-        $listing->bookings;
         $listing->user;
         $listing->user->person;
 

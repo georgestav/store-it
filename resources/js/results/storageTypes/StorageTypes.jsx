@@ -22,7 +22,7 @@ export default function StorageTypes({ display, setDisplay }) {
     const fetchListings = async(typeId) => {
         const response = await axios.get(`api/listings/type/${typeId}`);
         const data = response.data;
-        console.log(data);
+        // console.log(data);
         setListings(data);
         setListingsLoaded(true);
     }
