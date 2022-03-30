@@ -186,37 +186,20 @@ function ManageListing({ manageListing, switchListingManagement }) {
                             </div>
                             <div>
                                 <h4 className={styles.title}>Reviews:&nbsp;</h4>
-                                <ul>
-                                    <li>
-                                        Lorem ipsum dolor sit, amet consectetur
-                                        adipisicing elit. Blanditiis saepe sint
-                                        rem voluptate magnam ad necessitatibus
-                                        dignissimos! Assumenda fugiat officiis
-                                        vel, odit libero deleniti aspernatur
-                                        reprehenderit voluptatibus? Enim, saepe
-                                        expedita? Eius nesciunt dolorum,
-                                        accusamus dolore ad nemo distinctio
-                                        minima non sint. Excepturi quia soluta
-                                        molestiae quisquam atque distinctio.
-                                        Quisquam doloremque, facere error vitae
-                                        doloribus corporis laborum molestias
-                                        voluptates possimus explicabo.
-                                    </li>
-                                    <li>
-                                        Lorem ipsum dolor sit, amet consectetur
-                                        adipisicing elit. Blanditiis saepe sint
-                                        rem voluptate magnam ad necessitatibus
-                                        dignissimos! Assumenda fugiat officiis
-                                        vel, odit libero deleniti aspernatur
-                                        reprehenderit voluptatibus? Enim, saepe
-                                        expedita? Eius nesciunt dolorum,
-                                        accusamus dolore ad nemo distinctio
-                                        minima non sint. Excepturi quia soluta
-                                        molestiae quisquam atque distinctio.
-                                        Quisquam doloremque, facere error vitae
-                                        doloribus corporis laborum molestias
-                                        voluptates possimus explicabo.
-                                    </li>
+                                <ul className={styles.reviews__list}>
+                                    {listing.reviews.map((review) => {
+                                        return (
+                                            <li key={review.id}>
+                                                {review.text}
+                                                <br />
+                                                <strong
+                                                    className={styles.reviewer}
+                                                >
+                                                    by {review.user.name}
+                                                </strong>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </div>
                         </div>
