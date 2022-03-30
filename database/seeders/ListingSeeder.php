@@ -29,7 +29,8 @@ class ListingSeeder extends Seeder
                 "description" => "We have one spot open in our private garage. It’s a safe and great neighborhood. It can fit approx 20-30 boxes or 1 car. It's a private space, clean and quiet.",
                 "size" => 20,
                 "daily_rate" => 1.3,
-                "rating" => 3,
+                "rating" => 0,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 5,
@@ -41,7 +42,8 @@ class ListingSeeder extends Seeder
                 "description" => "We have a few spaces at our apartment, we have security and someone is offen here to watch.",
                 "size" => 43,
                 "daily_rate" => 2.7,
-                "rating" => 3,
+                "rating" => 0,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 2,
@@ -53,7 +55,8 @@ class ListingSeeder extends Seeder
                 "description" => "This garage is perfect for all sizes. Located in the heart of Deep Ellum, walking distance from a variety of restaurants and local shops/attractions. I know it must b a hassle finding parking meters and wondering if your car will be there when you get back. This space will give you security and lots of free time to do what you want, when you want.",
                 "size" => 21,
                 "daily_rate" => 2,
-                "rating" => 3,
+                "rating" => 0,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 1,
@@ -65,7 +68,8 @@ class ListingSeeder extends Seeder
                 "description" => "Mi casa es tu casa.",
                 "size" => 15,
                 "daily_rate" => 7.8,
-                "rating" => 3,
+                "rating" => 0,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 5,
@@ -77,7 +81,8 @@ class ListingSeeder extends Seeder
                 "description" => "This space can accommodate a large car or truck, and is in the front of my house. I'm usually home and can keep watch of your property. Access 24/7. Just let me know what you're looking to store and we can make it happen. Contact me for details.",
                 "size" => 23,
                 "daily_rate" => 0.9,
-                "rating" => 3,
+                "rating" => 0,
+                "reviews" => 0,
             ],
         ];
 
@@ -93,6 +98,8 @@ class ListingSeeder extends Seeder
                 'size' => $listing['size'],
                 'daily_rate' => $listing['daily_rate'],
                 'rating' => $listing['rating'],
+                "review_count" => $listing["reviews"],
+                
             ]);
         }
     }

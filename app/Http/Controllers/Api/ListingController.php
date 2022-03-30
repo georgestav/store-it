@@ -127,6 +127,7 @@ class ListingController extends Controller
         $listing->size = $request->input("size");
         $listing->daily_rate = $request->input("daily_rate");
         $listing->rating = $request->rating;
+        $listing->review_count = 0;
 
         $listing->save();
         return response($listing);
@@ -165,5 +166,48 @@ class ListingController extends Controller
 
         $listing->delete();
         return response('Record Deleted');
+    }
+
+    /**
+     * updating a rating for a specific listing from the listings table
+     *
+     * @param $listing_id
+     * @param $operation (plus or minus)
+     */
+    
+    public function updateRating($listing_id, $operation)
+    {
+        $listing = Listing::findOrFail($listing_id);
+
+        //updating the count of reviews
+        $count = intval($listing->review_count);
+
+        if ($operation == "plus") {
+            $count++;
+        } elseif ($operation == "minus") {
+            $count--;
+        }
+
+        $listing->review_count = $count;
+
+        //updating the rating
+        $reviews = $listing->reviews;
+
+        $total = 0;
+
+        foreach($reviews as $review) {
+            $total += intval($review->score);
+        };
+
+        if ($count == 0) {
+            $listing->rating = 0;
+        } else {
+            $listing->rating = round($total / $count);
+        }
+        
+
+        $listing->save();
+
+        return $listing;
     }
 }

@@ -106,6 +106,7 @@ export default function Map({ listings, cityCoordinates }) {
                                             value={listing.rating}
                                             readOnly
                                         />
+                                    <div>Number of reviews: {listing.review_count}</div>
                                     </div>{" "}
                                     <br />{" "}
                                     {(listing.distance / 1000).toFixed(2)} km{" "}

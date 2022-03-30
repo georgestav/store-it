@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('address');
             $table->text("description");
             $table->integer("size");
+            $table->integer("review_count");
             $table->float("daily_rate", 8, 2);
             $table->integer("rating");
             $table->timestamps();
