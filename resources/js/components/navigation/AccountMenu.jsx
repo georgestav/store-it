@@ -33,9 +33,9 @@ export default function AccountMenu({ setDisplay }) {
                     textAlign: "center",
                 }}
             >
-                <Typography sx={{ minWidth: 100 }} style={{ padding: 10 }}>
+                {/* <Typography sx={{ minWidth: 100 }} style={{ padding: 10 }}>
                     Become a host
-                </Typography>
+                </Typography> */}
                 {user.name ? (
                     <Typography sx={{ minWidth: 100 }}>
                         Welcome {user.name}

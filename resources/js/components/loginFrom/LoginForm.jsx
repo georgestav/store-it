@@ -70,14 +70,14 @@ export default function LoginForm({ setDisplay }) {
                         required
                     />
                 </div>
-                <div>
+                {/* <div>
                     <label htmlFor="rememberme">Remember me</label>
                     <input
                         type="checkbox"
                         id="rememberme"
                         onClick={() => setRememberMe(!rememberMe)}
                     />
-                </div>
+                </div> */}
                 <div className={styles.buttons}>
                         <Button variant="contained" onClick={() => setDisplay("")}>Back</Button>
                         <Button variant="contained" type="submit">
