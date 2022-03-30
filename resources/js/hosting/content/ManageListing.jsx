@@ -32,7 +32,6 @@ function ManageListing({ manageListing, switchListingManagement }) {
         setListings(await fetchListing(manageListing.id)); //fetch listing data on use
     }, [triggerRefresh]);
 
-    console.log(listing);
     if (!listing) {
         return (
             <div>
