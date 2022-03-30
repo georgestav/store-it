@@ -3,30 +3,30 @@ import React, { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function AvailableDates({ listingId }) {
-    const [booking, setBooking] = useState(null);
+    const [listing, setListing] = useState(null);
 
-    const fetchBooking = async () => {
+    const fetchListing = async () => {
         const request = await axios.get(`/api/listings/${listingId}`);
         const response = await request.data;
-        setBooking(response);
+        setListing(response);
     };
 
     useEffect(() => {
-        fetchBooking();
+        fetchListing();
     }, []);
 
-    if (booking) {
+    if (listing) {
         return (
             <div>
                 <div>
                     <strong>Your Selected Storage at: </strong>{" "}
-                    {booking.address}
+                    {listing.address}
                 </div>
                 <div>
                     <div>
                         <strong>Is available from: </strong>
                         {
-                            booking.availabilities[0]?.available_from.split(
+                            listing.availabilities[0]?.available_from.split(
                                 " "
                             )[0]
                         }
@@ -34,7 +34,7 @@ function AvailableDates({ listingId }) {
                     <div>
                         <strong>Until: </strong>{" "}
                         {
-                            booking.availabilities[0]?.available_until.split(
+                            listing.availabilities[0]?.available_until.split(
                                 " "
                             )[0]
                         }
@@ -45,7 +45,7 @@ function AvailableDates({ listingId }) {
                         <strong>It's booked the following dates: </strong>
                     </div>
                     <ul>
-                        {booking.bookings.map((reserved) => {
+                        {listing.bookings.map((reserved) => {
                             return (
                                 <li key={reserved.id}>
                                     <div>

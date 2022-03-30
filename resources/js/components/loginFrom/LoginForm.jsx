@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -36,9 +36,15 @@ export default function LoginForm({ setDisplay }) {
             setDisplay(""); //set display to empty to switch back to main content
         } catch (error) {
             setErrors(error.response?.data.errors); //accessing the error messages
-            console.error(error.response?.data.message);
+            // console.error(error?.response?.data.message);
         }
     };
+
+    useEffect(() => {
+        return () => {
+            setErrors({});
+          };
+    }, [])
 
     return (
         <div className={styles.body}>

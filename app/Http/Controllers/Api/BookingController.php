@@ -38,6 +38,7 @@ class BookingController extends Controller
      * add new booking to the bookings table
      *
      * @param  \Illuminate\Http\Request  $request
+     * 
      */
     public function store(Request $request)
     {
@@ -51,17 +52,17 @@ class BookingController extends Controller
         $booking_start = strtotime($request->input("booked_from"));
         $booking_end = strtotime($request->input("booked_until"));
 
-        //check, whether the start date is before the end date
+        //check, whether the start date is before the end date -> return false if booking start is after booking end
         if ($booking_start > $booking_end) {
             return "false order";
         }
 
-        //check, whether the listing is available in the period
+        //check, whether the listing is available in the period -> return false if booking is not withing availability range
         if (!($booking_start >= $available_start && $booking_start <= $available_end) || !($booking_end >= $available_start) && ($booking_end <= $available_end)) {
             return "false";
         }
 
-        //check, whether the there are no other bookings in the period
+        //check, whether the there are no other bookings in the period -> return false if the booking overlaps with other accepted bookings
         $overlap = false;
         foreach ($all_bookings as $old) {
             $old_start = strtotime($old->booked_from);
