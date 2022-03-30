@@ -113,7 +113,6 @@ function PersonalDetails({ userid }) {
     };
 
     const formChangeHandler = (e) => {
-        console.log(formData);
         setFormData((previous_values) => {
             return {
                 ...previous_values,
