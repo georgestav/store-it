@@ -21,17 +21,17 @@ class ListingController extends Controller
 
         return $listings;
     }
-    
+
     //get all listings from the listings table
     public function index($city = null, $cityCoordinates0 = null, $cityCoordinates1 = null, $type)
     {
-        if($type == 0) {
+        if ($type == 0) {
             $listings = Listing::query()->get();
         } else {
             $listings = Listing::query()->where("storage_type_id", $type)->get();
         }
-        
-        
+
+
 
         $distances = [];
 
@@ -103,6 +103,12 @@ class ListingController extends Controller
         $listing->bookings;
         $listing->user;
         $listing->user->person;
+        $listing->reviews;
+
+        foreach ($listing->reviews as $review) {
+            $review->user;
+        }
+
 
         return response($listing);
     }
@@ -174,7 +180,7 @@ class ListingController extends Controller
      * @param $listing_id
      * @param $operation (plus or minus)
      */
-    
+
     public function updateRating($listing_id, $operation)
     {
         $listing = Listing::findOrFail($listing_id);
@@ -195,7 +201,7 @@ class ListingController extends Controller
 
         $total = 0;
 
-        foreach($reviews as $review) {
+        foreach ($reviews as $review) {
             $total += intval($review->score);
         };
 
@@ -204,7 +210,7 @@ class ListingController extends Controller
         } else {
             $listing->rating = round($total / $count);
         }
-        
+
 
         $listing->save();
 
