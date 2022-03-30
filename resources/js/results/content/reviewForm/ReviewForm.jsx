@@ -20,6 +20,7 @@ export default function ReviewForm({listingId, userId, setForm, form, setRefresh
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await axios.post(`/api/reviews/${listingId}`, values);
+        const update = await axios.post(`api/listings/rating/${listingId}/plus`);
         const data = response.data;
         console.log(data);
         setForm(!form);

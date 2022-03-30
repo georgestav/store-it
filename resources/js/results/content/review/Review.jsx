@@ -9,6 +9,7 @@ export default function Review({review, refreshTrigger, setRefreshTrigger, userI
     //deleting the specific review
     const deleteReview = async () => {
         const response = await axios.delete(`api/reviews/${id}`);
+        const update = await axios.post(`api/listings/rating/${listingId}/minus`);
         const data = response.data;
         console.log(data);
     }

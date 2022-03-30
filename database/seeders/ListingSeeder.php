@@ -30,6 +30,7 @@ class ListingSeeder extends Seeder
                 "size" => 20,
                 "daily_rate" => 1.3,
                 "rating" => 3,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 5,
@@ -42,6 +43,7 @@ class ListingSeeder extends Seeder
                 "size" => 43,
                 "daily_rate" => 2.7,
                 "rating" => 3,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 2,
@@ -54,6 +56,7 @@ class ListingSeeder extends Seeder
                 "size" => 21,
                 "daily_rate" => 2,
                 "rating" => 3,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 1,
@@ -66,6 +69,7 @@ class ListingSeeder extends Seeder
                 "size" => 15,
                 "daily_rate" => 7.8,
                 "rating" => 3,
+                "reviews" => 0,
             ],
             [
                 'user_id' => 5,
@@ -78,6 +82,7 @@ class ListingSeeder extends Seeder
                 "size" => 23,
                 "daily_rate" => 0.9,
                 "rating" => 3,
+                "reviews" => 0,
             ],
         ];
 
@@ -93,6 +98,8 @@ class ListingSeeder extends Seeder
                 'size' => $listing['size'],
                 'daily_rate' => $listing['daily_rate'],
                 'rating' => $listing['rating'],
+                "review_count" => $listing["reviews"],
+                
             ]);
         }
     }
