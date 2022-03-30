@@ -6,6 +6,7 @@ import Rating from "@mui/material/Rating";
 import ReviewForm from "../reviewForm/ReviewForm";
 import { UserContext } from "../../../components/context/UserContext";
 import Review from "../review/Review";
+import { Button } from "@mui/material";
 
 export default function DetailedInfo() {
     const { id } = useParams();
@@ -74,39 +75,61 @@ export default function DetailedInfo() {
                         />
                         <div>Number of reviews: {listing.review_count}</div>
                     </div>
-                    <h3>Location: {listing.address}</h3>
-                    {listing.user.person != null ? (
+                    <div className={styles.listing__details}>
                         <div>
-                            Name: {listing.user.person.name}{" "}
-                            {listing.user.person.surname}
+                            <strong>Location:</strong> {listing.address}
                         </div>
-                    ) : (
-                        <div>By user: {listing.user.name}</div>
-                    )}
-                    <div>Email: {listing.user.email}</div>
-                    {listing.user.person != null &&
-                    listing.user.person != null ? (
-                        <div>Phone: {listing.user.person.phone}</div>
-                    ) : (
-                        <></>
-                    )}
-                    <div>City: {listing.city.name}</div>
-                    <div>Country: {listing.country.name}</div>
-                    <div>Daily rate: {listing.daily_rate}</div>
-                    <div>Description: {listing.description}</div>
-                    <div>Rating: {listing.rating}</div>
-                    <div>Size: {listing.size}m2</div>
-                    <Link to={`/results/book/${listing.id}`}>
-                        <button>Book</button>{" "}
-                    </Link>
-                    <br />
+                        {listing.user.person != null ? (
+                            <div>
+                                <strong>Name:</strong>{" "}
+                                {listing.user.person.name}{" "}
+                                {listing.user.person.surname}
+                            </div>
+                        ) : (
+                            <div>
+                                <strong>By user:</strong> {listing.user.name}
+                            </div>
+                        )}
+                        <div>
+                            <strong>Email:</strong> {listing.user.email}
+                        </div>
+                        {listing.user.person != null &&
+                        listing.user.person != null ? (
+                            <div>
+                                <strong>Phone:</strong>{" "}
+                                {listing.user.person.phone}
+                            </div>
+                        ) : (
+                            <></>
+                        )}
+                        <div>
+                            <strong>City:</strong> {listing.city.name}
+                        </div>
+                        <div>
+                            <strong>Country:</strong> {listing.country.name}
+                        </div>
+                        <div>
+                            <strong>Daily rate:</strong> {listing.daily_rate}
+                        </div>
+                        <div>
+                            <strong>Description:</strong> {listing.description}
+                        </div>
+                        <div>
+                            <strong>Size:</strong> {listing.size} m2
+                        </div>
+                        <Link to={`/results/book/${listing.id}`}>
+                            <Button color="success" variant="outlined">
+                                Book
+                            </Button>{" "}
+                        </Link>
+                    </div>
                 </div>
             ) : null}
 
             {user.user == "guest" ? (
                 <div>Reviews can be written only by logged-in users.</div>
             ) : bookings.length > 0 ? (
-                <button onClick={() => setForm(!form)}>Write a review</button>
+                <Button onClick={() => setForm(!form)}>Write a review</Button>
             ) : (
                 <div>
                     You cannot write reviews, if you have not booked the listing
