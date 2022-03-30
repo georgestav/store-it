@@ -8,7 +8,6 @@ import { UserContext } from "../../../components/context/UserContext";
 import Review from "../review/Review";
 
 export default function DetailedInfo() {
-    
     const { id } = useParams();
 
     const user = useContext(UserContext);
@@ -17,8 +16,6 @@ export default function DetailedInfo() {
     const [form, setForm] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [refreshTrigger, setRefreshTrigger] = useState(false);
-
-    console.log(user);
 
     const [listing, setListing] = useState(null);
 
@@ -37,17 +34,15 @@ export default function DetailedInfo() {
     const fetchBookings = async () => {
         const response = await axios.get(`/api/bookings/${user.user.id}/${id}`);
         const data = response.data;
-        console.log("this", data);
         setBookings(data);
-    }
+    };
 
     //function that fetches reviews
     const fetchReviews = async () => {
         const response = await axios.get(`/api/reviews/${id}`);
         const data = response.data;
-        console.log("reviews", data);
         setReviews(data);
-    }
+    };
 
     useEffect(() => {
         fetchListing(id);
@@ -59,9 +54,9 @@ export default function DetailedInfo() {
     }, [user]);
 
     return (
-        <>
+        <div className={styles.detailed__info}>
             {listing ? (
-                <>
+                <div className={styles.listing__info}>
                     <img
                         className={styles.image}
                         src={
@@ -71,61 +66,82 @@ export default function DetailedInfo() {
                         }
                         alt=""
                     />
-                    <Rating name="read-only" value={listing.rating} readOnly />
-                    <div>Number of reviews: {listing.review_count}</div>
+                    <div>
+                        <Rating
+                            name="read-only"
+                            value={listing.rating}
+                            readOnly
+                        />
+                        <div>Number of reviews: {listing.review_count}</div>
+                    </div>
                     <h3>Location: {listing.address}</h3>
                     {listing.user.person != null ? (
-                        <p>
+                        <div>
                             Name: {listing.user.person.name}{" "}
                             {listing.user.person.surname}
-                        </p>
+                        </div>
                     ) : (
-                        <p>By user: {listing.user.name}</p>
+                        <div>By user: {listing.user.name}</div>
                     )}
-                    <p>Email: {listing.user.email}</p>
+                    <div>Email: {listing.user.email}</div>
                     {listing.user.person != null &&
                     listing.user.person != null ? (
-                        <p>Phone: {listing.user.person.phone}</p>
+                        <div>Phone: {listing.user.person.phone}</div>
                     ) : (
                         <></>
                     )}
-                    <p>City: {listing.city.name}</p>
-                    <p>Country: {listing.country.name}</p>
-                    <p>Daily rate: {listing.daily_rate}</p>
-                    <p>Description: {listing.description}</p>
-                    <p>Rating: {listing.rating}</p>
-                    <p>Size: {listing.size}m2</p>
+                    <div>City: {listing.city.name}</div>
+                    <div>Country: {listing.country.name}</div>
+                    <div>Daily rate: {listing.daily_rate}</div>
+                    <div>Description: {listing.description}</div>
+                    <div>Rating: {listing.rating}</div>
+                    <div>Size: {listing.size}m2</div>
                     <Link to={`/results/book/${listing.id}`}>
                         <button>Book</button>{" "}
                     </Link>
                     <br />
-                </>
+                </div>
             ) : null}
 
-            {
-                user.user == "guest" ?
-                <p>Reviews can be written only by logged-in users.</p> :
-                (bookings.length > 0 ?
-                <button onClick={() => setForm(!form)}>Write a review</button> :
-                <p>You cannot write reviews, if you have not booked the listing in the past.</p>)
-            }            
-            
-            {
-                form ?
-                <ReviewForm refreshTrigger={refreshTrigger} setRefreshTrigger={setRefreshTrigger} listingId={id} userId={user.user.id} setForm={setForm} form={form}/> :
+            {user.user == "guest" ? (
+                <div>Reviews can be written only by logged-in users.</div>
+            ) : bookings.length > 0 ? (
+                <button onClick={() => setForm(!form)}>Write a review</button>
+            ) : (
+                <div>
+                    You cannot write reviews, if you have not booked the listing
+                    in the past.
+                </div>
+            )}
+
+            {form ? (
+                <ReviewForm
+                    refreshTrigger={refreshTrigger}
+                    setRefreshTrigger={setRefreshTrigger}
+                    listingId={id}
+                    userId={user.user.id}
+                    setForm={setForm}
+                    form={form}
+                />
+            ) : (
                 <></>
-            }
+            )}
 
             <h3>Reviews</h3>
-            {
-                reviews.length > 0 ?
-                (
-                reviews.map(review => (
-                    <Review listingId={id} key={review.id} userId={user.user.id} review={review} refreshTrigger={refreshTrigger} setRefreshTrigger={setRefreshTrigger}/>
+            {reviews.length > 0 ? (
+                reviews.map((review) => (
+                    <Review
+                        listingId={id}
+                        key={review.id}
+                        userId={user.user.id}
+                        review={review}
+                        refreshTrigger={refreshTrigger}
+                        setRefreshTrigger={setRefreshTrigger}
+                    />
                 ))
-                 ) :
-                <p>No reviews</p>
-            }
-        </>
+            ) : (
+                <div>No reviews</div>
+            )}
+        </div>
     );
 }
