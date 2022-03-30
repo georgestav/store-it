@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function ListingCard({listing}) {
     
-    const {id,address, pictures, daily_rate: dailyRate, description, rating, size, storage_type: storageType} = listing;
+    const {review_count, id, address, pictures, daily_rate: dailyRate, description, rating, size, storage_type: storageType} = listing;
 
     return (
         <div className={styles.container}>
@@ -17,6 +17,7 @@ export default function ListingCard({listing}) {
                                 value={rating}
                                 readOnly
                             />
+            <div>Number of reviews: {review_count}</div>
             <h3>Location: {address}</h3>
             <p><strong>Daily rate:</strong> {dailyRate}</p>
             <p><strong>Size:</strong> {size}m2</p>

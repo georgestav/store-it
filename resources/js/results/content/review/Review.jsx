@@ -2,7 +2,7 @@ import React from "react";
 import Rating from "@mui/material/Rating";
 import axios from "axios";
 
-export default function Review({review, refreshTrigger, setRefreshTrigger, userId}) {
+export default function Review({review, refreshTrigger, setRefreshTrigger, userId, listingId}) {
     
     const {id, score, text, user, updated_at: updatedAt, user_id} = review;
 
@@ -12,6 +12,7 @@ export default function Review({review, refreshTrigger, setRefreshTrigger, userI
         const update = await axios.post(`api/listings/rating/${listingId}/minus`);
         const data = response.data;
         console.log(data);
+        setRefreshTrigger(!refreshTrigger)
     }
 
     return (
@@ -21,7 +22,7 @@ export default function Review({review, refreshTrigger, setRefreshTrigger, userI
             <Rating name="read-only" value={score} readOnly />
             <p>{text}</p>
             { userId == user_id ?
-            <button onClick={() => {deleteReview(), setRefreshTrigger(!refreshTrigger)}}>Delete</button> :
+            <button onClick={deleteReview}>Delete</button> :
             <></>
             }
         </div>

@@ -94,6 +94,7 @@ function Listing({ listing, forceRefresh, switchListingManagement }) {
                                 value={listing.rating}
                                 readOnly
                             />
+                            <div>Number of reviews: {listing.review_count}</div>
                         </div>
                     </div>
                     <div className={styles.actions__container}>

@@ -72,6 +72,7 @@ export default function DetailedInfo() {
                         alt=""
                     />
                     <Rating name="read-only" value={listing.rating} readOnly />
+                    <div>Number of reviews: {listing.review_count}</div>
                     <h3>Location: {listing.address}</h3>
                     {listing.user.person != null ? (
                         <p>
@@ -120,7 +121,7 @@ export default function DetailedInfo() {
                 reviews.length > 0 ?
                 (
                 reviews.map(review => (
-                    <Review key={review.id} userId={user.user.id} review={review} refreshTrigger={refreshTrigger} setRefreshTrigger={setRefreshTrigger}/>
+                    <Review listingId={id} key={review.id} userId={user.user.id} review={review} refreshTrigger={refreshTrigger} setRefreshTrigger={setRefreshTrigger}/>
                 ))
                  ) :
                 <p>No reviews</p>

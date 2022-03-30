@@ -127,7 +127,7 @@ class ListingController extends Controller
         $listing->size = $request->input("size");
         $listing->daily_rate = $request->input("daily_rate");
         $listing->rating = $request->rating;
-        $listing->reviews = 0;
+        $listing->review_count = 0;
 
         $listing->save();
         return response($listing);
@@ -184,7 +184,7 @@ class ListingController extends Controller
 
         if ($operation == "plus") {
             $count++;
-        } else {
+        } elseif ($operation == "minus") {
             $count--;
         }
 
@@ -199,8 +199,15 @@ class ListingController extends Controller
             $total += intval($review->score);
         };
 
-        $listing->rating = $total / $count;
+        if ($count == 0) {
+            $listing->rating = 0;
+        } else {
+            $listing->rating = round($total / $count);
+        }
+        
 
         $listing->save();
+
+        return $listing;
     }
 }
