@@ -133,10 +133,7 @@ function NewListingForm({ toggleFormHandler, forceRefresh }) {
         imageData.append("photo", file);
         imageData.append("listing_id", id);
         try {
-            const res = await axios.post(
-                "http://localhost:3000/api/picture",
-                imageData
-            );
+            const res = await axios.post("/api/picture", imageData);
             console.log(res);
             forceRefresh();
         } catch (ex) {
