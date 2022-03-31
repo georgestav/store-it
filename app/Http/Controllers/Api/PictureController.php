@@ -59,7 +59,7 @@ class PictureController extends Controller
         $picture->photo = $base64; // pass the binary data to picture model
         $picture->name = $request->file('photo')->getClientOriginalName(); // pass the filename to the picture model
         $picture->save();
-        return response('success image saved');
+        return response('success image saved', $picture);
     }
 
     /**
