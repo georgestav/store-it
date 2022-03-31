@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const fetchCities = async () => {
     try {
         // get request to get list of cities in the DB that the user can register to
-        const getdetails = await axios.get("api/cities");
+        const getdetails = await axios.get("/api/cities");
         const data = await getdetails.data;
         return data;
     } catch (error) {
