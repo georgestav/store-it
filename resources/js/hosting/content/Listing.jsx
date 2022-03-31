@@ -8,7 +8,7 @@ import styles from "./Listing.module.css";
 const deleteListing = async (id) => {
     try {
         // get request to get list of cities in the DB that the user can register to
-        const getdetails = await axios.delete(`api/listings/${id}`);
+        const getdetails = await axios.delete(`/api/listings/${id}`);
         const data = await getdetails;
         return data;
     } catch (error) {

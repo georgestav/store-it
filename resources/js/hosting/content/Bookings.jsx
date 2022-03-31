@@ -14,7 +14,7 @@ export default function Bookings({ user, forceRefresh }) {
         if (!user.id) return;
 
         try {
-            const response = await axios.get(`api/user/${user.id}/getbookings`);
+            const response = await axios.get(`/api/user/${user.id}/getbookings`);
             const data = response.data;
             setBookings(data);
             setDataLoaded(true);

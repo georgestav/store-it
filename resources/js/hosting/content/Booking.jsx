@@ -9,7 +9,7 @@ export default function Booking({ booking, forceRefresh }) {
 
     //function that deletes the booking and refreshes the page, to remove it form the DOM
     const handleDelete = async () => {
-        const response = await axios.delete(`api/bookings/${id}`);
+        const response = await axios.delete(`/api/bookings/${id}`);
         console.log("deleted", response.status);
         if (response.status === 200) forceRefresh();
     };

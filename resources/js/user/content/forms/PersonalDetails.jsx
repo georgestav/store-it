@@ -27,7 +27,7 @@ function PersonalDetails({ userid }) {
     const getCities = async () => {
         try {
             // get request to get list of cities in the DB that the user can register to
-            const getdetails = await axios.get("api/cities");
+            const getdetails = await axios.get("/api/cities");
             const data = await getdetails.data;
             setCities(data);
         } catch (error) {
@@ -38,7 +38,7 @@ function PersonalDetails({ userid }) {
     const getCountries = async () => {
         try {
             // get request to get list of counties in the DB that the user can register to
-            const getdetails = await axios.get("api/countries");
+            const getdetails = await axios.get("/api/countries");
             const data = await getdetails.data;
             setCountries(data);
         } catch (error) {

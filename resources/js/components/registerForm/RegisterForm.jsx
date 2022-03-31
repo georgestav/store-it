@@ -40,7 +40,7 @@ export default function RegisterForm({ setDisplay }) {
             setErrors({});
 
             // get request to get logged in user data and assign it to userContext
-            const getdetails = await axios.get("api/user/logged-in");
+            const getdetails = await axios.get("/api/user/logged-in");
             const userData = await getdetails.data;
             setDisplay("");
             setUser(userData); //pass values to user Contex

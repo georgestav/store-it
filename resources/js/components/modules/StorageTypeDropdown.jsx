@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const fetchStorageTypes = async () => {
     try {
         // get request to get storage type a listing can register to
-        const getdetails = await axios.get("api/storagetypes");
+        const getdetails = await axios.get("/api/storagetypes");
         const data = await getdetails.data;
         return data;
     } catch (error) {

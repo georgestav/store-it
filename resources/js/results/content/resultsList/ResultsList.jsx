@@ -28,7 +28,7 @@ export default function ResultsList() {
         if (userInput.startsWith("Coords")) {
             return -1;
         } else {
-            const response = await axios.get(`api/cities/${userInput}`);
+            const response = await axios.get(`/api/cities/${userInput}`);
             const data = response.data;
             return data[0] ? data[0].id : -1;
         }
@@ -63,7 +63,7 @@ export default function ResultsList() {
         const cityCoordinates = await fetchCityCoordinates(search);
 
         const response = await axios.get(
-            `api/listings/${cityID}/${cityCoordinates[0]}/${cityCoordinates[1]}/${type}`
+            `/api/listings/${cityID}/${cityCoordinates[0]}/${cityCoordinates[1]}/${type}`
         );
         const data = response.data;
 

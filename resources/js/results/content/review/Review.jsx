@@ -14,9 +14,9 @@ export default function Review({
 
     //deleting the specific review
     const deleteReview = async () => {
-        const response = await axios.delete(`api/reviews/${id}`);
+        const response = await axios.delete(`/api/reviews/${id}`);
         const update = await axios.post(
-            `api/listings/rating/${listingId}/minus`
+            `/api/listings/rating/${listingId}/minus`
         );
         const data = response.data;
         console.log(data);

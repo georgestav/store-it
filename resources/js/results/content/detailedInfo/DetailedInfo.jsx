@@ -27,7 +27,7 @@ export default function DetailedInfo({ display, setDisplay }) {
     //function that fetches the listing
     const fetchListing = async (id) => {
         try {
-            const response = await axios.get(`api/listings/${id}`);
+            const response = await axios.get(`/api/listings/${id}`);
             const data = response.data;
             setListing(data);
         } catch (error) {

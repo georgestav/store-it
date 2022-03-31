@@ -20,7 +20,7 @@ function UserProfile() {
     const fetchUserData = async () => {
         try {
             // get request to get logged in user data and assign it to userContext
-            const getdetails = await axios.get("api/user/logged-in");
+            const getdetails = await axios.get("/api/user/logged-in");
             const userData = await getdetails.data;
             setUserData(userData);
             setUser(userData);

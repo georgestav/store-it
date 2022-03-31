@@ -48,7 +48,7 @@ function Hosting() {
     const checkUserLogged = async () => {
         try {
             // get request to get logged in user data and assign it to userContext
-            const getdetails = await axios.get("api/user/logged-in");
+            const getdetails = await axios.get("/api/user/logged-in");
             const userData = await getdetails.data;
             setUser(userData);
         } catch (error) {

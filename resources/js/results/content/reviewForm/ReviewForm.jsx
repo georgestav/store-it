@@ -30,7 +30,7 @@ export default function ReviewForm({
         e.preventDefault();
         const response = await axios.post(`/api/reviews/${listingId}`, values);
         const update = await axios.post(
-            `api/listings/rating/${listingId}/plus`
+            `/api/listings/rating/${listingId}/plus`
         );
         const data = response.data;
         console.log(data);
